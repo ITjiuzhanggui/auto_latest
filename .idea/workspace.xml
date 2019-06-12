@@ -20,6 +20,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="run_script.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/run_script.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4090">
+              <caret line="218" lean-forward="true" selection-start-line="218" selection-end-line="218" />
+              <folding>
+                <element signature="e#23#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="69">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="statusCle.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/statusCle.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -33,13 +54,40 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="conf.ini" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/conf/conf.ini">
+      <file leaf-file-name="statusDef.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/statusDef.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="847">
+              <caret line="521" column="30" lean-forward="true" selection-start-line="521" selection-start-column="30" selection-end-line="521" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#15090#16643#0" />
+              </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ini_data.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ini_data.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="49" column="17" lean-forward="true" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="project.log" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/logs/project.log">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="23">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -82,6 +130,8 @@
         <option value="$PROJECT_DIR$/core/statusCle.py" />
         <option value="$PROJECT_DIR$/logs/__init__.py" />
         <option value="$PROJECT_DIR$/conf/conf.ini" />
+        <option value="$PROJECT_DIR$/data.json" />
+        <option value="$PROJECT_DIR$/ini_data.json" />
       </list>
     </option>
   </component>
@@ -335,7 +385,21 @@
       <option name="project" value="LOCAL" />
       <updated>1560348834346</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="update &quot;data.json&quot;">
+      <created>1560348936413</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1560348936413</updated>
+    </task>
+    <task id="LOCAL-00010" summary="update &quot;ini_data.json&quot;">
+      <created>1560349012464</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1560349012464</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -379,7 +443,9 @@
     <MESSAGE value="update &quot;clear-status-log-perl&quot;" />
     <MESSAGE value="update &quot;logging&quot;" />
     <MESSAGE value="update &quot;conf.ini&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="update &quot;conf.ini&quot;" />
+    <MESSAGE value="update &quot;data.json&quot;" />
+    <MESSAGE value="update &quot;ini_data.json&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="update &quot;ini_data.json&quot;" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/run_script.py">
@@ -446,47 +512,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/8kj7ju67j.py" />
     <entry file="file://$PROJECT_DIR$/h8ujkn.py" />
-    <entry file="file://$PROJECT_DIR$/conf/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/project.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run_script.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="211" column="1" selection-start-line="211" selection-start-column="1" selection-end-line="211" selection-end-column="1" />
-          <folding>
-            <element signature="e#23#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/abstract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/defaultslog.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1146">
@@ -510,23 +535,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/statusDef.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="521" column="30" lean-forward="true" selection-start-line="521" selection-start-column="30" selection-end-line="521" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#15090#16643#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/logs/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
           <caret line="34" selection-start-line="34" selection-end-line="34" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/conf.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/abstract.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -542,10 +583,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf/conf.ini">
+    <entry file="file://$PROJECT_DIR$/data.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="318">
+          <caret line="41" column="18" lean-forward="true" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/statusDef.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="847">
+          <caret line="521" column="30" lean-forward="true" selection-start-line="521" selection-start-column="30" selection-end-line="521" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#15090#16643#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ini_data.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="49" column="17" lean-forward="true" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs/project.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4090">
+          <caret line="218" lean-forward="true" selection-start-line="218" selection-end-line="218" />
+          <folding>
+            <element signature="e#23#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
