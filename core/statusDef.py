@@ -480,3 +480,48 @@ class StaDefRuby(StaDefLog):
 
         with open("data.json", 'w') as f:
             json.dump(data, f)
+
+
+class StaDefPerl(StaDefLog):
+    """default test_status_perl long analysis"""
+
+    def serialization(self):
+        lines = self.status_log
+        data = self.data
+        if_n = True
+        for i in lines:
+            if i.startswith("perl"):
+                if "latest" in i:
+                    start = lines.index(i)
+
+        while if_n:
+            for i in lines[start:]:
+                if i == '\n':
+                    if_n = False
+                    end = lines[start:].index(i)
+
+        for i in lines[start:end + start]:
+            if i.startswith("perl"):
+                if "latest" in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    self.exception_to_response(num, "status_def_Perl:Total")
+                    data.get("status_def").get("perl").update(
+                        {"Toatl": num[-1] + "MB"}
+                    )
+
+            if i.startswith("default base layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_def_Perl:Base_Layer")
+                data.get("status_def").get("perl").update(
+                    {"Base_Layer": num[0]}
+                )
+
+            if i.startswith("default microservice added layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_def_Perl:MicroService_layer")
+                data.get("status_def").get("perl").update(
+                    {"MicroService_layer": num[0]}
+                )
+
+        with open("data.json", "w")as f:
+            json.dump(data, f)
