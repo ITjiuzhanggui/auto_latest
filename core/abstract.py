@@ -22,7 +22,7 @@ class Global(object):
 
     def exception_to_response(self, match_result, message):
         if match_result == []:
-            SetLog().info(" %s Not getting" % message)
+            SetLog().error(" %s Not getting" % message)
 
 def exect_contest(fun):
     try:

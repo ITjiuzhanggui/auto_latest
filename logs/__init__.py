@@ -1,19 +1,28 @@
 import logging
+import os
 from logging.handlers import RotatingFileHandler
 from conf import ConfManagement
 
 
 class DevelopmentConfig(object):
-    DEBUG = ConfManagement("default").get_ini("DEBUG")
-    LOG_LEVEL = logging.DEBUG
+    DEBUG = ConfManagement().get_ini("debug_format")
+    log_match = {
+        "info": logging.INFO,
+        "debug": logging.DEBUG,
+        "error": logging.ERROR,
+        "warning": logging.WARNING
+    }
+    LOG_LEVEL = log_match.get(DEBUG)
 
 
 class SetLog(object):
 
     def setup_log(e):
         logging.basicConfig(level=DevelopmentConfig.LOG_LEVEL)
+        log_path = os.path.dirname(os.path.realpath(__file__))
+        log = os.path.join(log_path, "project.log")
         file_log_handler = RotatingFileHandler(
-            "../logs/project.log", maxBytes=1024 * 1024 * 100, backupCount=10)
+            log, maxBytes=1024 * 1024 * 100, backupCount=10)
         # formatter = logging.Formatter('%(levelname)s %(filename)s:%(lineno)d %(message)s')
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         file_log_handler.setFormatter(formatter)
