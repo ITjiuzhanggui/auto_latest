@@ -10,7 +10,8 @@
 		"node": {},
 		"openjdk": {},
 		"ruby": {},
-		"tensorflow": {}
+		"tensorflow": {},
+		"perl": {}
 	},
 	"clear": {
 		"httpd": {},
@@ -23,7 +24,8 @@
 		"node": {},
 		"openjdk": {},
 		"ruby": {},
-		"tensorflow": {}
+		"tensorflow": {},
+		"perl": {}
 	},
 	"status_def": {
 		"httpd": {},
@@ -36,7 +38,8 @@
 		"node": {},
 		"openjdk": {},
 		"ruby": {},
-		"tensorflow": {}
+		"tensorflow": {},
+		"perl": {}
 	},
 	"status_Clr": {
 		"clearlinux_version": {},
@@ -50,6 +53,7 @@
 		"node": {},
 		"openjdk": {},
 		"ruby": {},
-		"tensorflow": {}
+		"tensorflow": {},
+		"perl": {}
 	}
 }
