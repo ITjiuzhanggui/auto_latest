@@ -61,7 +61,8 @@ make_path = auto_path + '/1.sh'
 make_path += " %s make status" % auto_path
 get_log_status(make_path, path)
 
-test_cmd = ["make memcached", "make php", "make python", "make golang", "make openjdk", "make perl", "make ruby"]
+test_cmd = ["make httpd", "make nginx", "make memcached", "make redis", "make php", "make python", "make node",
+            "make golang", "make openjdk", "make tensorflow", "make mariadb", "make perl", "make ruby"]
 
 
 def get_log_test(cmd, logs_patg):
