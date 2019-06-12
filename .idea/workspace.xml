@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1caf5d2c-2eec-47b4-a025-bcc79a1f37e4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/clearlogs.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/clearlogs.py" afterDir="false" />
-    </list>
+    <list default="true" id="1caf5d2c-2eec-47b4-a025-bcc79a1f37e4" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,15 +20,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="clearlogs.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/core/clearlogs.py">
+      <file leaf-file-name="statusCle.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/statusCle.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="778">
-              <caret line="622" lean-forward="true" selection-start-line="622" selection-end-line="622" />
+            <state relative-caret-position="-188">
+              <caret line="502" column="28" lean-forward="true" selection-start-line="502" selection-start-column="28" selection-end-line="502" selection-end-column="28" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#19587#24042#0" />
+                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#15702#17275#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/logs/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="750">
+              <caret line="37" column="9" lean-forward="true" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -74,6 +80,8 @@
         <option value="$PROJECT_DIR$/tests/__init__.py" />
         <option value="$PROJECT_DIR$/core/defaultslog.py" />
         <option value="$PROJECT_DIR$/core/clearlogs.py" />
+        <option value="$PROJECT_DIR$/core/statusDef.py" />
+        <option value="$PROJECT_DIR$/core/statusCle.py" />
       </list>
     </option>
   </component>
@@ -111,6 +119,11 @@
               <item name="auto_latest" type="b2602c69:ProjectViewProjectNode" />
               <item name="auto_latest" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="auto_latest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="auto_latest" type="462c0819:PsiDirectoryNode" />
+              <item name="logs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="auto_latest" type="b2602c69:ProjectViewProjectNode" />
@@ -287,7 +300,28 @@
       <option name="project" value="LOCAL" />
       <updated>1560348269315</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update &quot;clear_log_perl&quot;">
+      <created>1560348387305</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1560348387305</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update &quot;default-status-log-perl&quot;">
+      <created>1560348502310</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1560348502310</updated>
+    </task>
+    <task id="LOCAL-00006" summary="update &quot;clear-status-log-perl&quot;">
+      <created>1560348587583</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1560348587583</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -326,7 +360,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update &quot;run_script&quot;" />
     <MESSAGE value="update &quot;default_log_perl&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="update &quot;default_log_perl&quot;" />
+    <MESSAGE value="update &quot;clear_log_perl&quot;" />
+    <MESSAGE value="update &quot;default-status-log-perl&quot;" />
+    <MESSAGE value="update &quot;clear-status-log-perl&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="update &quot;clear-status-log-perl&quot;" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/run_script.py">
@@ -350,9 +387,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="621">
           <caret line="30" column="29" lean-forward="true" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -407,16 +441,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logs/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="37" column="9" lean-forward="true" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/logs/project.log">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
@@ -465,12 +489,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/clearlogs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="778">
-          <caret line="622" lean-forward="true" selection-start-line="622" selection-end-line="622" />
+        <state relative-caret-position="364">
+          <caret line="637" column="37" lean-forward="true" selection-start-line="637" selection-start-column="37" selection-end-line="637" selection-end-column="37" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
             <element signature="e#19587#24042#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/statusDef.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="521" column="30" lean-forward="true" selection-start-line="521" selection-start-column="30" selection-end-line="521" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#15090#16643#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/statusCle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-188">
+          <caret line="502" column="28" lean-forward="true" selection-start-line="502" selection-start-column="28" selection-end-line="502" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#15702#17275#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="37" column="9" lean-forward="true" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
         </state>
       </provider>
     </entry>
