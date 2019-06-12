@@ -618,3 +618,52 @@ class ClrRuby(ClrTestLog):
 
         with open("data.json", 'w') as f:
             json.dump(data, f)
+
+
+class ClrPerl(ClrTestLog):
+    """clearlinux test_case perl analysis"""
+
+    def serialization(self):
+        lines = self.test_log
+        data = self.data
+        up = down = 0
+        for item in lines:
+            if item.startswith("[perl] [INFO] Test clear docker image:\n"):
+                start = lines.index(item)
+
+        for i in lines[start:]:
+            if i.startswith("Test: benchmarks/statement/inc.b"):
+                end = lines[start:].index(i) + start
+
+        for item in lines[start:end]:
+            if item.startswith("Test-File: benchmarks/app/podhtml.b\n"):
+                up = lines[start:end].index(item) + start
+
+            if item.startswith("Test: benchmarks/startup/noprog.b"):
+                down = lines[start:end].index(item) + start
+
+        for i in lines[up:down]:
+            if i.startswith("Avg:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "clearlinux_perl:podhtml.b")
+                data.get("clear").get("perl").update(
+                    {"podhtml.b": num[0]}
+                )
+
+        for item in lines[start:end]:
+            if item.startswith("Test: benchmarks/startup/noprog.b"):
+                up = lines[start:end].index(item) + start
+
+            if item.startswith("Test: benchmarks/statement/assign-int.b"):
+                down = lines[start:end].index(item) + start
+
+        for i in lines[up:down]:
+            if i.startswith("Avg:"):
+                num = re.findall("\d+\.\d*", i)
+                self.exception_to_response(num, "clearlinux_perl:noprog.b")
+                data.get("clear").get("perl").update(
+                    {"noprog.b": num[0]}
+                )
+
+        with open("data.json", "w")as f:
+            json.dump(data, f)
