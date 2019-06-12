@@ -487,23 +487,45 @@ class ClrOpenjdk(ClrTestLog):
         lines = self.test_log
         data = self.data
 
-        for i in lines[
-                 lines.index("[openjdk] [INFO] Test clear docker image:\n"):
-                 lines.index("clr-openjdk\n")]:
+        for item in lines:
+            if item.startswith("[openjdk] [INFO] Test clear docker image:\n"):
+                start = lines.index(item)
 
-            if i.startswith("o.s.MyBenchmark.testMethod"):
-                num = re.findall("\d+\.?\d+", i)
-                self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod:Score")
+        for i in lines[start:]:
+            if i.startswith("Benchmark"):
+                end = lines[start:].index(i) + start
+
+        for item in lines[start:end + 8]:
+            if i.startswith("MyBenchmark.testMethod"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod.Score")
                 data.get("clear").get("openjdk").update(
-                    {"MyBenchmark.testMethod:Score": num[1]}
+                    {"MyBenchmark.testMethod.Score": num[-2]}
                 )
 
-            if i.startswith("o.s.MyBenchmark.testMethod"):
-                num = re.findall("\d+\.?\d+", i)
-                self.exception_to_response(num, "clearlinux_openjdk:o.s.MyBenchmark.testMethod:Error")
+            if i.startswith("MyBenchmark.testMethod"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod.Error")
                 data.get("clear").get("openjdk").update(
-                    {"o.s.MyBenchmark.testMethod:Error": num[-1]}
+                    {"MyBenchmark.testMethod.Error": num[-1]}
                 )
+        # for i in lines[
+        #          lines.index("[openjdk] [INFO] Test clear docker image:\n"):
+        #          lines.index("clr-openjdk\n")]:
+        #
+        #     if i.startswith("o.s.MyBenchmark.testMethod"):
+        #         num = re.findall("\d+\.?\d+", i)
+        #         self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod:Score")
+        #         data.get("clear").get("openjdk").update(
+        #             {"MyBenchmark.testMethod:Score": num[1]}
+        #         )
+        #
+        #     if i.startswith("o.s.MyBenchmark.testMethod"):
+        #         num = re.findall("\d+\.?\d+", i)
+        #         self.exception_to_response(num, "clearlinux_openjdk:o.s.MyBenchmark.testMethod:Error")
+        #         data.get("clear").get("openjdk").update(
+        #             {"o.s.MyBenchmark.testMethod:Error": num[-1]}
+        #         )
 
         with open("data.json")as f:
             json.dump(data, f)

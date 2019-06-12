@@ -487,22 +487,40 @@ class DefOpenjdk(DefTestLog):
         data = self.data
 
         for i in lines[
-                 lines.index("[openjdk] [INFO] Test docker hub official image:\n"):
-                 lines.index("offi-openjdk\n")]:
+                 lines.index("[openjdk] [INFO] Test docker hub official image first:\n"):
+                 lines.index("[openjdk] [INFO] Test clear docker image:\n")]:
 
-            if i.startswith("o.s.MyBenchmark.testMethod"):
+            if i.startswith("MyBenchmark.testMethod"):
                 num = re.findall("\d+\.?\d+", i)
-                self.exception_to_response(num, "default_openjdk:MyBenchmark.testMethod:Score")
+                self.exception_to_response(num, "default_openjdk:MyBenchmark.testMethod.Score")
                 data.get("default").get("openjdk").update(
-                    {"MyBenchmark.testMethod:Score": num[1]}
+                    {"MyBenchmark.testMethod.Score": num[-2]}
                 )
 
-            if i.startswith("o.s.MyBenchmark.testMethod"):
+            if i.startswith("MyBenchmark.testMethod"):
                 num = re.findall("\d+\.?\d+", i)
-                self.exception_to_response(num, "default_openjdk:o.s.MyBenchmark.testMethod:Error")
+                self.exception_to_response(num, "default_openjdk:o.s.MyBenchmark.testMethod.Error")
                 data.get("default").get("openjdk").update(
-                    {"o.s.MyBenchmark.testMethod:Error": num[-1]}
+                    {"MyBenchmark.testMethod.Error": num[-1]}
                 )
+
+        # for i in lines[
+        #          lines.index("[openjdk] [INFO] Test docker hub official image:\n"):
+        #          lines.index("offi-openjdk\n")]:
+        #
+        #     if i.startswith("o.s.MyBenchmark.testMethod"):
+        #         num = re.findall("\d+\.?\d+", i)
+        #         self.exception_to_response(num, "default_openjdk:MyBenchmark.testMethod:Score")
+        #         data.get("default").get("openjdk").update(
+        #             {"MyBenchmark.testMethod:Score": num[1]}
+        #         )
+        #
+        #     if i.startswith("o.s.MyBenchmark.testMethod"):
+        #         num = re.findall("\d+\.?\d+", i)
+        #         self.exception_to_response(num, "default_openjdk:o.s.MyBenchmark.testMethod:Error")
+        #         data.get("default").get("openjdk").update(
+        #             {"o.s.MyBenchmark.testMethod:Error": num[-1]}
+        #         )
 
         with open("data.json")as f:
             json.dump(data, f)
