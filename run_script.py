@@ -223,3 +223,5 @@ SetLog().info("Successfully written：test_json")
 
 sh = auto_path + '/1.sh'
 os.system("rm %s" % sh)
+
+
