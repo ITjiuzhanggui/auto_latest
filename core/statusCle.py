@@ -495,3 +495,49 @@ class StaClrRuby(StaClrLog):
 
         with open("data.json", 'w') as f:
             json.dump(data, f)
+
+
+class StaClrPerl(StaClrLog):
+    """default test_status_perl long analysis"""
+
+    def serialization(self):
+        lines = self.status_log
+        data = self.data
+        if_n = True
+        for i in lines:
+            if i.startswith("perl"):
+                if "latest" in i:
+                    start = lines.index(i)
+
+        while if_n:
+            for i in lines[start:]:
+                if i == "\n":
+                    if_n = False
+                    end = lines[start:].index(i)
+
+        for i in lines[start:end + start]:
+
+            if i.startswith("clearlinux/perl"):
+                if "latest" in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    self.exception_to_response(num, "status_Clr_Perl:Total")
+                    data.get("status_Clr").get("perl").update(
+                        {"Total": num[-1] + "MB"}
+                    )
+
+            if i.startswith("clearlinux base layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_Clr_Perl:Base_Layer")
+                data.get("status_Clr").get("perl").update(
+                    {"Base_Layer": num[0]}
+                )
+
+            if i.startswith("clearlinux microservice added layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_Clr_Perl:MicroService_layer")
+                data.get("status_Clr").get("perl").update(
+                    {"MicroService_layer": num[0]}
+                )
+
+        with open("data.json", "w")as f:
+            json.dump(data, f)
