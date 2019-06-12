@@ -41,7 +41,11 @@ path = os.path.join(CURPATH, "update")
 os.makedirs(path, exist_ok=True)
 make_path = auto_path + "/1.sh"
 make_path += " %s make update" % auto_path
+<<<<<<< HEAD
 # get_log_update(make_path, path)
+=======
+#get_log_update(make_path, path)
+>>>>>>> ae1124d7c678b958082ae4872a55f9e190414c9e
 
 
 def get_log_status(cmd, logs_patg):
@@ -61,6 +65,10 @@ make_path = auto_path + '/1.sh'
 make_path += " %s make status" % auto_path
 get_log_status(make_path, path)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ae1124d7c678b958082ae4872a55f9e190414c9e
 test_cmd = ["make memcached", "make php", "make python", "make golang", "make openjdk", "make perl", "make ruby"]
 
 
@@ -223,5 +231,8 @@ SetLog().info("Successfully written：test_json")
 
 sh = auto_path + '/1.sh'
 os.system("rm %s" % sh)
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ae1124d7c678b958082ae4872a55f9e190414c9e
