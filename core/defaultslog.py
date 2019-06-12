@@ -617,3 +617,51 @@ class DefRuby(DefTestLog):
 
         with open("data.json", 'w') as f:
             json.dump(data, f)
+
+
+class DefPerl(DefTestLog):
+    """default test_case Perl analysis"""
+
+    def serialization(self):
+        lines = self.test_log
+        data = self.data
+        start = end = 0
+        influs_default = []
+
+        for i in lines[
+                 lines.index("perl/perl.sh\n"):
+                 lines.index("[perl] [INFO] Test clear docker image:\n")]:
+            influs_default.append(i)
+
+        for item in influs_default:
+            if item.startswith("Test-File: benchmarks/app/podhtml.b"):
+                start = lines.index(item)
+
+            if item.startswith("Test: benchmarks/startup/noprog.b"):
+                end = lines.index(item)
+
+        for i in lines[start:end]:
+            if i.startswith("Avg:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "default_perl:podhtml.b")
+                data.get("default").get("perl").update(
+                    {"podhtml.b": num[0]}
+                )
+
+        for item in influs_default:
+            if item.startswith("Test: benchmarks/startup/noprog.b"):
+                start = lines.index(item)
+
+            if item.startswith("Test: benchmarks/statement/assign-int.b"):
+                end = lines.index(item)
+
+        for i in lines[start:end]:
+            if i.startswith("Avg:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "default_perl:noprog.b")
+                data.get("default").get("perl").update(
+                    {"noprog.b": num[0]}
+                )
+
+        with open("data.json", "w")as f:
+            json.dump(data, f)
