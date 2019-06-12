@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1caf5d2c-2eec-47b4-a025-bcc79a1f37e4" name="Default" comment="" />
+    <list default="true" id="1caf5d2c-2eec-47b4-a025-bcc79a1f37e4" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,11 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="run_script.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="run_script.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_script.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4090">
-              <caret line="218" lean-forward="true" selection-start-line="218" selection-end-line="218" />
+            <state relative-caret-position="525">
+              <caret line="63" column="22" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
               <folding>
                 <element signature="e#23#34#0" expanded="true" />
               </folding>
@@ -85,9 +87,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="23">
+              <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -122,7 +128,6 @@
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/core/abstract.py" />
         <option value="$PROJECT_DIR$/logs/project.log" />
-        <option value="$PROJECT_DIR$/run_script.py" />
         <option value="$PROJECT_DIR$/tests/__init__.py" />
         <option value="$PROJECT_DIR$/core/defaultslog.py" />
         <option value="$PROJECT_DIR$/core/clearlogs.py" />
@@ -132,6 +137,8 @@
         <option value="$PROJECT_DIR$/conf/conf.ini" />
         <option value="$PROJECT_DIR$/data.json" />
         <option value="$PROJECT_DIR$/ini_data.json" />
+        <option value="$PROJECT_DIR$/run_script.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -399,7 +406,21 @@
       <option name="project" value="LOCAL" />
       <updated>1560349012464</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="update &quot;test_cmd&quot;">
+      <created>1560349135528</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1560349135528</updated>
+    </task>
+    <task id="LOCAL-00012" summary="update &quot;README&quot;">
+      <created>1560349346119</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1560349346119</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -445,7 +466,9 @@
     <MESSAGE value="update &quot;conf.ini&quot;" />
     <MESSAGE value="update &quot;data.json&quot;" />
     <MESSAGE value="update &quot;ini_data.json&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="update &quot;ini_data.json&quot;" />
+    <MESSAGE value="update &quot;test_cmd&quot;" />
+    <MESSAGE value="update &quot;README&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="update &quot;README&quot;" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/run_script.py">
@@ -615,9 +638,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
@@ -627,11 +647,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/run_script.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4090">
-          <caret line="218" lean-forward="true" selection-start-line="218" selection-end-line="218" />
+        <state relative-caret-position="525">
+          <caret line="63" column="22" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
           <folding>
             <element signature="e#23#34#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
         </state>
       </provider>
     </entry>
