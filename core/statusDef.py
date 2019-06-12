@@ -12,7 +12,7 @@ class StaDefLog(Global):
         status_logpath = ConfManagement().get_ini("STATUS_LOG_PATH")
         self.status_log = self.read_logs(status_logpath)
         json_path = os.path.dirname(os.path.realpath(__file__))[:-4] + 'data.json'
-        print("status_Def[json_path]%s"%json_path)
+#        print("status_Def[json_path]%s"%json_path)
         with open(json_path, 'r') as f:
             self.data = json.load(f)
 

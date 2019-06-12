@@ -27,9 +27,9 @@ os.system("cp 1.sh %s/" % auto_path)
 
 
 def get_log_update(cmd, logs_patg):
-    print("updte:cmd:%s" % cmd)
+    SetLog().info("updte:cmd:%s" % cmd)
     for i in range(1):
-        os.system("{} > {}/{}.logs 2>&1 ".format(
+        os.system("{} > {}/{}.log 2>&1 ".format(
             cmd, logs_patg, time.strftime( \
                 "%Y-%m-%d-%H:%M:%S", \
                 time.localtime()).replace(' ', ':'). \
@@ -41,13 +41,13 @@ path = os.path.join(CURPATH, "update")
 os.makedirs(path, exist_ok=True)
 make_path = auto_path + "/1.sh"
 make_path += " %s make update" % auto_path
-get_log_update(make_path, path)
+#get_log_update(make_path, path)
 
 
 def get_log_status(cmd, logs_patg):
-    print("status:cmd:%s" % cmd)
+    SetLog().info("status:cmd:%s" % cmd)
     for i in range(1):
-        os.system("{} > {}/{}.logs 2>&1 ".format(
+        os.system("{} > {}/{}.log 2>&1 ".format(
             cmd, logs_patg, time.strftime( \
                 "%Y-%m-%d-%H:%M:%S", \
                 time.localtime()).replace(' ', ':'). \
@@ -62,14 +62,13 @@ make_path += " %s make status" % auto_path
 get_log_status(make_path, path)
 
 
-test_cmd = ["make httpd", "make nginx", "make memcached", "make redis", "make php", "make python", "make node",
-            "make golang", "make openjdk", "make tensorflow", "make mariadb", "make perl", "make ruby"]
+test_cmd = ["make memcached", "make php", "make python", "make golang", "make openjdk", "make perl", "make ruby"]
 
 
 def get_log_test(cmd, logs_patg):
-    print("test:cmd:%s" % cmd)
-    for i in range(2):
-        os.system("{} > {}/{}.logs 2>&1 ".format(
+    SetLog().info("test:cmd:%s" % cmd)
+    for i in range(5):
+        os.system("{} > {}/{}.log 2>&1 ".format(
             cmd, logs_patg, time.strftime( \
                 "%Y-%m-%d-%H:%M:%S", \
                 time.localtime()).replace(' ', ':'). \
@@ -117,7 +116,6 @@ def test_anlies(num):
             if "httpd" in log:
                 files = os.listdir(log)[num]
                 p = os.path.join(log, files)
-                print("httpd:%s" % p)
                 ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
                 exect_contest(DefHttpd().serialization)
                 exect_contest(ClrHttpd().serialization)
@@ -208,11 +206,11 @@ for i in test_cmd:
 
 for num in range(1):
     status_anlies(num)
-print("Successfully written：status_json")
+SetLog().info("Successfully written：status_json")
 
-for num in range(2):
+for num in range(5):
     test_anlies(num)
-print("Successfully written：test_json")
+SetLog().info("Successfully written：test_json")
 
 sh = auto_path + '/1.sh'
 os.system("rm %s" % sh)
