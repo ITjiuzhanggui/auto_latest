@@ -522,7 +522,7 @@ class DefOpenjdk(DefTestLog):
         #             {"o.s.MyBenchmark.testMethod:Error": num[-1]}
         #         )
 
-        with open("data.json")as f:
+        with open("data.json", "w")as f:
             json.dump(data, f)
 
 

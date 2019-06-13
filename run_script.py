@@ -41,6 +41,8 @@ path = os.path.join(CURPATH, "update")
 os.makedirs(path, exist_ok=True)
 make_path = auto_path + "/1.sh"
 make_path += " %s make update" % auto_path
+
+
 # get_log_update(make_path, path)
 
 
@@ -224,4 +226,3 @@ SetLog().info("Successfully written：test_json")
 
 sh = auto_path + '/1.sh'
 os.system("rm %s" % sh)
-
