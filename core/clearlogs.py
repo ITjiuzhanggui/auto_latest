@@ -648,6 +648,7 @@ class ClrPerl(ClrTestLog):
     def serialization(self):
         lines = self.test_log
         data = self.data
+        start = end = 0
         up = down = 0
         for item in lines:
             if item.startswith("[perl] [INFO] Test clear docker image:\n"):

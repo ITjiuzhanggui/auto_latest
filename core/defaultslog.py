@@ -658,20 +658,20 @@ class DefPerl(DefTestLog):
             if item.startswith("Test: benchmarks/startup/noprog.b"):
                 end = lines.index(item)
 
-        for i in lines[start:end]:
-            if i.startswith("Avg:"):
-                num = re.findall("\d+\.?\d*", i)
+        for item in lines[start:end]:
+            if item.startswith("Avg:"):
+                num = re.findall("\d+\.?\d*", item)
                 self.exception_to_response(num, "default_perl:podhtml.b")
                 data.get("default").get("perl").update(
                     {"podhtml.b": num[0]}
                 )
 
-        for item in influs_default:
-            if item.startswith("Test: benchmarks/startup/noprog.b"):
-                start = lines.index(item)
+        for i in influs_default:
+            if i.startswith("Test: benchmarks/startup/noprog.b"):
+                start = lines.index(i)
 
-            if item.startswith("Test: benchmarks/statement/assign-int.b"):
-                end = lines.index(item)
+            if i.startswith("Test: benchmarks/statement/assign-int.b"):
+                end = lines.index(i)
 
         for i in lines[start:end]:
             if i.startswith("Avg:"):

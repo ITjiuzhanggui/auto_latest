@@ -197,7 +197,6 @@ class StaDefMemcached(StaDefLog):
             if i.startswith("default microservice added layer Size:"):
                 num = re.findall("\d+\.?\d*", i)
                 self.exception_to_response(num, "status_def_memcached:MicroService_layer")
-                print(num)
                 data.get("status_def").get("memcached").update(
                     {"MicroService_layer": num[0]}
                 )
