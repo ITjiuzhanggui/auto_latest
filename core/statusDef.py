@@ -525,3 +525,49 @@ class StaDefPerl(StaDefLog):
 
         with open("data.json", "w")as f:
             json.dump(data, f)
+
+
+class StaDefTensorflow(StaDefLog):
+    """default test_status_perl long analysis"""
+
+    def serialization(self):
+        lines = self.status_log
+        data = self.data
+
+        if_n = True
+        for i in lines:
+            if i.startswith("tensorflow"):
+                if "latest" in i:
+                    start = lines.index(i)
+
+        while if_n:
+            for i in lines[start:]:
+                if i == "\n":
+                    if_n = False
+                    end = lines[start:].index(i)
+
+        for i in lines[start:end + start]:
+
+            if i.startswith("tensorflow"):
+                if "latest" in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    self.exception_to_response(num, "status_def_tensorflow:Total")
+                    data.get("status_def").get("tensorflow").update(
+                        {"Total": num[-1] + "GB"}
+                    )
+
+            if i.startswith("default base layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_def_tensorflow:Base_Layer")
+                data.get("status_def").get("tensorflow").update(
+                    {"Base_Layer": num[0]}
+                )
+
+            if i.startswith("default microservice added layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_def_tensorflow:MicroService_layer")
+                data.get("status_def").get("tensorflow").update(
+                    {"MicroService_layer": num[0]}
+                )
+        with open("data.json", "w")as f:
+            json.dump(data, f)

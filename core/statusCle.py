@@ -541,3 +541,50 @@ class StaClrPerl(StaClrLog):
 
         with open("data.json", "w")as f:
             json.dump(data, f)
+
+
+class StaClrTensorflow(StaClrLog):
+    """clearlinux test_status_tensorflow log analysis"""
+
+    def serialization(self):
+        lines = self.status_log
+        data = self.data
+
+        if_n = True
+        for i in lines:
+            if i.startswith("tensorflow"):
+                if "latest" in i:
+                    start = lines.index(i)
+
+        while if_n:
+            for i in lines[start:]:
+                if i == "\n":
+                    if_n = False
+                    end = lines[start:].index(i)
+
+        for i in lines[start:end + start]:
+
+            if i.startswith("clearlinux/tensorflow"):
+                if "latest" in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    self.exception_to_response(num, "status_Clr_tensorflow:Total")
+                    data.get("status_Clr").get("tensorflow").update(
+                        {"Total": num[-1] + "GB"}
+                    )
+
+            if i.startswith("clearlinux base layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_Clr_tensorflow:Base_Layer")
+                data.get("status_Clr").get("tensorflow").update(
+                    {"Base_Layer": num[0]}
+                )
+
+            if i.startswith("clearlinux microservice added layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_Clr_tensorflow:MicroService_layer")
+                data.get("status_Clr").get("tensorflow").update(
+                    {"MicroService_layer": num[0]}
+                )
+
+        with open("data.json", 'w') as f:
+            json.dump(data, f)
