@@ -12,7 +12,7 @@ class StaDefLog(Global):
         status_logpath = ConfManagement().get_ini("STATUS_LOG_PATH")
         self.status_log = self.read_logs(status_logpath)
         json_path = os.path.dirname(os.path.realpath(__file__))[:-4] + 'data.json'
-#        print("status_Def[json_path]%s"%json_path)
+        #        print("status_Def[json_path]%s"%json_path)
         with open(json_path, 'r') as f:
             self.data = json.load(f)
 
@@ -197,7 +197,6 @@ class StaDefMemcached(StaDefLog):
             if i.startswith("default microservice added layer Size:"):
                 num = re.findall("\d+\.?\d*", i)
                 self.exception_to_response(num, "status_def_memcached:MicroService_layer")
-                print(num)
                 data.get("status_def").get("memcached").update(
                     {"MicroService_layer": num[0]}
                 )
@@ -571,3 +570,4 @@ class StaDefTensorflow(StaDefLog):
                 )
         with open("data.json", "w")as f:
             json.dump(data, f)
+
