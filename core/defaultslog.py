@@ -727,7 +727,7 @@ class DefPerl(DefTestLog):
     def serialization(self):
         lines = self.test_log
         data = self.data
-        start = end = 0
+#        start = end = 0
         influs_default = []
 
         for i in lines[
@@ -754,10 +754,10 @@ class DefPerl(DefTestLog):
             if i.startswith("Test: benchmarks/startup/noprog.b"):
                 start = lines.index(i)
 
-            if i.startswith("Test: benchmarks/statement/assign-int.b"):
+            if i.startswith("[perl] [INFO] Test clear docker image:\n"):
                 end = lines.index(i)
 
-        for i in lines[start:end]:
+        for i in lines[start:end + 15]:
             if i.startswith("Avg:"):
                 num = re.findall("\d+\.?\d*", i)
                 self.exception_to_response(num, "default_perl:noprog.b")

@@ -732,45 +732,72 @@ class ClrPerl(ClrTestLog):
     def serialization(self):
         lines = self.test_log
         data = self.data
-        start = end = 0
-        up = down = 0
+#        start = end = 0
+#        up = down = 0
+
         for item in lines:
             if item.startswith("[perl] [INFO] Test clear docker image:\n"):
                 start = lines.index(item)
 
-        for i in lines[start:]:
-            if i.startswith("Test: benchmarks/statement/inc.b"):
-                end = lines[start:].index(i) + start
+        for item in lines[start:]:
+            if item.startswith("Test: benchmarks/startup/noprog.b"):
+                end = lines[start:].index(item) + start
 
         for item in lines[start:end]:
-            if item.startswith("Test-File: benchmarks/app/podhtml.b\n"):
-                up = lines[start:end].index(item) + start
-
-            if item.startswith("Test: benchmarks/startup/noprog.b"):
-                down = lines[start:end].index(item) + start
-
-        for i in lines[up:down]:
-            if i.startswith("Avg:"):
-                num = re.findall("\d+\.?\d*", i)
-                self.exception_to_response(num, "clearlinux_perl:podhtml.b")
+            if item.startswith("Avg:"):
+                num = re.findall("\d+\.?\d*", item)
                 data.get("clear").get("perl").update(
                     {"podhtml.b": num[0]}
                 )
 
-        for item in lines[start:end]:
-            if item.startswith("Test: benchmarks/startup/noprog.b"):
-                up = lines[start:end].index(item) + start
+        for i in lines[start:end + 2]:
+            if i.startswith("Test: benchmarks/startup/noprog.b"):
+                up = lines[start:end + 2].index(i) + start
 
-            if item.startswith("Test: benchmarks/statement/assign-int.b"):
-                down = lines[start:end].index(item) + start
-
-        for i in lines[up:down]:
+        for i in lines[up:]:
             if i.startswith("Avg:"):
-                num = re.findall("\d+\.\d*", i)
-                self.exception_to_response(num, "clearlinux_perl:noprog.b")
+                num = re.findall("\d+\.?\d*", i)
                 data.get("clear").get("perl").update(
                     {"noprog.b": num[0]}
                 )
+
+        # for item in lines:
+        #     if item.startswith("[perl] [INFO] Test clear docker image:\n"):
+        #         start = lines.index(item)
+        #
+        # for i in lines[start:]:
+        #     if i.startswith("Test: benchmarks/statement/inc.b"):
+        #         end = lines[start:].index(i) + start
+        #
+        # for item in lines[start:end]:
+        #     if item.startswith("Test-File: benchmarks/app/podhtml.b\n"):
+        #         up = lines[start:end].index(item) + start
+        #
+        #     if item.startswith("Test: benchmarks/startup/noprog.b"):
+        #         down = lines[start:end].index(item) + start
+        #
+        # for i in lines[up:down]:
+        #     if i.startswith("Avg:"):
+        #         num = re.findall("\d+\.?\d*", i)
+        #         self.exception_to_response(num, "clearlinux_perl:podhtml.b")
+        #         data.get("clear").get("perl").update(
+        #             {"podhtml.b": num[0]}
+        #         )
+        #
+        # for item in lines[start:end]:
+        #     if item.startswith("Test: benchmarks/startup/noprog.b"):
+        #         up = lines[start:end].index(item) + start
+        #
+        #     if item.startswith("Test: benchmarks/statement/assign-int.b"):
+        #         down = lines[start:end].index(item) + start
+        #
+        # for i in lines[up:down]:
+        #     if i.startswith("Avg:"):
+        #         num = re.findall("\d+\.\d*", i)
+        #         self.exception_to_response(num, "clearlinux_perl:noprog.b")
+        #         data.get("clear").get("perl").update(
+        #             {"noprog.b": num[0]}
+        #         )
 
         with open("data.json", "w")as f:
             json.dump(data, f)
