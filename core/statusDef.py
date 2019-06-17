@@ -63,7 +63,7 @@ class StaDefHttpd(StaDefLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -155,7 +155,7 @@ class StaDefNginx(StaDefLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -201,7 +201,7 @@ class StaDefMemcached(StaDefLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -247,7 +247,7 @@ class StaDefRedis(StaDefLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -293,7 +293,7 @@ class StaDefPhp(StaDefLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -339,7 +339,7 @@ class StaDefPython(StaDefLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -385,7 +385,7 @@ class StaDefNode(StaDefLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -431,7 +431,7 @@ class StaDefOpenjdk(StaDefLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -477,7 +477,7 @@ class StaDefRuby(StaDefLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -522,7 +522,7 @@ class StaDefPerl(StaDefLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, "w")as f:
+        with open('data.json', "w")as f:
             json.dump(data, f)
 
 
@@ -568,6 +568,6 @@ class StaDefTensorflow(StaDefLog):
                 data.get("status_def").get("tensorflow").update(
                     {"MicroService_layer": num[0]}
                 )
-        with open(self.json_path, "w")as f:
+        with open('data.json', "w")as f:
             json.dump(data, f)
 

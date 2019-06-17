@@ -65,7 +65,7 @@ class DefHttpd(DefTestLog):
                     {"Transfer rate": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -115,7 +115,7 @@ class DefNginx(DefTestLog):
                     {"Transfer rate": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -148,7 +148,7 @@ class DefMemcached(DefTestLog):
                 data.get("default").get("memcached").update(
                     {"Totals": ["Latency:" + num[-2], num[-1] + " KB/sec"]})
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -365,7 +365,7 @@ class DefRedis(DefTestLog):
                     {"MSET (10 keys)": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -387,7 +387,7 @@ class DefPhp(DefTestLog):
                     {"Score": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -411,7 +411,7 @@ class DefPython(DefTestLog):
                     {"Totals": num[-2:]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -454,7 +454,7 @@ class DefGoalng(DefTestLog):
                     {"BenchmarkJSON": num[0][:-6]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -476,7 +476,7 @@ class DefNode(DefTestLog):
                     {"benchmark-node-octane": num[-1]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -523,7 +523,7 @@ class DefOpenjdk(DefTestLog):
         #             {"o.s.MyBenchmark.testMethod:Error": num[-1]}
         #         )
 
-        with open(self.json_path, "w")as f:
+        with open('data.json', "w")as f:
             json.dump(data, f)
 
 
@@ -718,7 +718,7 @@ class DefRuby(DefTestLog):
         #                 {"app_tarai": num[-2]}
         #             )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -766,5 +766,5 @@ class DefPerl(DefTestLog):
                     {"noprog.b": num[0]}
                 )
 
-        with open(self.json_path, "w")as f:
+        with open('data.json', "w")as f:
             json.dump(data, f)

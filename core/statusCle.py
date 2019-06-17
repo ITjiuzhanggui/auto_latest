@@ -81,7 +81,7 @@ class StaClrHttpd(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -127,7 +127,7 @@ class StaClrGolang(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -172,7 +172,7 @@ class StaClrNginx(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -218,7 +218,7 @@ class StaClrMemcached(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -264,7 +264,7 @@ class StaClrRedis(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -310,7 +310,7 @@ class StaClrPhp(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -356,7 +356,7 @@ class StaClrPython(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -402,7 +402,7 @@ class StaClrNode(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -448,7 +448,7 @@ class StaClrOpenjdk(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -494,7 +494,7 @@ class StaClrRuby(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
 
 
@@ -540,7 +540,7 @@ class StaClrPerl(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, "w")as f:
+        with open('data.json', "w")as f:
             json.dump(data, f)
 
 
@@ -587,5 +587,5 @@ class StaClrTensorflow(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
-        with open(self.json_path, 'w') as f:
+        with open('data.json', 'w') as f:
             json.dump(data, f)
