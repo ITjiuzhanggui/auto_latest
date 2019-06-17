@@ -1,4 +1,5 @@
 import json
+import os
 import re
 from core.abstract import Global
 from conf import ConfManagement
@@ -10,8 +11,8 @@ class DefTestLog(Global):
         super(DefTestLog, self).__init__()
         test_logpath = ConfManagement().get_ini("TEST_LOG_PATH")
         self.test_log = self.read_logs(test_logpath)
-
-        with open('data.json', 'r') as f:
+        json_path = os.path.dirname(os.path.realpath(__file__))[:-4] + 'data.json'
+        with open(json_path, 'r') as f:
             self.data = json.load(f)
 
     def serialization(self):
@@ -64,7 +65,7 @@ class DefHttpd(DefTestLog):
                     {"Transfer rate": num[0]}
                 )
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -114,7 +115,7 @@ class DefNginx(DefTestLog):
                     {"Transfer rate": num[0]}
                 )
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -147,7 +148,7 @@ class DefMemcached(DefTestLog):
                 data.get("default").get("memcached").update(
                     {"Totals": ["Latency:" + num[-2], num[-1] + " KB/sec"]})
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -364,7 +365,7 @@ class DefRedis(DefTestLog):
                     {"MSET (10 keys)": num[0]}
                 )
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -386,7 +387,7 @@ class DefPhp(DefTestLog):
                     {"Score": num[0]}
                 )
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -410,7 +411,7 @@ class DefPython(DefTestLog):
                     {"Totals": num[-2:]}
                 )
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -453,7 +454,7 @@ class DefGoalng(DefTestLog):
                     {"BenchmarkJSON": num[0][:-6]}
                 )
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -475,7 +476,7 @@ class DefNode(DefTestLog):
                     {"benchmark-node-octane": num[-1]}
                 )
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -522,7 +523,7 @@ class DefOpenjdk(DefTestLog):
         #             {"o.s.MyBenchmark.testMethod:Error": num[-1]}
         #         )
 
-        with open("data.json", "w")as f:
+        with open(self.json_path, "w")as f:
             json.dump(data, f)
 
 
@@ -717,7 +718,7 @@ class DefRuby(DefTestLog):
         #                 {"app_tarai": num[-2]}
         #             )
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -765,5 +766,5 @@ class DefPerl(DefTestLog):
                     {"noprog.b": num[0]}
                 )
 
-        with open("data.json", "w")as f:
+        with open(self.json_path, "w")as f:
             json.dump(data, f)

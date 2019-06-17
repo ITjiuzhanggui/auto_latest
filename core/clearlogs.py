@@ -1,4 +1,5 @@
 import json
+import os
 import re
 from core.abstract import Global
 from conf import ConfManagement
@@ -10,8 +11,8 @@ class ClrTestLog(Global):
         super(ClrTestLog, self).__init__()
         test_logpath = ConfManagement().get_ini("TEST_LOG_PATH")
         self.test_log = self.read_logs(test_logpath)
-
-        with open('data.json', 'r') as f:
+        json_path = os.path.dirname(os.path.realpath(__file__))[:-4] + 'data.json'
+        with open(json_path, 'r') as f:
             self.data = json.load(f)
 
     def serialization(self):
@@ -65,7 +66,7 @@ class ClrHttpd(ClrTestLog):
                     {"Transfer rate": num[0]}
                 )
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -115,7 +116,7 @@ class ClrNginx(ClrTestLog):
                     {"Transfer rate": num[0]}
                 )
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -148,7 +149,7 @@ class ClrMemcached(ClrTestLog):
                 data.get("clear").get("memcached").update(
                     {"Totals": ["Latency:" + num[-2], num[-1] + " KB/sec"]})
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -365,7 +366,7 @@ class ClrRedis(ClrTestLog):
                     {"MSET (10 keys)": num[0]}
                 )
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -387,7 +388,7 @@ class ClrPhp(ClrTestLog):
                     {"Score": num[0]}
                 )
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -411,7 +412,7 @@ class ClrPython(ClrTestLog):
                     {"Totals": num[-2:]}
                 )
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -454,7 +455,7 @@ class ClrGoalng(ClrTestLog):
                     {"BenchmarkJSON": num[0][:-6]}
                 )
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -476,7 +477,7 @@ class ClrNode(ClrTestLog):
                     {"benchmark-node-octane": num[-1]}
                 )
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -527,7 +528,7 @@ class ClrOpenjdk(ClrTestLog):
         #             {"o.s.MyBenchmark.testMethod:Error": num[-1]}
         #         )
 
-        with open("data.json")as f:
+        with open(self.json_path, 'w')as f:
             json.dump(data, f)
 
 
@@ -722,7 +723,7 @@ class ClrRuby(ClrTestLog):
         #                 {"app_tarai": num[-2]}
         #             )
 
-        with open("data.json", 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -799,5 +800,5 @@ class ClrPerl(ClrTestLog):
         #             {"noprog.b": num[0]}
         #         )
 
-        with open("data.json", "w")as f:
+        with open(self.json_path, "w")as f:
             json.dump(data, f)
