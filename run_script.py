@@ -79,6 +79,7 @@ def get_log_test(cmd, logs_patg):
 
 def status_anlies(num):
     list = os.listdir(CURPATH)
+
     if "status_log" in list:
         logs = os.path.join(CURPATH, "status_log")
         i = os.listdir(logs)[num]
@@ -112,7 +113,10 @@ def status_anlies(num):
 
 def test_anlies(num):
     list = os.listdir(CURPATH)
+
     if "test_log" in list:
+        test_json_path = os.path.dirname(os.path.realpath(__file__)) + "/data.json"
+        test_json_ini = os.path.dirname(os.path.realpath(__file__)) + "/ini_data.json"
         logs = os.path.join(CURPATH, "test_log")
         for i in os.listdir(logs):
             log = os.path.join(logs, i)
@@ -122,7 +126,7 @@ def test_anlies(num):
                 ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
                 exect_contest(DefHttpd().serialization)
                 exect_contest(ClrHttpd().serialization)
-                os.system("cp data.json %s" % (JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
 
             if "nginx" in log:
                 files = os.listdir(log)[num]
@@ -130,7 +134,7 @@ def test_anlies(num):
                 ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
                 exect_contest(DefNginx().serialization)
                 exect_contest(ClrNginx().serialization)
-                os.system("cp data.json %s" % (JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
 
             if "memcached" in log:
                 files = os.listdir(log)[num]
@@ -138,7 +142,7 @@ def test_anlies(num):
                 ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
                 exect_contest(DefMemcached().serialization)
                 exect_contest(ClrMemcached().serialization)
-                os.system("cp data.json %s" % (JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
 
             if "redis" in log:
                 files = os.listdir(log)[num]
@@ -146,7 +150,7 @@ def test_anlies(num):
                 ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
                 exect_contest(DefRedis().serialization)
                 exect_contest(ClrRedis().serialization)
-                os.system("cp data.json %s" % (JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
 
             if "php" in log:
                 files = os.listdir(log)[num]
@@ -154,7 +158,7 @@ def test_anlies(num):
                 ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
                 exect_contest(DefPhp().serialization)
                 exect_contest(ClrPhp().serialization)
-                os.system("cp data.json %s" % (JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
 
             if "python" in log:
                 files = os.listdir(log)[num]
@@ -162,7 +166,7 @@ def test_anlies(num):
                 ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
                 exect_contest(DefPython().serialization)
                 exect_contest(ClrPython().serialization)
-                os.system("cp data.json %s" % (JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
 
             if "golang" in log:
                 files = os.listdir(log)[num]
@@ -170,7 +174,7 @@ def test_anlies(num):
                 ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
                 exect_contest(DefGoalng().serialization)
                 exect_contest(ClrGoalng().serialization)
-                os.system("cp data.json %s" % (JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
 
             if "node" in log:
                 files = os.listdir(log)[num]
@@ -178,7 +182,7 @@ def test_anlies(num):
                 ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
                 exect_contest(DefNode().serialization)
                 exect_contest(ClrNode().serialization)
-                os.system("cp data.json %s" % (JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
 
             if "openjdk" in log:
                 files = os.listdir(log)[num]
@@ -186,7 +190,7 @@ def test_anlies(num):
                 ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
                 exect_contest(DefOpenjdk().serialization)
                 exect_contest(ClrOpenjdk().serialization)
-                os.system("cp data.json %s" % (JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
 
             if "ruby" in log:
                 files = os.listdir(log)[num]
@@ -194,7 +198,7 @@ def test_anlies(num):
                 ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
                 exect_contest(DefRuby().serialization)
                 exect_contest(ClrRuby().serialization)
-                os.system("cp data.json %s" % (JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
 
             if "perl" in log:
                 files = os.listdir(log)[num]
@@ -202,9 +206,9 @@ def test_anlies(num):
                 ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
                 exect_contest(DefPerl().serialization)
                 exect_contest(ClrPerl().serialization)
-                os.system("cp data.json %s" % (JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/%d.json" % int(time.time() + num)))
 
-        os.system("cp ini_data.json data.json")
+        os.system("cp {} {}".format(test_json_ini, test_json_path))
 
 
 for i in test_cmd:

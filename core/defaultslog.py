@@ -11,8 +11,8 @@ class DefTestLog(Global):
         super(DefTestLog, self).__init__()
         test_logpath = ConfManagement().get_ini("TEST_LOG_PATH")
         self.test_log = self.read_logs(test_logpath)
-        json_path = os.path.dirname(os.path.realpath(__file__))[:-4] + 'data.json'
-        with open(json_path, 'r') as f:
+        self.json_path = os.path.dirname(os.path.realpath(__file__))[:-4] + 'data.json'
+        with open(self.json_path, 'r') as f:
             self.data = json.load(f)
 
     def serialization(self):
@@ -65,7 +65,7 @@ class DefHttpd(DefTestLog):
                     {"Transfer rate": num[0]}
                 )
 
-        with open('data.json', 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -115,7 +115,7 @@ class DefNginx(DefTestLog):
                     {"Transfer rate": num[0]}
                 )
 
-        with open('data.json', 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -148,7 +148,7 @@ class DefMemcached(DefTestLog):
                 data.get("default").get("memcached").update(
                     {"Totals": ["Latency:" + num[-2], num[-1] + " KB/sec"]})
 
-        with open('data.json', 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -365,7 +365,7 @@ class DefRedis(DefTestLog):
                     {"MSET (10 keys)": num[0]}
                 )
 
-        with open('data.json', 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -387,7 +387,7 @@ class DefPhp(DefTestLog):
                     {"Score": num[0]}
                 )
 
-        with open('data.json', 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -411,7 +411,7 @@ class DefPython(DefTestLog):
                     {"Totals": num[-2:]}
                 )
 
-        with open('data.json', 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -454,7 +454,7 @@ class DefGoalng(DefTestLog):
                     {"BenchmarkJSON": num[0][:-6]}
                 )
 
-        with open('data.json', 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -476,7 +476,7 @@ class DefNode(DefTestLog):
                     {"benchmark-node-octane": num[-1]}
                 )
 
-        with open('data.json', 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -523,7 +523,7 @@ class DefOpenjdk(DefTestLog):
         #             {"o.s.MyBenchmark.testMethod:Error": num[-1]}
         #         )
 
-        with open('data.json', "w")as f:
+        with open(self.json_path, "w")as f:
             json.dump(data, f)
 
 
@@ -555,13 +555,50 @@ class DefRuby(DefTestLog):
                        "io_file_create", "io_file_read", "io_file_write", "io_nonblock_noex", "io_nonblock_noex2",
                        "io_pipe_rw", "io_select", "io_select2", "io_select3", "loop_for", "loop_generator",
                        "loop_times", "loop_whileloop", "loop_whileloop2", "marshal_dump_flo", "marshal_dump_load_geniv",
-                       "marshal_dump_load_time", "require", "require_thread", "securerandom", "so_ackermann",
+                       "marshal_dump_load_time",
+                       "(1..1_000_000).last(100)",
+                       "Calculating-(1..1_000_000).last(100)",
+                       "Calculating-(1..1_000_000).last(1000)",
+                       "Calculating-(1..1_000_000).last(10000)",
+                       "capitalize-1",
+                       "capitalize-10",
+                       "capitalize-100",
+                       "capitalize-1000",
+                       "downcase-1",
+                       "downcase-10",
+                       "downcase-100",
+                       "downcase-1000",
+                       "require", "require_thread", "securerandom", "so_ackermann",
                        "so_array", "so_binary_trees", "so_concatenate", "so_count_words", "so_exception", "so_fannkuch",
                        "so_fasta", "so_k_nucleotidepreparing", "so_lists", "so_mandelbrot", "so_matrix",
                        "so_meteor_contest",
                        "so_nbody", "so_nested_loop", "so_nsieve", "so_nsieve_bits", "so_object", "so_partial_sums",
                        "so_pidigits", "so_random", "so_reverse_complementpreparing", "so_sieve", "so_spectralnorm",
-                       "string_index", "string_scan_re", "string_scan_str", "time_subsec", "vm1_attr_ivar",
+                       "string_index", "string_scan_re",
+                       "string_scan_str",
+                       "to_chars-1",
+                       "to_chars-10",
+                       "to_chars-100",
+                       "to_chars-1000",
+                       "swapcase-1",
+                       "swapcase-10",
+                       "swapcase-100",
+                       "swapcase-1000",
+                       "upcase-1",
+                       "upcase-10",
+                       "upcase-100",
+                       "upcase-1000",
+                       """Time.strptime("28/Aug/2005:06:54:20 +0000", "%d/%b/%Y:%T %z")""",
+                       """Time.strptime("1", "%s")""",
+                       """Time.strptime("0 +0100", "%s %z")""",
+                       """Time.strptime("0 UTC", "%s %z")""",
+                       """Time.strptime("1.5", "%s.%N")""",
+                       """Time.strptime("1.000000000001", "%s.%N")""",
+                       """Time.strptime("20010203 -0200", "%Y%m%d %z")""",
+                       """Time.strptime("20010203 UTC", "%Y%m%d %z")""",
+                       """Time.strptime("2018-365", "%Y-%j")""",
+                       """Time.strptime("2018-091", "%Y-%j")""",
+                       "time_subsec", "vm1_attr_ivar",
                        "vm1_attr_ivar_set",
                        "vm1_block", "vm1_blockparam", "vm1_blockparam_call", "vm1_blockparam_pass",
                        "vm1_blockparam_yield",
@@ -601,21 +638,249 @@ class DefRuby(DefTestLog):
 
             for startwith_item in influs_list:
                 if i.endswith("s/i)\n") and startwith_item in i:
-                    num = re.findall("\d+\.?\d*s", i)
+                    num = re.findall("\d+\.?\d* s|ERROR", i)
                     data_ruby.update({startwith_item: num[-1][:-1]})
 
             if "so_reverse_complementpreparing" in i:
                 start = lines.index(i)
                 so_reverse_complementpreparing = lines[start + 1]
-                num = re.findall("\d+\.?\d*s", so_reverse_complementpreparing)
+                num = re.findall("\d+\.?\d* s", so_reverse_complementpreparing)
+                self.exception_to_response(num, "default_Ruby:so_reverse_complementpreparing %d line" % (start + 2))
                 data_ruby.update({"so_reverse_complementpreparing": num[-1][:-1]})
 
             if "so_k_nucleotidepreparing" in i:
                 start = lines.index(i)
                 so_reverse_complementpreparing = lines[start + 1]
-                num = re.findall("\d+\.?\d*s", so_reverse_complementpreparing)
-
+                num = re.findall("\d+\.?\d* s", so_reverse_complementpreparing)
+                self.exception_to_response(num, "default_Ruby:so_k_nucleotidepreparing %d line" % (start + 2))
                 data_ruby.update({"so_k_nucleotidepreparing": num[-1][:-1]})
+
+            for item in lines:
+                if item.startswith("Warming up --------------------------------------\n"):
+                    up = lines.index(item)
+
+            for item in lines[up:]:
+                if item.startswith("Comparison:\n"):
+                    down = lines[up:].index(item) + up
+
+            for i in lines[up:down]:
+
+                if "(1..1_000_000).last(100)" in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"(1..1_000_000).last(100)": num[-4]})
+
+                if "(1..1_000_000).last(1000)" in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"(1..1_000_000).last(1000)": num[-4]})
+
+                if "(1..1_000_000).last(10000)" in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"(1..1_000_000).last(10000)": num[-4]})
+
+            for i in lines[down:]:
+
+                if i.startswith("Warming up --------------------------------------\n"):
+                    capit_start = lines[down:].index(i) + down
+
+            for i in lines[capit_start:]:
+
+                if i.startswith("Calculating -------------------------------------\n"):
+                    calc_start = lines[capit_start:].index(i) + capit_start
+
+            for i in lines[calc_start:]:
+
+                if i.startswith("Comparison:\n"):
+                    calc_end = lines[calc_start:].index(i) + calc_start
+
+            for i in lines[calc_start:calc_end]:
+
+                if "capitalize-1  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"capitalize-1": num[1]})
+
+                if "capitalize-10  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"capitalize-10": num[1]})
+
+                if "capitalize-100  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"capitalize-100": num[1]})
+
+                if "capitalize-1000  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"capitalize-1000": num[1]})
+
+            for i in lines[calc_end:]:
+                if i.startswith("Calculating -------------------------------------\n"):
+                    downcase_start = lines[calc_end:].index(i) + calc_end
+
+            for i in lines[downcase_start:]:
+
+                if i.startswith("Comparison:\n"):
+                    downcase_end = lines[downcase_start:].index(i) + downcase_start
+
+            for i in lines[downcase_start:downcase_end]:
+
+                if "downcase-1  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"downcase-1": num[1]})
+
+                if "downcase-10  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"downcase-10": num[1]})
+
+                if "downcase-100  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"downcase-100": num[1]})
+
+                if "downcase-1000  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"downcase-1000": num[1]})
+
+            for i in lines[downcase_end:]:
+                if i.startswith("Warming up --------------------------------------\n"):
+                    to_chars = lines[downcase_end:].index(i) + downcase_end
+
+            for i in lines[to_chars:]:
+
+                if i.startswith("Calculating -------------------------------------\n"):
+                    to_chars_start = lines[to_chars:].index(i) + to_chars
+
+            for i in lines[to_chars_start:]:
+
+                if i.startswith("Comparison:\n"):
+                    to_chars_end = lines[to_chars_start:].index(i) + to_chars_start
+
+            for i in lines[to_chars_start:to_chars_end]:
+
+                if "to_chars-1  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"to_chars-1": num[1]})
+
+                if "to_chars-10  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"to_chars-10": num[1]})
+
+                if "to_chars-100  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"to_chars-100": num[1]})
+
+                if "to_chars-1000  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"to_chars-1000": num[1]})
+
+            for i in lines[to_chars_end:]:
+
+                if i.startswith("Warming up --------------------------------------\n"):
+                    swapcase = lines[to_chars_end:].index(i) + to_chars_end
+
+            for i in lines[swapcase:]:
+
+                if i.startswith("Calculating -------------------------------------\n"):
+                    swapcase_start = lines[swapcase:].index(i) + swapcase
+
+            for i in lines[swapcase_start:]:
+
+                if i.startswith("Comparison:\n"):
+                    swapcase_end = lines[swapcase_start:].index(i) + swapcase_start
+
+            for i in lines[swapcase_start:swapcase_end]:
+
+                if "swapcase-1  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"swapcase-1": num[1]})
+
+                if "swapcase-10  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"swapcase-10": num[1]})
+
+                if "swapcase-100  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"swapcase-100": num[1]})
+
+                if "swapcase-1000  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"swapcase-1000": num[1]})
+
+            for i in lines[swapcase_end:]:
+
+                if i.startswith("Calculating -------------------------------------\n"):
+                    upcase_start = lines[swapcase_end:].index(i) + swapcase_end
+
+            for i in lines[upcase_start:]:
+
+                if i.startswith("Comparison:\n"):
+                    upcase_end = lines[upcase_start:].index(i) + upcase_start
+
+            for i in lines[upcase_start:upcase_end]:
+
+                if "upcase-1  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"upcase-1": num[1]})
+
+                if "upcase-10  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"upcase-10": num[1]})
+
+                if "upcase-100  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"upcase-100": num[1]})
+
+                if "upcase-1000  " in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"upcase-1000": num[1]})
+
+            for i in lines[upcase_end:]:
+
+                if i.startswith("Calculating -------------------------------------\n"):
+                    time_start = lines[upcase_end:].index(i) + upcase_end
+
+            for i in lines[time_start:]:
+
+                if i.startswith("Comparison:\n"):
+                    time_end = lines[time_start:].index(i) + time_start
+
+            for i in lines[time_start:time_end]:
+
+                if """Time.strptime("28/Aug/2005:06:54:20 +0000", "%d/%b/%Y:%T %z")  """ in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"""Time.strptime("28/Aug/2005:06:54:20 +0000", "%d/%b/%Y:%T %z")""": num[-4]})
+
+                if """Time.strptime("1", "%s")  """ in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"""Time.strptime("1", "%s")""": num[-4]})
+
+                if """Time.strptime("0 +0100", "%s %z")  """ in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"""Time.strptime("0 +0100", "%s %z")""": num[-4]})
+
+                if """Time.strptime("0 UTC", "%s %z")  """ in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"""Time.strptime("0 UTC", "%s %z")""": num[-4]})
+
+                if """Time.strptime("1.5", "%s.%N")  """ in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"""Time.strptime("1.5", "%s.%N")""": num[-4]})
+
+                if """Time.strptime("1.000000000001", "%s.%N")  """ in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"""Time.strptime("1.000000000001", "%s.%N")""": num[-4]})
+
+                if """Time.strptime("20010203 -0200", "%Y%m%d %z")  """ in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"""Time.strptime("20010203 -0200", "%Y%m%d %z")""": num[-4]})
+
+                if """Time.strptime("20010203 UTC", "%Y%m%d %z")  """ in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"""Time.strptime("20010203 UTC", "%Y%m%d %z")""": num[-4]})
+
+                if """Time.strptime("2018-365", "%Y-%j")  """ in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"""Time.strptime("2018-365", "%Y-%j")""": num[-4]})
+
+                if """Time.strptime("2018-091", "%Y-%j")  """ in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    data_ruby.update({"""Time.strptime("2018-091", "%Y-%j")""": num[-4]})
 
         data.get("default").get("ruby").update(data_ruby)
         # for i in lines[
@@ -718,7 +983,7 @@ class DefRuby(DefTestLog):
         #                 {"app_tarai": num[-2]}
         #             )
 
-        with open('data.json', 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
@@ -766,5 +1031,6 @@ class DefPerl(DefTestLog):
                     {"noprog.b": num[0]}
                 )
 
-        with open('data.json', "w")as f:
+        with open(self.json_path, "w")as f:
             json.dump(data, f)
+
