@@ -1,0 +1,59 @@
+{
+	"default": {
+		"httpd": {},
+		"nginx": {},
+		"memcached": {},
+		"redis": {},
+		"php": {},
+		"python": {},
+		"golang": {},
+		"node": {},
+		"openjdk": {},
+		"ruby": {},
+		"tensorflow": {},
+		"perl": {}
+	},
+	"clear": {
+		"httpd": {},
+		"nginx": {},
+		"memcached": {},
+		"redis": {},
+		"php": {},
+		"python": {},
+		"golang": {},
+		"node": {},
+		"openjdk": {},
+		"ruby": {},
+		"tensorflow": {},
+		"perl": {}
+	},
+	"status_def": {
+		"httpd": {},
+		"golang": {},
+		"nginx": {},
+		"memcached": {},
+		"redis": {},
+		"php": {},
+		"python": {},
+		"node": {},
+		"openjdk": {},
+		"ruby": {},
+		"tensorflow": {},
+		"perl": {}
+	},
+	"status_Clr": {
+		"clearlinux_version": {},
+		"httpd": {},
+		"golang": {},
+		"nginx": {},
+		"memcached": {},
+		"redis": {},
+		"php": {},
+		"python": {},
+		"node": {},
+		"openjdk": {},
+		"ruby": {},
+		"tensorflow": {},
+		"perl": {}
+	}
+}
