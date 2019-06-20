@@ -556,7 +556,6 @@ class DefRuby(DefTestLog):
                        "io_pipe_rw", "io_select", "io_select2", "io_select3", "loop_for", "loop_generator",
                        "loop_times", "loop_whileloop", "loop_whileloop2", "marshal_dump_flo", "marshal_dump_load_geniv",
                        "marshal_dump_load_time",
-                       "(1..1_000_000).last(100)",
                        "Calculating-(1..1_000_000).last(100)",
                        "Calculating-(1..1_000_000).last(1000)",
                        "Calculating-(1..1_000_000).last(10000)",
