@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1caf5d2c-2eec-47b4-a025-bcc79a1f37e4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_script.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,11 +28,17 @@
       <file leaf-file-name="run_script.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run_script.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="208" column="108" selection-start-line="208" selection-start-column="16" selection-end-line="208" selection-end-column="114" />
-              <folding>
-                <element signature="e#23#34#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="437">
+              <caret line="202" column="29" lean-forward="true" selection-start-line="202" selection-start-column="29" selection-end-line="202" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="clearlogs.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/clearlogs.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="13110">
+              <caret line="574" column="70" selection-start-line="574" selection-start-column="70" selection-end-line="574" selection-end-column="70" />
             </state>
           </provider>
         </entry>
@@ -92,9 +99,9 @@
         <option value="$PROJECT_DIR$/data.json" />
         <option value="$PROJECT_DIR$/core/statusCle.py" />
         <option value="$PROJECT_DIR$/core/statusDef.py" />
-        <option value="$PROJECT_DIR$/run_script.py" />
-        <option value="$PROJECT_DIR$/core/clearlogs.py" />
         <option value="$PROJECT_DIR$/core/defaultslog.py" />
+        <option value="$PROJECT_DIR$/core/clearlogs.py" />
+        <option value="$PROJECT_DIR$/run_script.py" />
       </list>
     </option>
   </component>
@@ -608,7 +615,14 @@
       <option name="project" value="LOCAL" />
       <updated>1560969052535</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="update &quot;.&quot;">
+      <created>1561009258127</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1561009258127</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -622,7 +636,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32897604" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32897604" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13166311" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13486141" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -641,24 +655,24 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.122068234" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32897604" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32897604" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39978212" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32897604" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" weight="0.32897604" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32897604" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -685,9 +699,9 @@
     <MESSAGE value="update &quot;core_ruby&quot;" />
     <MESSAGE value="update &quot;core_perl&quot;" />
     <MESSAGE value="update &quot;json_path&quot;" />
-    <MESSAGE value="update &quot;.&quot;" />
     <MESSAGE value="update &quot;core_ruby  run_scprit&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="update &quot;core_ruby  run_scprit&quot;" />
+    <MESSAGE value="update &quot;.&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="update &quot;.&quot;" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/core/clearlogs.py">
@@ -959,19 +973,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
           <caret line="33" column="49" selection-start-line="33" selection-start-column="49" selection-end-line="33" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/statusDef.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -996,27 +997,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/core/statusDef.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-10258">
+          <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/defaultslog.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="535" lean-forward="true" selection-start-line="535" selection-end-line="535" />
+        <state relative-caret-position="453">
+          <caret line="640" column="27" selection-start-line="640" selection-start-column="27" selection-end-line="640" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/clearlogs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="659" column="113" selection-start-line="659" selection-start-column="16" selection-end-line="659" selection-end-column="113" />
+        <state relative-caret-position="13110">
+          <caret line="574" column="70" selection-start-line="574" selection-start-column="70" selection-end-line="574" selection-end-column="70" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/run_script.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="208" column="108" selection-start-line="208" selection-start-column="16" selection-end-line="208" selection-end-column="114" />
-          <folding>
-            <element signature="e#23#34#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="437">
+          <caret line="202" column="29" lean-forward="true" selection-start-line="202" selection-start-column="29" selection-end-line="202" selection-end-column="29" />
         </state>
       </provider>
     </entry>
