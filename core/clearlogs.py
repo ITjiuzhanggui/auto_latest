@@ -659,6 +659,8 @@ class ClrRuby(ClrTestLog):
                 self.exception_to_response(num, "clearlinux_Ruby:so_k_nucleotidepreparing %d line" % (start + 2))
                 data_ruby.update({"so_k_nucleotidepreparing": num[-1][:-1]})
 
+        lines = lines[lines.index("[ruby] [INFO] Test clear docker image:\n"):lines.index("Clr-Ruby-Server\n")]
+
         for item in lines:
             if item.startswith("Warming up --------------------------------------\n"):
                 up = lines.index(item)

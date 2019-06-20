@@ -654,6 +654,8 @@ class DefRuby(DefTestLog):
                 self.exception_to_response(num, "default_Ruby:so_k_nucleotidepreparing %d line" % (start + 2))
                 data_ruby.update({"so_k_nucleotidepreparing": num[-1][:-1]})
 
+        lines = lines[lines.index("ruby/ruby.sh\n"):lines.index("Default-Ruby-Server\n")]
+
         for item in lines:
             if item.startswith("Warming up --------------------------------------\n"):
                 up = lines.index(item)
