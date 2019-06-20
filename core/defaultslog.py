@@ -654,232 +654,232 @@ class DefRuby(DefTestLog):
                 self.exception_to_response(num, "default_Ruby:so_k_nucleotidepreparing %d line" % (start + 2))
                 data_ruby.update({"so_k_nucleotidepreparing": num[-1][:-1]})
 
-            for item in lines:
-                if item.startswith("Warming up --------------------------------------\n"):
-                    up = lines.index(item)
+        for item in lines:
+            if item.startswith("Warming up --------------------------------------\n"):
+                up = lines.index(item)
 
-            for item in lines[up:]:
-                if item.startswith("Comparison:\n"):
-                    down = lines[up:].index(item) + up
+        for item in lines[up:]:
+            if item.startswith("Comparison:\n"):
+                down = lines[up:].index(item) + up
 
-            for i in lines[up:down]:
+        for i in lines[up:down]:
 
-                if "(1..1_000_000).last(100)" in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"(1..1_000_000).last(100)": num[-4]})
+            if "(1..1_000_000).last(100)" in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"(1..1_000_000).last(100)": num[-4]})
 
-                if "(1..1_000_000).last(1000)" in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"(1..1_000_000).last(1000)": num[-4]})
+            if "(1..1_000_000).last(1000)" in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"(1..1_000_000).last(1000)": num[-4]})
 
-                if "(1..1_000_000).last(10000)" in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"(1..1_000_000).last(10000)": num[-4]})
+            if "(1..1_000_000).last(10000)" in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"(1..1_000_000).last(10000)": num[-4]})
 
-            for i in lines[down:]:
+        for i in lines[down:]:
 
-                if i.startswith("Warming up --------------------------------------\n"):
-                    capit_start = lines[down:].index(i) + down
+            if i.startswith("Warming up --------------------------------------\n"):
+                capit_start = lines[down:].index(i) + down
 
-            for i in lines[capit_start:]:
+        for i in lines[capit_start:]:
 
-                if i.startswith("Calculating -------------------------------------\n"):
-                    calc_start = lines[capit_start:].index(i) + capit_start
+            if i.startswith("Calculating -------------------------------------\n"):
+                calc_start = lines[capit_start:].index(i) + capit_start
 
-            for i in lines[calc_start:]:
+        for i in lines[calc_start:]:
 
-                if i.startswith("Comparison:\n"):
-                    calc_end = lines[calc_start:].index(i) + calc_start
+            if i.startswith("Comparison:\n"):
+                calc_end = lines[calc_start:].index(i) + calc_start
 
-            for i in lines[calc_start:calc_end]:
+        for i in lines[calc_start:calc_end]:
 
-                if "capitalize-1  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"capitalize-1": num[1]})
+            if "capitalize-1  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"capitalize-1": num[1]})
 
-                if "capitalize-10  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"capitalize-10": num[1]})
+            if "capitalize-10  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"capitalize-10": num[1]})
 
-                if "capitalize-100  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"capitalize-100": num[1]})
+            if "capitalize-100  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"capitalize-100": num[1]})
 
-                if "capitalize-1000  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"capitalize-1000": num[1]})
+            if "capitalize-1000  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"capitalize-1000": num[1]})
 
-            for i in lines[calc_end:]:
-                if i.startswith("Calculating -------------------------------------\n"):
-                    downcase_start = lines[calc_end:].index(i) + calc_end
+        for i in lines[calc_end:]:
+            if i.startswith("Calculating -------------------------------------\n"):
+                downcase_start = lines[calc_end:].index(i) + calc_end
 
-            for i in lines[downcase_start:]:
+        for i in lines[downcase_start:]:
 
-                if i.startswith("Comparison:\n"):
-                    downcase_end = lines[downcase_start:].index(i) + downcase_start
+            if i.startswith("Comparison:\n"):
+                downcase_end = lines[downcase_start:].index(i) + downcase_start
 
-            for i in lines[downcase_start:downcase_end]:
+        for i in lines[downcase_start:downcase_end]:
 
-                if "downcase-1  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"downcase-1": num[1]})
+            if "downcase-1  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"downcase-1": num[1]})
 
-                if "downcase-10  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"downcase-10": num[1]})
+            if "downcase-10  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"downcase-10": num[1]})
 
-                if "downcase-100  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"downcase-100": num[1]})
+            if "downcase-100  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"downcase-100": num[1]})
 
-                if "downcase-1000  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"downcase-1000": num[1]})
+            if "downcase-1000  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"downcase-1000": num[1]})
 
-            for i in lines[downcase_end:]:
-                if i.startswith("Warming up --------------------------------------\n"):
-                    to_chars = lines[downcase_end:].index(i) + downcase_end
+        for i in lines[downcase_end:]:
+            if i.startswith("Warming up --------------------------------------\n"):
+                to_chars = lines[downcase_end:].index(i) + downcase_end
 
-            for i in lines[to_chars:]:
+        for i in lines[to_chars:]:
 
-                if i.startswith("Calculating -------------------------------------\n"):
-                    to_chars_start = lines[to_chars:].index(i) + to_chars
+            if i.startswith("Calculating -------------------------------------\n"):
+                to_chars_start = lines[to_chars:].index(i) + to_chars
 
-            for i in lines[to_chars_start:]:
+        for i in lines[to_chars_start:]:
 
-                if i.startswith("Comparison:\n"):
-                    to_chars_end = lines[to_chars_start:].index(i) + to_chars_start
+            if i.startswith("Comparison:\n"):
+                to_chars_end = lines[to_chars_start:].index(i) + to_chars_start
 
-            for i in lines[to_chars_start:to_chars_end]:
+        for i in lines[to_chars_start:to_chars_end]:
 
-                if "to_chars-1  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"to_chars-1": num[1]})
+            if "to_chars-1  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"to_chars-1": num[1]})
 
-                if "to_chars-10  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"to_chars-10": num[1]})
+            if "to_chars-10  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"to_chars-10": num[1]})
 
-                if "to_chars-100  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"to_chars-100": num[1]})
+            if "to_chars-100  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"to_chars-100": num[1]})
 
-                if "to_chars-1000  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"to_chars-1000": num[1]})
+            if "to_chars-1000  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"to_chars-1000": num[1]})
 
-            for i in lines[to_chars_end:]:
+        for i in lines[to_chars_end:]:
 
-                if i.startswith("Warming up --------------------------------------\n"):
-                    swapcase = lines[to_chars_end:].index(i) + to_chars_end
+            if i.startswith("Warming up --------------------------------------\n"):
+                swapcase = lines[to_chars_end:].index(i) + to_chars_end
 
-            for i in lines[swapcase:]:
+        for i in lines[swapcase:]:
 
-                if i.startswith("Calculating -------------------------------------\n"):
-                    swapcase_start = lines[swapcase:].index(i) + swapcase
+            if i.startswith("Calculating -------------------------------------\n"):
+                swapcase_start = lines[swapcase:].index(i) + swapcase
 
-            for i in lines[swapcase_start:]:
+        for i in lines[swapcase_start:]:
 
-                if i.startswith("Comparison:\n"):
-                    swapcase_end = lines[swapcase_start:].index(i) + swapcase_start
+            if i.startswith("Comparison:\n"):
+                swapcase_end = lines[swapcase_start:].index(i) + swapcase_start
 
-            for i in lines[swapcase_start:swapcase_end]:
+        for i in lines[swapcase_start:swapcase_end]:
 
-                if "swapcase-1  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"swapcase-1": num[1]})
+            if "swapcase-1  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"swapcase-1": num[1]})
 
-                if "swapcase-10  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"swapcase-10": num[1]})
+            if "swapcase-10  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"swapcase-10": num[1]})
 
-                if "swapcase-100  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"swapcase-100": num[1]})
+            if "swapcase-100  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"swapcase-100": num[1]})
 
-                if "swapcase-1000  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"swapcase-1000": num[1]})
+            if "swapcase-1000  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"swapcase-1000": num[1]})
 
-            for i in lines[swapcase_end:]:
+        for i in lines[swapcase_end:]:
 
-                if i.startswith("Calculating -------------------------------------\n"):
-                    upcase_start = lines[swapcase_end:].index(i) + swapcase_end
+            if i.startswith("Calculating -------------------------------------\n"):
+                upcase_start = lines[swapcase_end:].index(i) + swapcase_end
 
-            for i in lines[upcase_start:]:
+        for i in lines[upcase_start:]:
 
-                if i.startswith("Comparison:\n"):
-                    upcase_end = lines[upcase_start:].index(i) + upcase_start
+            if i.startswith("Comparison:\n"):
+                upcase_end = lines[upcase_start:].index(i) + upcase_start
 
-            for i in lines[upcase_start:upcase_end]:
+        for i in lines[upcase_start:upcase_end]:
 
-                if "upcase-1  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"upcase-1": num[1]})
+            if "upcase-1  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"upcase-1": num[1]})
 
-                if "upcase-10  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"upcase-10": num[1]})
+            if "upcase-10  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"upcase-10": num[1]})
 
-                if "upcase-100  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"upcase-100": num[1]})
+            if "upcase-100  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"upcase-100": num[1]})
 
-                if "upcase-1000  " in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"upcase-1000": num[1]})
+            if "upcase-1000  " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"upcase-1000": num[1]})
 
-            for i in lines[upcase_end:]:
+        for i in lines[upcase_end:]:
 
-                if i.startswith("Calculating -------------------------------------\n"):
-                    time_start = lines[upcase_end:].index(i) + upcase_end
+            if i.startswith("Calculating -------------------------------------\n"):
+                time_start = lines[upcase_end:].index(i) + upcase_end
 
-            for i in lines[time_start:]:
+        for i in lines[time_start:]:
 
-                if i.startswith("Comparison:\n"):
-                    time_end = lines[time_start:].index(i) + time_start
+            if i.startswith("Comparison:\n"):
+                time_end = lines[time_start:].index(i) + time_start
 
-            for i in lines[time_start:time_end]:
+        for i in lines[time_start:time_end]:
 
-                if """Time.strptime("28/Aug/2005:06:54:20 +0000", "%d/%b/%Y:%T %z")  """ in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"""Time.strptime("28/Aug/2005:06:54:20 +0000", "%d/%b/%Y:%T %z")""": num[-4]})
+            if """Time.strptime("28/Aug/2005:06:54:20 +0000", "%d/%b/%Y:%T %z")  """ in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"""Time.strptime("28/Aug/2005:06:54:20 +0000", "%d/%b/%Y:%T %z")""": num[-4]})
 
-                if """Time.strptime("1", "%s")  """ in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"""Time.strptime("1", "%s")""": num[-4]})
+            if """Time.strptime("1", "%s")  """ in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"""Time.strptime("1", "%s")""": num[-4]})
 
-                if """Time.strptime("0 +0100", "%s %z")  """ in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"""Time.strptime("0 +0100", "%s %z")""": num[-4]})
+            if """Time.strptime("0 +0100", "%s %z")  """ in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"""Time.strptime("0 +0100", "%s %z")""": num[-4]})
 
-                if """Time.strptime("0 UTC", "%s %z")  """ in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"""Time.strptime("0 UTC", "%s %z")""": num[-4]})
+            if """Time.strptime("0 UTC", "%s %z")  """ in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"""Time.strptime("0 UTC", "%s %z")""": num[-4]})
 
-                if """Time.strptime("1.5", "%s.%N")  """ in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"""Time.strptime("1.5", "%s.%N")""": num[-4]})
+            if """Time.strptime("1.5", "%s.%N")  """ in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"""Time.strptime("1.5", "%s.%N")""": num[-4]})
 
-                if """Time.strptime("1.000000000001", "%s.%N")  """ in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"""Time.strptime("1.000000000001", "%s.%N")""": num[-4]})
+            if """Time.strptime("1.000000000001", "%s.%N")  """ in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"""Time.strptime("1.000000000001", "%s.%N")""": num[-4]})
 
-                if """Time.strptime("20010203 -0200", "%Y%m%d %z")  """ in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"""Time.strptime("20010203 -0200", "%Y%m%d %z")""": num[-4]})
+            if """Time.strptime("20010203 -0200", "%Y%m%d %z")  """ in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"""Time.strptime("20010203 -0200", "%Y%m%d %z")""": num[-4]})
 
-                if """Time.strptime("20010203 UTC", "%Y%m%d %z")  """ in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"""Time.strptime("20010203 UTC", "%Y%m%d %z")""": num[-4]})
+            if """Time.strptime("20010203 UTC", "%Y%m%d %z")  """ in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"""Time.strptime("20010203 UTC", "%Y%m%d %z")""": num[-4]})
 
-                if """Time.strptime("2018-365", "%Y-%j")  """ in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"""Time.strptime("2018-365", "%Y-%j")""": num[-4]})
+            if """Time.strptime("2018-365", "%Y-%j")  """ in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"""Time.strptime("2018-365", "%Y-%j")""": num[-4]})
 
-                if """Time.strptime("2018-091", "%Y-%j")  """ in i:
-                    num = re.findall("\d+\.?\d*", i)
-                    data_ruby.update({"""Time.strptime("2018-091", "%Y-%j")""": num[-4]})
+            if """Time.strptime("2018-091", "%Y-%j")  """ in i:
+                num = re.findall("\d+\.?\d*", i)
+                data_ruby.update({"""Time.strptime("2018-091", "%Y-%j")""": num[-4]})
 
         data.get("default").get("ruby").update(data_ruby)
         # for i in lines[
