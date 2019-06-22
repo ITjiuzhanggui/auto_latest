@@ -9,9 +9,12 @@
 		"golang": {},
 		"node": {},
 		"openjdk": {},
-		"ruby": {},
 		"tensorflow": {},
-		"perl": {}
+		"perl": {},
+		"postgres": {},
+		"mariadb":{},
+                "ruby": {}
+
 	},
 	"clear": {
 		"httpd": {},
@@ -23,9 +26,11 @@
 		"golang": {},
 		"node": {},
 		"openjdk": {},
-		"ruby": {},
 		"tensorflow": {},
-		"perl": {}
+		"perl": {},
+		"postgres":{},
+		"mariadb":{},
+		"ruby": {}
 	},
 	"status_def": {
 		"httpd": {},
@@ -37,9 +42,10 @@
 		"python": {},
 		"node": {},
 		"openjdk": {},
-		"ruby": {},
 		"tensorflow": {},
-		"perl": {}
+		"perl": {},
+		"postgres":{},
+                "mariadb":{}
 	},
 	"status_Clr": {
 		"clearlinux_version": {},
@@ -54,6 +60,8 @@
 		"openjdk": {},
 		"ruby": {},
 		"tensorflow": {},
-		"perl": {}
+		"perl": {}.
+		"postgres":{},
+                "mariadb":{}
 	}
 }
