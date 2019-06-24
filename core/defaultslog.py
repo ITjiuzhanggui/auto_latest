@@ -500,7 +500,7 @@ class DefOpenjdk(DefTestLog):
 
             if i.startswith("MyBenchmark.testMethod"):
                 num = re.findall("\d+\.?\d+", i)
-                self.exception_to_response(num, "default_openjdk:o.s.MyBenchmark.testMethod.Error")
+                self.exception_to_response(num, "default_openjdk:MyBenchmark.testMethod.Error")
                 data.get("default").get("openjdk").update(
                     {"MyBenchmark.testMethod.Error": num[-1]}
                 )

@@ -514,16 +514,16 @@ class ClrOpenjdk(ClrTestLog):
                  lines.index("[openjdk] [INFO] Test clear docker image:\n"):
                  lines.index("clr-openjdk\n")]:
 
-            if i.startswith("o.s.MyBenchmark.testMethod"):
+            if i.startswith("MyBenchmark.testMethod"):
                 num = re.findall("\d+\.?\d+", i)
                 self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod:Score")
                 data.get("clear").get("openjdk").update(
                     {"MyBenchmark.testMethod:Score": num[-2]}
                 )
 
-            if i.startswith("o.s.MyBenchmark.testMethod"):
+            if i.startswith("MyBenchmark.testMethod"):
                 num = re.findall("\d+\.?\d+", i)
-                self.exception_to_response(num, "clearlinux_openjdk:o.s.MyBenchmark.testMethod:Error")
+                self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod:Error")
                 data.get("clear").get("openjdk").update(
                     {"MyBenchmark.testMethod:Error": num[-1]}
                 )
