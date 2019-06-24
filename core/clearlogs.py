@@ -116,7 +116,7 @@ class ClrNginx(ClrTestLog):
                     {"Transfer rate": num[0]}
                 )
 
-        with open('data.json', 'w') as f:
+        with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
