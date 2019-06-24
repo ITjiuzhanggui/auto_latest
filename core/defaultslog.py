@@ -26,7 +26,7 @@ class DefHttpd(DefTestLog):
         lines = self.test_log
         data = self.data
         for i in lines[
-                 lines.index("httpd/httpd.sh\n"):
+                 lines.index("[httpd] [INFO] Test docker hub official image first:\n"):
                  lines.index("Default-Httpd-Server\n")]:
 
             if i.startswith("Time taken for tests"):
