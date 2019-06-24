@@ -3,7 +3,7 @@ import re
 import json
 from core.abstract import Global
 from conf import ConfManagement
-
+from logs import SetLog
 
 class StaClrLog(Global):
 
