@@ -28,7 +28,8 @@ os.system("cp 1.sh %s/" % auto_path)
 
 def get_log_update(cmd, logs_patg):
     SetLog().info("updte:cmd:%s" % cmd)
-    for i in range(1):
+    for i in range(5):
+        SetLog().info("*****************")
         os.system("{} > {}/{}.log 2>&1 ".format(
             cmd, logs_patg, time.strftime( \
                 "%Y-%m-%d-%H:%M:%S", \
@@ -62,7 +63,9 @@ make_path = auto_path + '/1.sh'
 make_path += " %s make status" % auto_path
 get_log_status(make_path, path)
 
-test_cmd = ["make memcached", "make php", "make python", "make golang", "make openjdk", "make perl", "make ruby"]
+test_cmd = ["make httpd", "make nginx", "make memcached", "make redis", "make php", "make python", "make node",
+            "make golang", "make postgres", "make tensorflow", "make mariadb", "make perl", "make openjdk",
+            "make ruby"]
 
 
 def get_log_test(cmd, logs_patg):
@@ -109,6 +112,13 @@ def status_anlies(num):
         exect_contest(StaClrRuby().serialization)
         exect_contest(StaDefPerl().serialization)
         exect_contest(StaClrPerl().serialization)
+        exect_contest(StaDefTensorflow.serialization)
+        exect_contest(StaClrTensorflow.serialization)
+        exect_contest(StaDefPostgres.serialization)
+        exect_contest(StaClrPostgres.serialization)
+        exect_contest(StaDefMariadb.serialization)
+        exect_contest(StaClrMariadb.serialization)
+
         os.system("cp {} {}".format(status_json_path, JSON_STATUS_PATH + "/%d.json" % int(time.time() + num)))
     os.system("cp {} {}".format(status_json_ini, status_json_path))
 
@@ -120,6 +130,7 @@ def test_anlies(num):
         test_json_path = os.path.dirname(os.path.realpath(__file__)) + "/data.json"
         test_json_ini = os.path.dirname(os.path.realpath(__file__)) + "/ini_data.json"
         logs = os.path.join(CURPATH, "test_log")
+
         for i in os.listdir(logs):
             log = os.path.join(logs, i)
             if "httpd" in log:
@@ -194,6 +205,38 @@ def test_anlies(num):
                 exect_contest(ClrOpenjdk().serialization)
                 os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
 
+            if "perl" in log:
+                files = os.listdir(log)[num]
+                p = os.path.join(log, files)
+                ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
+                exect_contest(DefPerl().serialization)
+                exect_contest(ClrPerl().serialization)
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
+
+            if "postgres" in log:
+                files = os.listdir(log)[num]
+                p = os.path.join(log, files)
+                ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
+                exect_contest(DefPostgres().serialization)
+                exect_contest(ClrPostgres().serialization)
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
+
+            if "tensorflow" in log:
+                files = os.listdir(log)[num]
+                p = os.path.join(log, files)
+                ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
+                exect_contest(DefTensorflow().serialization)
+                exect_contest(ClrTensorflow().serialization)
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
+
+            if "mariadb" in log:
+                files = os.listdir(log)[num]
+                p = os.path.join(log, files)
+                ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
+                exect_contest(DefMariadb().serialization)
+                exect_contest(ClrMariadb().serialization)
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
+
             if "ruby" in log:
                 files = os.listdir(log)[num]
                 p = os.path.join(log, files)
@@ -202,13 +245,6 @@ def test_anlies(num):
                 exect_contest(ClrRuby().serialization)
                 os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
 
-            if "perl" in log:
-                files = os.listdir(log)[num]
-                p = os.path.join(log, files)
-                ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
-                exect_contest(DefPerl().serialization)
-                exect_contest(ClrPerl().serialization)
-                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
         os.system("cp {} {}".format(test_json_ini, test_json_path))
 
 
@@ -218,7 +254,7 @@ for i in test_cmd:
     os.makedirs(path, exist_ok=True)
     make_path = auto_path + '/1.sh'
     make_path += " {} {} ".format(auto_path, i)
-#    get_log_test(make_path, path)
+    get_log_test(make_path, path)
 
 for num in range(1):
     status_anlies(num)

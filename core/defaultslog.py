@@ -77,8 +77,8 @@ class DefNginx(DefTestLog):
         data = self.data
 
         for i in lines[
-                 lines.index("nginx/nginx.sh\n"):
-                 lines.index("Default-Nginx-Server\n")]:
+                 lines.index("[nginx] [INFO] Test docker hub official image first:\n"):
+                 lines.index("[nginx] [INFO] Test clear docker image:\n")]:
 
             if i.startswith("Time taken for tests"):
                 num = re.findall("\d+\.?\d*", i)
@@ -352,11 +352,11 @@ class DefRedis(DefTestLog):
                     {"LRANGE_600 (first 600 elements)": num[0]}
                 )
 
-        influs_defaut.append("some-redis\n")
+        influs_defaut.append("Default-Redis-Server\n")
 
         for i in influs_defaut[
                  influs_defaut.index("====== MSET (10 keys) ======\n"):
-                 influs_defaut.index("some-redis\n")]:
+                 influs_defaut.index("Default-Redis-Server\n")]:
 
             if i.endswith("requests per second\n"):
                 num = re.findall("\d+\.?\d*", i)
@@ -1030,6 +1030,102 @@ class DefPerl(DefTestLog):
                 self.exception_to_response(num, "default_perl:noprog.b")
                 data.get("default").get("perl").update(
                     {"noprog.b": num[0]}
+                )
+
+        with open(self.json_path, "w")as f:
+            json.dump(data, f)
+
+
+class DefPostgres(DefTestLog):
+    """default test_case postgres analysis"""
+
+    def serialization(self):
+        lines = self.test_log
+        data = self.data
+
+        lines_a = lines[1:lines.index("[postgres] [INFO] Test clear docker image:\n")].copy()
+        line_nu = []
+
+        for i in lines_a:
+            if re.search(r"excluding", i) != None:
+                line_nu.append(lines_a.index(i))
+
+        bsw = lines_a[int(line_nu[0])].split()
+        bsr = lines_a[int(line_nu[1])].split()
+        bnw = lines_a[int(line_nu[2])].split()
+        bnr = lines_a[int(line_nu[3])].split()
+        bhw = lines_a[int(line_nu[4])].split()
+        bhr = lines_a[int(line_nu[5])].split()
+        data.get("default").get("postgres").update(
+            {"BUFFER_TEST&SINGLE_THREAD&READ_WRITE": bsw[2]}
+        )
+        data.get("default").get("postgres").update(
+            {"BUFFER_TEST&SINGLE_THREAD&READ_ONLY": bsr[2]}
+        )
+        data.get("default").get("postgres").update(
+            {"BUFFER_TEST&NORMAL_LOAD&READ_WRITE": bnw[2]}
+        )
+        data.get("default").get("postgres").update(
+            {"BUFFER_TEST&NORMAL_LOAD&READ_ONLY": bnr[2]}
+        )
+        data.get("default").get("postgres").update(
+            {"BUFFER_TEST&HEAVY_CONNECTION&READ_WRITE": bhw[2]}
+        )
+        data.get("default").get("postgres").update(
+            {"BUFFER_TEST&HEAVY_CONNECTION&READ_ONLY": bhr[2]}
+        )
+
+        with open(self.json_path, "w")as f:
+            json.dump(data, f)
+
+
+class DefTensorflow(DefTestLog):
+    """default test_case Tensorflow analysis"""
+
+    def serialization(self):
+        lines = self.test_log
+        data = self.data
+
+        for i in lines[
+                 lines.index("[tensorflow] [INFO] Test docker hub official image first:\n"):
+                 lines.index("[tensorflow] [INFO] Test clear docker image:\n")]:
+
+            if i.startswith("Total duration"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("default").get("tensorflow").update(
+                    {"Total duration": num[0]})
+
+        with open(self.json_path, "w")as f:
+            json.dump(data, f)
+
+
+class DefMariadb(DefTestLog):
+    """default test_case Mariadb analysis"""
+    def serialization(self):
+        lines = self.test_log
+        data = self.data
+
+        for i in lines[
+                 lines.index("[mariadb] [INFO] Test docker hub official image first:\n"):
+                 lines.index("[mariadb] [INFO] Test clear docker image:\n")]:
+
+            i = i.strip()
+            if i.startswith("Average number of seconds"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("default").get("mariadb").update(
+                    {"Average number of seconds to run all queries": num[0]}
+                )
+
+            if i.startswith("Minimum number of seconds"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("default").get("mariadb").update(
+                    {"Minimum number of seconds to run all queries": num[0]}
+                )
+
+            if i.startswith("Maximum number of seconds"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("default").get("mariadb").update(
+                    {"Maximum number of seconds to run all queries": num[0]}
                 )
 
         with open(self.json_path, "w")as f:

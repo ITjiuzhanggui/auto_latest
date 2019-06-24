@@ -527,7 +527,7 @@ class StaDefPerl(StaDefLog):
 
 
 class StaDefTensorflow(StaDefLog):
-    """default test_status_perl long analysis"""
+    """default test_status_tensorflow long analysis"""
 
     def serialization(self):
         lines = self.status_log
@@ -571,3 +571,94 @@ class StaDefTensorflow(StaDefLog):
         with open(self.json_path, "w")as f:
             json.dump(data, f)
 
+
+class StaDefPostgres(StaDefLog):
+    """default test_status_postgres long analysis"""
+
+    def serialization(self):
+        lines = self.status_log
+        data = self.data
+        if_n = True
+        for i in lines:
+            if i.startswith("postgres"):
+                if "latest" in i:
+                    start = lines.index(i)
+
+        while if_n:
+            for i in lines[start:]:
+                if i == '\n':
+                    if_n = False
+                    end = lines[start:].index(i)
+
+        for i in lines[start:end + start]:
+
+            if i.startswith("postgres"):
+                if "latest" in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    self.exception_to_response(num, "status_def_postgres:Total")
+                    data.get("status_def").get("postgres").update(
+                        {"Total": num[-1] + "MB"}
+                    )
+
+            if i.startswith("default base layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_def_postgres:Base_Layer")
+                data.get("status_def").get("postgres").update(
+                    {"Base_Layer": num[0]}
+                )
+
+            if i.startswith("default microservice added layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_def_postgres:MicroService_layer")
+                data.get("status_def").get("postgres").update(
+                    {"MicroService_layer": num[0]}
+                )
+
+        with open(self.json_path, 'w') as f:
+            json.dump(data, f)
+
+
+class StaDefMariadb(StaDefLog):
+    """default test_status_mariadb long analysis"""
+
+    def serialization(self):
+        lines = self.status_log
+        data = self.data
+        if_n = True
+        for i in lines:
+            if i.startswith("mariadb"):
+                if "latest" in i:
+                    start = lines.index(i)
+
+        while if_n:
+            for i in lines[start:]:
+                if i == '\n':
+                    if_n = False
+                    end = lines[start:].index(i)
+
+        for i in lines[start:end + start]:
+
+            if i.startswith("mariadb"):
+                if "latest" in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    self.exception_to_response(num, "status_def_mariadb:Total")
+                    data.get("status_def").get("mariadb").update(
+                        {"Total": num[-1] + "MB"}
+                    )
+
+            if i.startswith("default base layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_def_mariadb:Base_Layer")
+                data.get("status_def").get("mariadb").update(
+                    {"Base_Layer": num[0]}
+                )
+
+            if i.startswith("default microservice added layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_def_mariadb:MicroService_layer")
+                data.get("status_def").get("mariadb").update(
+                    {"MicroService_layer": num[0]}
+                )
+
+        with open(self.json_path, 'w') as f:
+            json.dump(data, f)

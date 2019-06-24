@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1caf5d2c-2eec-47b4-a025-bcc79a1f37e4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/clearlogs.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/clearlogs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/defaultslog.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/defaultslog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/statusCle.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/statusCle.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/statusDef.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/statusDef.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_script.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,41 +29,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="defaultslog.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/defaultslog.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="683">
-              <caret line="656" column="89" lean-forward="true" selection-start-line="656" selection-start-column="89" selection-end-line="656" selection-end-column="89" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="conf.ini" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/conf/conf.ini">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="4" column="72" lean-forward="true" selection-start-line="4" selection-start-column="72" selection-end-line="4" selection-end-column="72" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="run_script.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run_script.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="740">
-              <caret line="113" lean-forward="true" selection-start-line="113" selection-end-line="113" />
+            <state relative-caret-position="2595">
+              <caret line="268" lean-forward="true" selection-start-line="268" selection-end-line="268" />
               <folding>
                 <element signature="e#23#34#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="clearlogs.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/clearlogs.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="605">
-              <caret line="662" lean-forward="true" selection-start-line="662" selection-end-line="662" />
             </state>
           </provider>
         </entry>
@@ -80,7 +57,7 @@
       <find>Mem</find>
       <find>R</find>
       <find>with</find>
-      <find>with open</find>
+      <find />
       <find>json</find>
       <find>os.path</find>
       <find>Ruby</find>
@@ -117,12 +94,12 @@
         <option value="$PROJECT_DIR$/tests/1.py" />
         <option value="$PROJECT_DIR$/core/MQ_logs.py" />
         <option value="$PROJECT_DIR$/data.json" />
+        <option value="$PROJECT_DIR$/conf/conf.ini" />
+        <option value="$PROJECT_DIR$/core/clearlogs.py" />
         <option value="$PROJECT_DIR$/core/statusCle.py" />
         <option value="$PROJECT_DIR$/core/statusDef.py" />
-        <option value="$PROJECT_DIR$/core/defaultslog.py" />
-        <option value="$PROJECT_DIR$/core/clearlogs.py" />
-        <option value="$PROJECT_DIR$/conf/conf.ini" />
         <option value="$PROJECT_DIR$/run_script.py" />
+        <option value="$PROJECT_DIR$/core/defaultslog.py" />
       </list>
     </option>
   </component>
@@ -692,12 +669,18 @@
       <option name="project" value="LOCAL" />
       <updated>1561040012638</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="update &quot;.&quot;">
+      <created>1561041316786</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1561041316786</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32897604" />
@@ -706,7 +689,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32897604" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32897604" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13486141" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1369936" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -772,6 +755,11 @@
     <MESSAGE value="update &quot;core_ruby  run_scprit&quot;" />
     <MESSAGE value="update &quot;.&quot;" />
     <option name="LAST_COMMIT_MESSAGE" value="update &quot;.&quot;" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="3" />
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/core/clearlogs.py">
@@ -1053,45 +1041,193 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/statusCle.py">
+    <entry file="file://$PROJECT_DIR$/conf/conf.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="667">
-          <caret line="33" column="49" selection-start-line="33" selection-start-column="49" selection-end-line="33" selection-end-column="49" />
+        <state relative-caret-position="92">
+          <caret line="4" column="72" selection-start-line="4" selection-start-column="72" selection-end-line="4" selection-end-column="72" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/statusDef.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12010">
-          <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/clearlogs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="605">
-          <caret line="662" lean-forward="true" selection-start-line="662" selection-end-line="662" />
+        <state relative-caret-position="759">
+          <caret line="121" column="19" lean-forward="true" selection-start-line="121" selection-start-column="19" selection-end-line="121" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/defaultslog.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="683">
-          <caret line="656" column="89" lean-forward="true" selection-start-line="656" selection-start-column="89" selection-end-line="656" selection-end-column="89" />
+        <state relative-caret-position="-184">
+          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf/conf.ini">
+    <entry file="file://$PROJECT_DIR$/core/clearlogs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="72" lean-forward="true" selection-start-line="4" selection-start-column="72" selection-end-line="4" selection-end-column="72" />
+        <state relative-caret-position="797">
+          <caret line="1168" selection-start-line="1168" selection-end-line="1168" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/statusCle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="759">
+          <caret line="639" column="31" selection-start-line="639" selection-start-column="31" selection-end-line="639" selection-end-column="31" />
+          <folding>
+            <element signature="e#129#1173#0" />
+            <element signature="e#157#512#0" />
+            <element signature="e#551#555#0" />
+            <element signature="e#595#1173#0" />
+            <element signature="e#730#849#0" />
+            <element signature="e#762#849#0" />
+            <element signature="e#796#849#0" />
+            <element signature="e#892#1173#0" />
+            <element signature="e#947#1173#0" />
+            <element signature="e#1210#2792#0" />
+            <element signature="e#1294#2792#0" />
+            <element signature="e#1399#1501#0" />
+            <element signature="e#1441#1501#0" />
+            <element signature="e#1535#1670#0" />
+            <element signature="e#1575#1670#0" />
+            <element signature="e#1609#1670#0" />
+            <element signature="e#1728#2715#0" />
+            <element signature="e#1781#2065#0" />
+            <element signature="e#1819#2065#0" />
+            <element signature="e#2143#2375#0" />
+            <element signature="e#2467#2715#0" />
+            <element signature="e#2830#4421#0" />
+            <element signature="e#2915#4421#0" />
+            <element signature="e#3020#3123#0" />
+            <element signature="e#3063#3123#0" />
+            <element signature="e#3157#3292#0" />
+            <element signature="e#3197#3292#0" />
+            <element signature="e#3231#3292#0" />
+            <element signature="e#3350#4344#0" />
+            <element signature="e#3404#3690#0" />
+            <element signature="e#3442#3690#0" />
+            <element signature="e#3768#4002#0" />
+            <element signature="e#4094#4344#0" />
+            <element signature="e#4458#6039#0" />
+            <element signature="e#4542#6039#0" />
+            <element signature="e#4647#4749#0" />
+            <element signature="e#4689#4749#0" />
+            <element signature="e#4783#4918#0" />
+            <element signature="e#4823#4918#0" />
+            <element signature="e#4857#4918#0" />
+            <element signature="e#4975#5962#0" />
+            <element signature="e#5028#5312#0" />
+            <element signature="e#5066#5312#0" />
+            <element signature="e#5390#5622#0" />
+            <element signature="e#5714#5962#0" />
+            <element signature="e#6080#7698#0" />
+            <element signature="e#6168#7698#0" />
+            <element signature="e#6273#6379#0" />
+            <element signature="e#6319#6379#0" />
+            <element signature="e#6413#6548#0" />
+            <element signature="e#6453#6548#0" />
+            <element signature="e#6487#6548#0" />
+            <element signature="e#6606#7621#0" />
+            <element signature="e#6663#6955#0" />
+            <element signature="e#6701#6955#0" />
+            <element signature="e#7033#7273#0" />
+            <element signature="e#7365#7621#0" />
+            <element signature="e#7735#9317#0" />
+            <element signature="e#7819#9317#0" />
+            <element signature="e#7924#8026#0" />
+            <element signature="e#7966#8026#0" />
+            <element signature="e#8060#8195#0" />
+            <element signature="e#8100#8195#0" />
+            <element signature="e#8134#8195#0" />
+            <element signature="e#8253#9240#0" />
+            <element signature="e#8306#8590#0" />
+            <element signature="e#8344#8590#0" />
+            <element signature="e#8668#8900#0" />
+            <element signature="e#8992#9240#0" />
+            <element signature="e#9352#10916#0" />
+            <element signature="e#9434#10916#0" />
+            <element signature="e#9539#9639#0" />
+            <element signature="e#9579#9639#0" />
+            <element signature="e#9673#9808#0" />
+            <element signature="e#9713#9808#0" />
+            <element signature="e#9747#9808#0" />
+            <element signature="e#9866#10839#0" />
+            <element signature="e#9917#10197#0" />
+            <element signature="e#9955#10197#0" />
+            <element signature="e#10275#10503#0" />
+            <element signature="e#10595#10839#0" />
+            <element signature="e#10954#12545#0" />
+            <element signature="e#11355#11416#0" />
+            <element signature="e#12581#14154#0" />
+            <element signature="e#12664#14154#0" />
+            <element signature="e#12769#12870#0" />
+            <element signature="e#12810#12870#0" />
+            <element signature="e#12904#13039#0" />
+            <element signature="e#12944#13039#0" />
+            <element signature="e#12978#13039#0" />
+            <element signature="e#13097#14077#0" />
+            <element signature="e#13149#13431#0" />
+            <element signature="e#13187#13431#0" />
+            <element signature="e#13509#13739#0" />
+            <element signature="e#13831#14077#0" />
+            <element signature="e#14193#15793#0" />
+            <element signature="e#14279#15793#0" />
+            <element signature="e#14384#14488#0" />
+            <element signature="e#14428#14488#0" />
+            <element signature="e#14522#14657#0" />
+            <element signature="e#14562#14657#0" />
+            <element signature="e#14596#14657#0" />
+            <element signature="e#14715#15716#0" />
+            <element signature="e#14770#15058#0" />
+            <element signature="e#14808#15058#0" />
+            <element signature="e#15136#15372#0" />
+            <element signature="e#15464#15716#0" />
+            <element signature="e#15829#17405#0" />
+            <element signature="e#15915#17405#0" />
+            <element signature="e#16020#16121#0" />
+            <element signature="e#16061#16121#0" />
+            <element signature="e#16155#16290#0" />
+            <element signature="e#16195#16290#0" />
+            <element signature="e#16229#16290#0" />
+            <element signature="e#16348#17328#0" />
+            <element signature="e#16400#16682#0" />
+            <element signature="e#16438#16682#0" />
+            <element signature="e#16760#16990#0" />
+            <element signature="e#17082#17328#0" />
+            <element signature="e#17441#19013#0" />
+            <element signature="e#17524#19013#0" />
+            <element signature="e#17629#17730#0" />
+            <element signature="e#17670#17730#0" />
+            <element signature="e#17764#17899#0" />
+            <element signature="e#17804#17899#0" />
+            <element signature="e#17838#17899#0" />
+            <element signature="e#17957#18937#0" />
+            <element signature="e#18009#18291#0" />
+            <element signature="e#18047#18291#0" />
+            <element signature="e#18369#18599#0" />
+            <element signature="e#18691#18937#0" />
+            <element signature="e#19055#20685#0" />
+            <element signature="e#19146#20685#0" />
+            <element signature="e#19252#19359#0" />
+            <element signature="e#19299#19359#0" />
+            <element signature="e#19393#19528#0" />
+            <element signature="e#19433#19528#0" />
+            <element signature="e#19467#19528#0" />
+            <element signature="e#19586#20608#0" />
+            <element signature="e#19644#19938#0" />
+            <element signature="e#19682#19938#0" />
+            <element signature="e#20016#20258#0" />
+            <element signature="e#20350#20608#0" />
+            <element signature="e#20723#22314#0" />
+            <element signature="e#22384#23975#0" />
+            <element signature="e#22785#22846#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/run_script.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="740">
-          <caret line="113" lean-forward="true" selection-start-line="113" selection-end-line="113" />
+        <state relative-caret-position="2595">
+          <caret line="268" lean-forward="true" selection-start-line="268" selection-end-line="268" />
           <folding>
             <element signature="e#23#34#0" expanded="true" />
           </folding>

@@ -353,11 +353,11 @@ class ClrRedis(ClrTestLog):
                     {"LRANGE_600 (first 600 elements)": num[0]}
                 )
 
-        influs_defaut.append("some-redis\n")
+        influs_defaut.append("Clr-Redis-Server\n")
 
         for i in influs_defaut[
                  influs_defaut.index("====== MSET (10 keys) ======\n"):
-                 influs_defaut.index("some-redis\n")]:
+                 influs_defaut.index("Clr-Redis-Server\n")]:
 
             if i.endswith("requests per second\n"):
                 num = re.findall("\d+\.?\d*", i)
@@ -488,45 +488,45 @@ class ClrOpenjdk(ClrTestLog):
         lines = self.test_log
         data = self.data
 
-        for item in lines:
-            if item.startswith("[openjdk] [INFO] Test clear docker image:\n"):
-                start = lines.index(item)
-
-        for i in lines[start:]:
-            if i.startswith("Benchmark"):
-                end = lines[start:].index(i) + start
-
-        for item in lines[start:end + 8]:
-            if i.startswith("MyBenchmark.testMethod"):
-                num = re.findall("\d+\.?\d*", i)
-                self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod.Score")
-                data.get("clear").get("openjdk").update(
-                    {"MyBenchmark.testMethod.Score": num[-2]}
-                )
-
-            if i.startswith("MyBenchmark.testMethod"):
-                num = re.findall("\d+\.?\d*", i)
-                self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod.Error")
-                data.get("clear").get("openjdk").update(
-                    {"MyBenchmark.testMethod.Error": num[-1]}
-                )
-        # for i in lines[
-        #          lines.index("[openjdk] [INFO] Test clear docker image:\n"):
-        #          lines.index("clr-openjdk\n")]:
+        # for item in lines:
+        #     if item.startswith("[openjdk] [INFO] Test clear docker image:\n"):
+        #         start = lines.index(item)
         #
-        #     if i.startswith("o.s.MyBenchmark.testMethod"):
-        #         num = re.findall("\d+\.?\d+", i)
-        #         self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod:Score")
+        # for i in lines[start:]:
+        #     if i.startswith("Benchmark"):
+        #         end = lines[start:].index(i) + start
+        #
+        # for item in lines[start:end + 8]:
+        #     if i.startswith("MyBenchmark.testMethod"):
+        #         num = re.findall("\d+\.?\d*", i)
+        #         self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod.Score")
         #         data.get("clear").get("openjdk").update(
-        #             {"MyBenchmark.testMethod:Score": num[1]}
+        #             {"MyBenchmark.testMethod.Score": num[-2]}
         #         )
         #
-        #     if i.startswith("o.s.MyBenchmark.testMethod"):
-        #         num = re.findall("\d+\.?\d+", i)
-        #         self.exception_to_response(num, "clearlinux_openjdk:o.s.MyBenchmark.testMethod:Error")
+        #     if i.startswith("MyBenchmark.testMethod"):
+        #         num = re.findall("\d+\.?\d*", i)
+        #         self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod.Error")
         #         data.get("clear").get("openjdk").update(
-        #             {"o.s.MyBenchmark.testMethod:Error": num[-1]}
+        #             {"MyBenchmark.testMethod.Error": num[-1]}
         #         )
+        for i in lines[
+                 lines.index("[openjdk] [INFO] Test clear docker image:\n"):
+                 lines.index("clr-openjdk\n")]:
+
+            if i.startswith("o.s.MyBenchmark.testMethod"):
+                num = re.findall("\d+\.?\d+", i)
+                self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod:Score")
+                data.get("clear").get("openjdk").update(
+                    {"MyBenchmark.testMethod:Score": num[-2]}
+                )
+
+            if i.startswith("o.s.MyBenchmark.testMethod"):
+                num = re.findall("\d+\.?\d+", i)
+                self.exception_to_response(num, "clearlinux_openjdk:o.s.MyBenchmark.testMethod:Error")
+                data.get("clear").get("openjdk").update(
+                    {"MyBenchmark.testMethod:Error": num[-1]}
+                )
 
         with open(self.json_path, 'w')as f:
             json.dump(data, f)
@@ -1068,3 +1068,101 @@ class ClrPerl(ClrTestLog):
 
         with open(self.json_path, "w")as f:
             json.dump(data, f)
+
+
+class ClrPostgres(ClrTestLog):
+    """clearlinux test_case postgres analysis"""
+
+    def serialization(self):
+        lines = self.test_log
+        data = self.data
+
+        lines_b = lines[lines.index("[postgres] [INFO] Test clear docker image:\n"):].copy()
+        line_nu2 = []
+
+        for i in lines_b:
+            if re.search(r"excluding", i) != None:
+                line_nu2.append(lines_b.index(i))
+
+        bsw2 = lines_b[int(line_nu2[0])].split()
+        bsr2 = lines_b[int(line_nu2[1])].split()
+        bnw2 = lines_b[int(line_nu2[2])].split()
+        bnr2 = lines_b[int(line_nu2[3])].split()
+        bhw2 = lines_b[int(line_nu2[4])].split()
+        bhr2 = lines_b[int(line_nu2[5])].split()
+        data.get("clear").get("postgres").update(
+            {"BUFFER_TEST&SINGLE_THREAD&READ_WRITE": bsw2[2]}
+        )
+        data.get("clear").get("postgres").update(
+            {"BUFFER_TEST&SINGLE_THREAD&READ_ONLY": bsr2[2]}
+        )
+        data.get("clear").get("postgres").update(
+            {"BUFFER_TEST&NORMAL_LOAD&READ_WRITE": bnw2[2]}
+        )
+        data.get("clear").get("postgres").update(
+            {"BUFFER_TEST&NORMAL_LOAD&READ_ONLY": bnr2[2]}
+        )
+        data.get("clear").get("postgres").update(
+            {"BUFFER_TEST&HEAVY_CONNECTION&READ_WRITE": bhw2[2]}
+        )
+        data.get("clear").get("postgres").update(
+            {"BUFFER_TEST&HEAVY_CONNECTION&READ_ONLY": bhr2[2]}
+        )
+
+        with open(self.json_path, "w")as f:
+            json.dump(data, f)
+
+
+class ClrTensorflow(ClrTestLog):
+    """clearlinux test_case tensorflow analysis"""
+
+    def serialization(self):
+        lines = self.test_log
+        data = self.data
+
+        for i in lines[
+                 lines.index("[tensorflow] [INFO] Test clear docker image:\n"):
+                 lines.index("Clr-Tensorflow-Server\n")]:
+
+            if i.startswith("Total duration"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("tensorflow").update(
+                    {"Total duration": num[0]})
+
+        with open(self.json_path, "w") as f:
+            json.dump(data, f)
+
+
+class ClrMariadb(ClrTestLog):
+    """clrearlinux test_case mariadb analysis"""
+
+    def serialization(self):
+        lines = self.test_log
+        data = self.data
+
+        for i in lines[
+                 lines.index("[mariadb] [INFO] Test clear docker image:\n"):
+                 lines.index("Clr-Mariadb\n")]:
+
+            i = i.strip()
+            if i.startswith("Average number of seconds"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("mariadb").update(
+                    {"Average number of seconds to run all queries": num[0]}
+                )
+
+            if i.startswith("Minimum number of seconds"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("mariadb").update(
+                    {"Minimum number of seconds to run all queries": num[0]}
+                )
+
+            if i.startswith("Maximum number of seconds"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("mariadb").update(
+                    {"Maximum number of seconds to run all queries": num[0]}
+                )
+
+        with open(self.json_path, "w") as f:
+            json.dump(data, f)
+
