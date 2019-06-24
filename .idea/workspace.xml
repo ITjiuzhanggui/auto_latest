@@ -57,12 +57,13 @@
       <find>Mem</find>
       <find>R</find>
       <find>with</find>
-      <find />
+      <find>with open</find>
       <find>json</find>
       <find>os.path</find>
       <find>Ruby</find>
       <find>&quot;marshal_dump_load_time&quot;</find>
       <find>&quot;string_scan_str&quot;</find>
+      <find>DefNginx</find>
     </findStrings>
     <replaceStrings>
       <replace>SetLog().info</replace>
