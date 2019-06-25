@@ -5,6 +5,7 @@ from core.abstract import Global
 from conf import ConfManagement
 from logs import SetLog
 
+
 class StaClrLog(Global):
 
     def __init__(self):
@@ -866,5 +867,3 @@ class StaClrRabbitmq(StaClrLog):
 
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
-
-
