@@ -40,7 +40,7 @@ class StaClrLog(Global):
 
 
 class StaClrHttpd(StaClrLog):
-    """default test_status_httpd long analysis"""
+    """clearlinux test_status_httpd long analysis"""
 
     def serialization(self):
         lines = self.status_log
@@ -81,12 +81,21 @@ class StaClrHttpd(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
+        for i in lines[start:]:
+            if i.startswith("clearlinux/httpd version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_httpd:VERSION_ID")
+                data.get("status_Clr").get("httpd").update(
+                    {"VERSION_ID": num[0]}
+                )
+
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
 class StaClrGolang(StaClrLog):
-    """default test_status_golang long analysis"""
+    """clearlinux test_status_golang long analysis"""
 
     def serialization(self):
         lines = self.status_log
@@ -127,12 +136,21 @@ class StaClrGolang(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
+        for i in lines[start:]:
+            if i.startswith("clearlinux/golang version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_golang:VERSION_ID")
+                data.get("status_Clr").get("golang").update(
+                    {"VERSION_ID": num[0]}
+                )
+
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
 class StaClrNginx(StaClrLog):
-    """default test_status_nginx long analysis"""
+    """clearlinux test_status_nginx long analysis"""
 
     def serialization(self):
         lines = self.status_log
@@ -172,12 +190,21 @@ class StaClrNginx(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
+        for i in lines[start:]:
+            if i.startswith("clearlinux/nginx version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_nginx:VERSION_ID")
+                data.get("status_Clr").get("nginx").update(
+                    {"VERSION_ID": num[0]}
+                )
+
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
 class StaClrMemcached(StaClrLog):
-    """default test_status_memcached long analysis"""
+    """clearlinux test_status_memcached long analysis"""
 
     def serialization(self):
         lines = self.status_log
@@ -218,12 +245,21 @@ class StaClrMemcached(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
+        for i in lines[start:]:
+            if i.startswith("clearlinux/memcached version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_memcached:VERSION_ID")
+                data.get("status_Clr").get("memcached").update(
+                    {"VERSION_ID": num[0]}
+                )
+
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
 class StaClrRedis(StaClrLog):
-    """default test_status_redis long analysis"""
+    """clearlinux test_status_redis long analysis"""
 
     def serialization(self):
         lines = self.status_log
@@ -264,12 +300,21 @@ class StaClrRedis(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
+        for i in lines[start:]:
+            if i.startswith("clearlinux/redis version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_redis:VERSION_ID")
+                data.get("status_Clr").get("redis").update(
+                    {"VERSION_ID": num[0]}
+                )
+
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
 class StaClrPhp(StaClrLog):
-    """default test_status_php long analysis"""
+    """clearlinux test_status_php long analysis"""
 
     def serialization(self):
         lines = self.status_log
@@ -310,12 +355,21 @@ class StaClrPhp(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
+        for i in lines[start:]:
+            if i.startswith("clearlinux/php version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_php:VERSION_ID")
+                data.get("status_Clr").get("php").update(
+                    {"VERSION_ID": num[0]}
+                )
+
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
 class StaClrPython(StaClrLog):
-    """default test_status_python long analysis"""
+    """clearlinux test_status_python long analysis"""
 
     def serialization(self):
         lines = self.status_log
@@ -354,6 +408,15 @@ class StaClrPython(StaClrLog):
                 self.exception_to_response(num, "status_Clr_python:MicroService_layer")
                 data.get("status_Clr").get("python").update(
                     {"MicroService_layer": num[0]}
+                )
+
+        for i in lines[start:]:
+            if i.startswith("clearlinux/python version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_python:VERSION_ID")
+                data.get("status_Clr").get("python").update(
+                    {"VERSION_ID": num[0]}
                 )
 
         with open(self.json_path, 'w') as f:
@@ -402,12 +465,21 @@ class StaClrNode(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
+        for i in lines[start:]:
+            if i.startswith("clearlinux/node version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_node:VERSION_ID")
+                data.get("status_Clr").get("node").update(
+                    {"VERSION_ID": num[0]}
+                )
+
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
 class StaClrOpenjdk(StaClrLog):
-    """default test_status_openjdk long analysis"""
+    """clearlinux test_status_openjdk long analysis"""
 
     def serialization(self):
         lines = self.status_log
@@ -449,12 +521,21 @@ class StaClrOpenjdk(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
+        for i in lines[start:]:
+            if i.startswith("clearlinux/openjdk version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_openjdk:VERSION_ID")
+                data.get("status_Clr").get("openjdk").update(
+                    {"VERSION_ID": num[0]}
+                )
+
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
 class StaClrRuby(StaClrLog):
-    """default test_status_openjdk long analysis"""
+    """clearlinux test_status_openjdk long analysis"""
 
     def serialization(self):
         lines = self.status_log
@@ -496,12 +577,21 @@ class StaClrRuby(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
+        for i in lines[start:]:
+            if i.startswith("clearlinux/ruby version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_ruby:VERSION_ID")
+                data.get("status_Clr").get("ruby").update(
+                    {"VERSION_ID": num[0]}
+                )
+
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
 class StaClrPerl(StaClrLog):
-    """default test_status_perl long analysis"""
+    """clearlinux test_status_perl long analysis"""
 
     def serialization(self):
         lines = self.status_log
@@ -540,6 +630,15 @@ class StaClrPerl(StaClrLog):
                 self.exception_to_response(num, "status_Clr_Perl:MicroService_layer")
                 data.get("status_Clr").get("perl").update(
                     {"MicroService_layer": num[0]}
+                )
+
+        for i in lines[start:]:
+            if i.startswith("clearlinux/perl version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_Perl:VERSION_ID")
+                data.get("status_Clr").get("perl").update(
+                    {"VERSION_ID": num[0]}
                 )
 
         with open(self.json_path, "w")as f:
@@ -589,12 +688,21 @@ class StaClrTensorflow(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
+        for i in lines[start:]:
+            if i.startswith("clearlinux/tensorflow version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_tensorflow:VERSION_ID")
+                data.get("status_Clr").get("tensorflow").update(
+                    {"VERSION_ID": num[0]}
+                )
+
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
 class StaClrPostgres(StaClrLog):
-    """default test_status_postgres long analysis"""
+    """clearlinux test_status_postgres long analysis"""
 
     def serialization(self):
         lines = self.status_log
@@ -636,12 +744,21 @@ class StaClrPostgres(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
+        for i in lines[start:]:
+            if i.startswith("clearlinux/postgres version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_postgres:VERSION_ID")
+                data.get("status_Clr").get("postgres").update(
+                    {"VERSION_ID": num[0]}
+                )
+
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
 class StaClrMariadb(StaClrLog):
-    """default test_status_mariadb long analysis"""
+    """clearlinux test_status_mariadb long analysis"""
 
     def serialization(self):
         lines = self.status_log
@@ -682,12 +799,21 @@ class StaClrMariadb(StaClrLog):
                     {"MicroService_layer": num[0]}
                 )
 
+        for i in lines[start:]:
+            if i.startswith("clearlinux/mariadb version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_mariadb:VERSION_ID")
+                data.get("status_Clr").get("mariadb").update(
+                    {"VERSION_ID": num[0]}
+                )
+
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
 
 class StaClrRabbitmq(StaClrLog):
-    """default test_status_openjdk long analysis"""
+    """clearlinux test_status_openjdk long analysis"""
 
     def serialization(self):
         lines = self.status_log
@@ -727,6 +853,15 @@ class StaClrRabbitmq(StaClrLog):
                 self.exception_to_response(num, "status_Clr_rabbitmq:MicroService_layer")
                 data.get("status_Clr").get("rabbitmq").update(
                     {"MicroService_layer": num[0]}
+                )
+
+        for i in lines[start:]:
+            if i.startswith("clearlinux/rabbitmq version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_rabbitmq:VERSION_ID")
+                data.get("status_Clr").get("rabbitmq").update(
+                    {"VERSION_ID": num[0]}
                 )
 
         with open(self.json_path, 'w') as f:
