@@ -510,22 +510,38 @@ class ClrOpenjdk(ClrTestLog):
         #         data.get("clear").get("openjdk").update(
         #             {"MyBenchmark.testMethod.Error": num[-1]}
         #         )
-        for i in lines[
-                 lines.index("[openjdk] [INFO] Test clear docker image:\n"):
-                 lines.index("clr-openjdk\n")]:
+        # for i in lines[
+        #          lines.index("[openjdk] [INFO] Test clear docker image:\n"):
+        #          lines.index("clr-openjdk\n")]:
+        #
+        #     if i.startswith("MyBenchmark.testMethod"):
+        #         num = re.findall("\d+\.?\d+", i)
+        #         self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod:Score")
+        #         data.get("clear").get("openjdk").update(
+        #             {"MyBenchmark.testMethod:Score": num[-2]}
+        #         )
+        #
+        #     if i.startswith("MyBenchmark.testMethod"):
+        #         num = re.findall("\d+\.?\d+", i)
+        #         self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod:Error")
+        #         data.get("clear").get("openjdk").update(
+        #             {"MyBenchmark.testMethod:Error": num[-1]}
+        #         )
+
+        for i in lines[lines.index("[openjdk] [INFO] Test clear docker image:\n"):]:
+
+            i.strip()
 
             if i.startswith("MyBenchmark.testMethod"):
-                num = re.findall("\d+\.?\d+", i)
-                self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod:Score")
+                num = re.findall("\d+\.?\d*", i)
                 data.get("clear").get("openjdk").update(
-                    {"MyBenchmark.testMethod:Score": num[-2]}
+                    {"MyBenchmark.testMethod.Score": num[-2]}
                 )
 
             if i.startswith("MyBenchmark.testMethod"):
-                num = re.findall("\d+\.?\d+", i)
-                self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod:Error")
+                num = re.findall("\d+\.?\d*", i)
                 data.get("clear").get("openjdk").update(
-                    {"MyBenchmark.testMethod:Error": num[-1]}
+                    {"MyBenchmark.testMethod.Error": num[-1]}
                 )
 
         with open(self.json_path, 'w')as f:
