@@ -839,7 +839,7 @@ class StaClrRabbitmq(StaClrLog):
                     num = re.findall("\d+\.?\d*", i)
                     self.exception_to_response(num, "status_Clr_rabbitmq:Total")
                     data.get("status_Clr").get("rabbitmq").update(
-                        {"Total": num[-1] + "MB"}
+                        {"Total": num[-1] + "GB"}
                     )
 
             if i.startswith("clearlinux base layer Size:"):
