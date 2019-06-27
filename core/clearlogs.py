@@ -357,7 +357,7 @@ class ClrRedis(ClrTestLog):
 
         for i in influs_defaut[
                  influs_defaut.index("====== MSET (10 keys) ======\n"):
-                 influs_defaut.index("Clr-Redis-Server\n")]:
+                 influs_defaut.index("[redis] [INFO] memtier_benchmark test:\n")]:
 
             if i.endswith("requests per second\n"):
                 num = re.findall("\d+\.?\d*", i)

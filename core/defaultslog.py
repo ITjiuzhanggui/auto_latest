@@ -356,12 +356,12 @@ class DefRedis(DefTestLog):
 
         for i in influs_defaut[
                  influs_defaut.index("====== MSET (10 keys) ======\n"):
-                 influs_defaut.index("Default-Redis-Server\n")]:
+                 influs_defaut.index("[redis] [INFO] memtier_benchmark test:\n")]:
 
             if i.endswith("requests per second\n"):
                 num = re.findall("\d+\.?\d*", i)
                 self.exception_to_response(num, "clearlinux_redis:MSET (10 keys)")
-                data.get("clear").get("redis").update(
+                data.get("default").get("redis").update(
                     {"MSET (10 keys)": num[0]}
                 )
 
