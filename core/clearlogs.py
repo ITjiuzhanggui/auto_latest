@@ -1150,7 +1150,7 @@ class ClrTensorflow(ClrTestLog):
 
 
 class ClrMariadb(ClrTestLog):
-    """clrearlinux test_case mariadb analysis"""
+    """clearlinux test_case mariadb analysis"""
 
     def serialization(self):
         lines = self.test_log
@@ -1181,4 +1181,32 @@ class ClrMariadb(ClrTestLog):
 
         with open(self.json_path, "w") as f:
             json.dump(data, f)
+
+
+class ClrRabbitmq(ClrTestLog):
+    """clearlinux test_case rabbitmq analysis"""
+
+    def serialization(self):
+        lines = self.test_log
+        data = self.data
+
+        for i in lines[
+                 lines.index("[rabbitmq] [INFO] Test clear docker image:\n"):
+                 lines.index("clr-rabbitmq\n")]:
+
+            if "sending rate avg:" in i:
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("rabbitmq").update(
+                    {"sending rate avg": num[-1]}
+                )
+
+            if "receiving rate avg:" in i:
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("rabbitmq").update(
+                    {"receiving rate avg": num[-1]}
+                )
+
+        with open(self.json_path, "w")as f:
+            json.dump(data, f)
+
 

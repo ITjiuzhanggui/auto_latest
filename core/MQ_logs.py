@@ -646,6 +646,25 @@ def default_from_mariadb(lines):
             )
 
 
+def default_from_rabbitmq(lines):
+    """rabbitmq unit tests analysis"""
+    for i in lines[
+             lines.index("[rabbitmq] [INFO] Test docker hub official image first:\n"):
+             lines.index("[rabbitmq] [INFO] Test clear docker image:\n")]:
+
+        if "sending rate avg:" in i:
+            num = re.findall("\d+\.?\d*", i)
+            data.get("default").get("rabbitmq").update(
+                {"sending rate avg": num[-1]}
+            )
+
+        if "receiving rate avg:" in i:
+            num = re.findall("\d+\.?\d*", i)
+            data.get("default").get("rabbitmq").update(
+                {"receiving rate avg": num[-1]}
+            )
+
+
 """clearlinux test_log"""
 
 
@@ -1293,6 +1312,24 @@ def clr_from_mariadb(lines):
                 {"Maximum number of seconds to run all queries": num[0]}
             )
 
+
+def clr_from_rabbitmq(lines):
+    """rabbitmq unit tests analysis"""
+    for i in lines[
+             lines.index("[rabbitmq] [INFO] Test clear docker image:\n"):
+             lines.index("clr-rabbitmq\n")]:
+
+        if "sending rate avg:" in i:
+            num = re.findall("\d+\.?\d*", i)
+            data.get("clear").get("rabbitmq").update(
+                {"sending rate avg": num[-1]}
+            )
+
+        if "receiving rate avg:" in i:
+            num = re.findall("\d+\.?\d*", i)
+            data.get("clear").get("rabbitmq").update(
+                {"receiving rate avg": num[-1]}
+            )
 
 """STATUS_default_log"""
 
@@ -2529,10 +2566,10 @@ def StaClrRabbitmq(lines):
 
 
 def main():
-    file_name = r"C:\Users\xinhuizx\Intel-Test-MQservice\2019-07-01\2019-07-01-05_25_14.log"
+    file_name = r"/home/zxh/auto_latest/2019-07-03/test_log/rabbitmq/2019-07-02-23:36:43.log"
     test = read_logs(file_name)
 
-    status_log = r"C:\Users\xinhuizx\Intel-Test-MQservice\2019-06-26\json\status\1561582617.json"
+    status_log = r"/home/zxh/auto_latest/2019-07-03/json/status/1562122078.json"
     status = read_status_logs(status_log)
 
     # default_from_httpd(test)
@@ -2549,6 +2586,7 @@ def main():
     # default_from_postgres(test)
     # default_from_tensorflow(test)
     # default_from_mariadb(test)
+    default_from_rabbitmq(test)
 
     # clr_from_httpd(test)
     # clr_from_nginx(test)
@@ -2561,9 +2599,10 @@ def main():
     # clr_from_openjdk(test)
     # clr_from_ruby(test)
     # clr_from_perl(test)
-    # clr_from_postgres(test)
+    # clr_from_postgres(test)clr_from_rabbitmq
     # clr_from_tensorflow(test)
     # clr_from_mariadb(test)
+    clr_from_rabbitmq(test)
 
     # StaDefHttpd(status)
     # StaDefRuby(status)
