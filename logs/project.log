@@ -10568,3 +10568,21 @@
 2019-06-23 00:42:02,001 - root - INFO - -----------------------
 2019-06-23 00:42:02,001 - root - INFO - -----------------------
 2019-06-23 00:42:02,001 - root - INFO - -----------------------
+2019-07-03 10:38:02,674 - root - INFO - updte:cmd:/home/zds/MQ_service/clearlinux-microservice-test/1.sh /home/zds/MQ_service/clearlinux-microservice-test make update
+2019-07-03 10:38:02,674 - root - INFO - *****************
+2019-07-03 10:38:02,674 - root - INFO - *****************
+2019-07-03 10:38:07,258 - root - INFO - *****************
+2019-07-03 10:38:07,258 - root - INFO - *****************
+2019-07-03 10:38:07,258 - root - INFO - *****************
+2019-07-03 10:46:11,270 - root - INFO - Successfully written：status_json
+2019-07-03 10:46:12,061 - root - INFO - Successfully written：test_json
+2019-07-03 10:46:12,061 - root - INFO - Successfully written：test_json
+2019-07-03 10:47:20,681 - root - INFO - Successfully written：status_json
+2019-07-03 10:47:21,436 - root - INFO - Successfully written：test_json
+2019-07-03 10:47:21,436 - root - INFO - Successfully written：test_json
+2019-07-03 10:47:58,542 - root - INFO - Successfully written：status_json
+2019-07-03 10:47:59,265 - root - INFO - Successfully written：test_json
+2019-07-03 10:47:59,265 - root - INFO - Successfully written：test_json
+2019-07-03 14:33:39,377 - root - INFO - Successfully written：status_json
+2019-07-03 14:33:41,189 - root - INFO - Successfully written：test_json
+2019-07-03 14:33:41,189 - root - INFO - Successfully written：test_json

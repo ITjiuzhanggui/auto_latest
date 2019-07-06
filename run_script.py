@@ -238,6 +238,14 @@ def test_anlies(num):
                 exect_contest(ClrMariadb().serialization)
                 os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
 
+            if "rabbitmq" in log:
+                files = os.listdir(log)[num]
+                p = os.path.join(log, files)
+                ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
+                exect_contest(DefRabbitmq().serialization)
+                exect_contest(ClrRabbitmq().serialization)
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
+
             if "ruby" in log:
                 files = os.listdir(log)[num]
                 p = os.path.join(log, files)

@@ -1131,3 +1131,30 @@ class DefMariadb(DefTestLog):
         with open(self.json_path, "w")as f:
             json.dump(data, f)
 
+
+class DefRabbitmq(DefTestLog):
+    """default test_case Rabbitmq analysis"""
+    def serialization(self):
+        lines = self.test_log
+        data = self.data
+
+        for i in lines[
+                 lines.index("[rabbitmq] [INFO] Test docker hub official image first:\n"):
+                 lines.index("[rabbitmq] [INFO] Test clear docker image:\n")]:
+
+            if "sending rate avg:" in i:
+                num = re.findall("\d+\.?\d*", i)
+                data.get("default").get("rabbitmq").update(
+                    {"sending rate avg": num[-1]}
+                )
+
+            if "receiving rate avg:" in i:
+                num = re.findall("\d+\.?\d*", i)
+                data.get("default").get("rabbitmq").update(
+                    {"receiving rate avg": num[-1]}
+                )
+
+        with open(self.json_path, "w")as f:
+            json.dump(data, f)
+
+
