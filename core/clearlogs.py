@@ -555,7 +555,7 @@ class ClrRuby(ClrTestLog):
         lines = self.test_log
         data = self.data
 
-        influs_list = ["app_answer", "app_answer", "app_erb", "app_factorial",
+        influs_list = ["app_answer", "app_aobench", "app_erb", "app_factorial",
                        "app_fib", "app_lc_fizzbuzz", "app_mandelbrot", "app_pentomino",
                        "app_raise", "app_strconcat", "app_tak", "app_tarai", "app_uri",
                        "array_sample_100k_10", "array_sample_100k_11", "array_sample_100k__100",
