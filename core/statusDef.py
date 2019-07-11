@@ -694,14 +694,14 @@ class StaDefRabbitmq(StaDefLog):
                         {"Total": num[-1] + "MB"}
                     )
 
-            if i.startswith("clearlinux base layer Size:"):
+            if i.startswith("default base layer Size:"):
                 num = re.findall("\d+\.?\d*", i)
                 self.exception_to_response(num, "status_Def_rabbitmq:Base_Layer")
                 data.get("status_def").get("rabbitmq").update(
                     {"Base_Layer": num[0]}
                 )
 
-            if i.startswith("clearlinux microservice added layer Size:"):
+            if i.startswith("default microservice added layer Size:"):
                 num = re.findall("\d+\.?\d*", i)
                 self.exception_to_response(num, "status_Def_rabbitmq:MicroService_layer")
                 data.get("status_def").get("rabbitmq").update(
