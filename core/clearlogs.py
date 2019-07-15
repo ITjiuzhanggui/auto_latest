@@ -366,6 +366,37 @@ class ClrRedis(ClrTestLog):
                     {"MSET (10 keys)": num[0]}
                 )
 
+        for i in influs_defaut[
+                 influs_defaut.index("[redis] [INFO] Test clear docker image:\n"):
+                 influs_defaut.index("Clr-Redis-Server\n")]:
+
+            if i.startswith("Sets"):
+                num = re.findall("---|\d+\.?\d*", i)
+
+                data.get("clear").get("redis").update(
+                    {"Sets-Latency:": num[-2]})
+                data.get("clear").get("redis").update(
+                    {"Sets-KB/sec": num[-1]}
+                )
+
+            if i.startswith("Gets"):
+                num = re.findall("---|\d+\.?\d*", i)
+
+                data.get("clear").get("redis").update(
+                    {"Gets-Latency:": num[-2]})
+                data.get("clear").get("redis").update(
+                    {"Gets-KB/sec": num[-1]}
+                )
+
+            if i.startswith("Totals"):
+                num = re.findall("---|\d+\.?\d*", i)
+
+                data.get("clear").get("redis").update(
+                    {"Totals-Latency:": num[-2]})
+                data.get("clear").get("redis").update(
+                    {"Totals-KB/sec": num[-1]}
+                )
+
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
@@ -1015,8 +1046,8 @@ class ClrPerl(ClrTestLog):
     def serialization(self):
         lines = self.test_log
         data = self.data
-#        start = end = 0
-#        up = down = 0
+        #        start = end = 0
+        #        up = down = 0
 
         for item in lines:
             if item.startswith("[perl] [INFO] Test clear docker image:\n"):
@@ -1208,5 +1239,3 @@ class ClrRabbitmq(ClrTestLog):
 
         with open(self.json_path, "w")as f:
             json.dump(data, f)
-
-

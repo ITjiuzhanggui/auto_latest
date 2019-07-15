@@ -365,6 +365,37 @@ class DefRedis(DefTestLog):
                     {"MSET (10 keys)": num[0]}
                 )
 
+        for i in influs_defaut[
+                 influs_defaut.index("[redis] [INFO] memtier_benchmark test:\n"):
+                 influs_defaut.index("Default-Redis-Server\n")]:
+
+            if i.startswith("Sets"):
+                num = re.findall("---|\d+\.?\d*", i)
+
+                data.get("default").get("redis").update(
+                    {"Sets-Latency:": num[-2]})
+                data.get("default").get("redis").update(
+                    {"Sets-KB/sec": num[-1]}
+                )
+
+            if i.startswith("Gets"):
+                num = re.findall("---|\d+\.?\d*", i)
+
+                data.get("default").get("redis").update(
+                    {"Gets-Latency:": num[-2]})
+                data.get("default").get("redis").update(
+                    {"Gets-KB/sec": num[-1]}
+                )
+
+            if i.startswith("Totals"):
+                num = re.findall("---|\d+\.?\d*", i)
+
+                data.get("default").get("redis").update(
+                    {"Totals-Latency:": num[-2]})
+                data.get("default").get("redis").update(
+                    {"Totals-KB/sec": num[-1]}
+                )
+
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
