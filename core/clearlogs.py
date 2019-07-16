@@ -374,7 +374,7 @@ class ClrRedis(ClrTestLog):
                 num = re.findall("---|\d+\.?\d*", i)
 
                 data.get("clear").get("redis").update(
-                    {"Sets-Latency:": num[-2]})
+                    {"Sets-Latency": num[-2]})
                 data.get("clear").get("redis").update(
                     {"Sets-KB/sec": num[-1]}
                 )
@@ -383,7 +383,7 @@ class ClrRedis(ClrTestLog):
                 num = re.findall("---|\d+\.?\d*", i)
 
                 data.get("clear").get("redis").update(
-                    {"Gets-Latency:": num[-2]})
+                    {"Gets-Latency": num[-2]})
                 data.get("clear").get("redis").update(
                     {"Gets-KB/sec": num[-1]}
                 )
@@ -392,7 +392,7 @@ class ClrRedis(ClrTestLog):
                 num = re.findall("---|\d+\.?\d*", i)
 
                 data.get("clear").get("redis").update(
-                    {"Totals-Latency:": num[-2]})
+                    {"Totals-Latency": num[-2]})
                 data.get("clear").get("redis").update(
                     {"Totals-KB/sec": num[-1]}
                 )
