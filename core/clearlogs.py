@@ -1362,6 +1362,6 @@ class ClrFlink(ClrTestLog):
                 data.get("clear").get("flink").update(
                     {"StreamNetworkLatencyBenchmarkExecutor.networkLatency1to1": num[-2]})
 
-        with open(self.json_path, 'w')as f:
+        with open(self.json_path, "w")as f:
             json.dump(data, f)
 
