@@ -1239,3 +1239,129 @@ class ClrRabbitmq(ClrTestLog):
 
         with open(self.json_path, "w")as f:
             json.dump(data, f)
+
+
+class ClrFlink(ClrTestLog):
+    """clearlinux test_case flink analysis"""
+
+    def serialization(self):
+        lines = self.test_log
+        data = self.data
+
+        for i in lines[
+                 lines.index("[flink] [INFO] Test clear docker image:\n"):
+                 lines.index("Clr-Flink-Server\n")]:
+
+            if i.startswith("KeyByBenchmarks.arrayKeyBy"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"KeyByBenchmarks.arrayKeyBy": num[-2]})
+
+            if i.startswith("KeyByBenchmarks.tupleKeyBy"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"KeyByBenchmarks.tupleKeyBy": num[-2]})
+
+            if i.startswith("MemoryStateBackendBenchmark.stateBackends") and "MEMORY" in i:
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"MemoryStateBackendBenchmark.stateBackends-MEMORY": num[-2]})
+
+            if i.startswith("MemoryStateBackendBenchmark.stateBackends") and " FS " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"MemoryStateBackendBenchmark.stateBackends-FS": num[-2]})
+
+            if i.startswith("MemoryStateBackendBenchmark.stateBackends") and "_ASYNC " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"MemoryStateBackendBenchmark.stateBackends-FS_ASYNC": num[-2]})
+
+            if i.startswith("RocksStateBackendBenchmark.stateBackends") and " ROCKS " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"RocksStateBackendBenchmark.stateBackends-ROCKS": num[-2]})
+
+            if i.startswith("RocksStateBackendBenchmark.stateBackends") and "_INC " in i:
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"RocksStateBackendBenchmark.stateBackends-ROCKS_INC": num[-2]})
+
+            if i.startswith("SerializationFrameworkMiniBenchmarks.serializerAvro"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"SerializationFrameworkMiniBenchmarks.serializerAvro": num[-2]})
+
+            if i.startswith("SerializationFrameworkMiniBenchmarks.serializerKryo"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"SerializationFrameworkMiniBenchmarks.serializerKryo": num[-2]})
+
+            if i.startswith("SerializationFrameworkMiniBenchmarks.serializerPojo"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"SerializationFrameworkMiniBenchmarks.serializerPojo": num[-2]})
+
+            if i.startswith("SerializationFrameworkMiniBenchmarks.serializerRow"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"SerializationFrameworkMiniBenchmarks.serializerRow": num[-2]})
+
+            if i.startswith("SerializationFrameworkMiniBenchmarks.serializerTuple"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"SerializationFrameworkMiniBenchmarks.serializerTuple": num[-2]})
+
+            if i.startswith("StreamNetworkThroughputBenchmarkExecutor.networkThroughput") and "1,100ms" in i:
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"StreamNetworkThroughputBenchmarkExecutor.networkThroughput-1,100ms": num[-2]})
+
+            if i.startswith("StreamNetworkThroughputBenchmarkExecutor.networkThroughput") and "100,1ms" in i:
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"StreamNetworkThroughputBenchmarkExecutor.networkThroughput-100,1ms": num[-2]})
+
+            if i.startswith("StreamNetworkThroughputBenchmarkExecutor.networkThroughput") and "1000,1ms" in i:
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"StreamNetworkThroughputBenchmarkExecutor.networkThroughput-1000,1ms": num[-2]})
+
+            if i.startswith("StreamNetworkThroughputBenchmarkExecutor.networkThroughput") and "1000,100ms" in i:
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"StreamNetworkThroughputBenchmarkExecutor.networkThroughput-1000,100ms": num[-2]})
+
+            if i.startswith("SumLongsBenchmark.benchmarkCount"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"SumLongsBenchmark.benchmarkCount": num[-2]})
+
+            if i.startswith("WindowBenchmarks.globalWindow"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"WindowBenchmarks.globalWindow": num[-2]})
+
+            if i.startswith("WindowBenchmarks.sessionWindow"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"WindowBenchmarks.sessionWindow": num[-2]})
+
+            if i.startswith("WindowBenchmarks.slidingWindow"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"WindowBenchmarks.slidingWindow": num[-2]})
+
+            if i.startswith("WindowBenchmarks.tumblingWindow"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"WindowBenchmarks.tumblingWindow": num[-2]})
+
+            if i.startswith("StreamNetworkLatencyBenchmarkExecutor.networkLatency1to1"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("flink").update(
+                    {"StreamNetworkLatencyBenchmarkExecutor.networkLatency1to1": num[-2]})
+
+        with open(self.json_path, 'w')as f:
+            json.dump(data, f)
+
