@@ -266,6 +266,14 @@ def test_anlies(num):
                 exect_contest(ClrFlink().serialization)
                 os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
 
+            if "cassandra" in log:
+                files = os.listdir(log)[num]
+                p = os.path.join(log, files)
+                ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
+                exect_contest(DefCassandra().serialization)
+                exect_contest(ClrCassandra().serialization)
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
+
         os.system("cp {} {}".format(test_json_ini, test_json_path))
 
 

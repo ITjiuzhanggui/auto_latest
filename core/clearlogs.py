@@ -1365,3 +1365,83 @@ class ClrFlink(ClrTestLog):
         with open(self.json_path, "w")as f:
             json.dump(data, f)
 
+
+class ClrCassandra(ClrTestLog):
+    """clearlinux test_case Cassandra analysis"""
+
+    def serialization(self):
+        lines = self.test_log
+        data = self.data
+
+        lines_b = lines[lines.index("[cassandra] [INFO] Test clear docker image:\n"):].copy()
+        line_nu21 = []
+        line_nu22 = []
+        for i in lines_b:
+            if re.search(r"Op rate", i) != None:
+                line_nu21.append(lines_b.index(i))
+
+        for j in lines_b:
+            if re.search(r"Latency mean", j) != None:
+                line_nu22.append(lines_b.index(j))
+
+        wo = lines_b[int(line_nu21[0])].split()
+        r4o = lines_b[int(line_nu21[1])].split()
+        r8o = lines_b[int(line_nu21[2])].split()
+        r16o = lines_b[int(line_nu21[3])].split()
+        r24o = lines_b[int(line_nu21[4])].split()
+        r36o = lines_b[int(line_nu21[5])].split()
+        r54o = lines_b[int(line_nu21[6])].split()
+
+        wl = lines_b[int(line_nu22[0])].split()
+        r4l = lines_b[int(line_nu22[1])].split()
+        r8l = lines_b[int(line_nu22[2])].split()
+        r16l = lines_b[int(line_nu22[3])].split()
+        r24l = lines_b[int(line_nu22[4])].split()
+        r36l = lines_b[int(line_nu22[5])].split()
+        r54l = lines_b[int(line_nu22[6])].split()
+
+        data.get("clear").get("cassandra").update(
+            {"cassandra-stress write test - Op rate(op/s)": wo[3]}
+        )
+        data.get("clear").get("cassandra").update(
+            {"cassandra-stress write test - Latency mean(ms)": wl[3]}
+        )
+        data.get("clear").get("cassandra").update(
+            {"cassandra-stress read test - 4 threads - Op rate(op/s)": r4o[3]}
+        )
+        data.get("clear").get("cassandra").update(
+            {"cassandra-stress read test - 4 threads - Latency mean(ms)": r4l[3]}
+        )
+        data.get("clear").get("cassandra").update(
+            {"cassandra-stress read test - 8 threads - Op rate(op/s)": r8o[3]}
+        )
+        data.get("clear").get("cassandra").update(
+            {"cassandra-stress read test - 8 threads - Latency mean(ms)": r8l[3]}
+        )
+        data.get("clear").get("cassandra").update(
+            {"cassandra-stress read test - 16 threads - Op rate(op/s)": r16o[3]}
+        )
+        data.get("clear").get("cassandra").update(
+            {"cassandra-stress read test - 16 threads - Latency mean(ms)": r16l[3]}
+        )
+        data.get("clear").get("cassandra").update(
+            {"cassandra-stress read test - 24 threads - Op rate(op/s)": r24o[3]}
+        )
+        data.get("clear").get("cassandra").update(
+            {"cassandra-stress read test - 24 threads - Latency mean(ms)": r24l[3]}
+        )
+        data.get("clear").get("cassandra").update(
+            {"cassandra-stress read test - 36 threads - Op rate(op/s)": r36o[3]}
+        )
+        data.get("clear").get("cassandra").update(
+            {"cassandra-stress read test - 36 threads - Latency mean(ms)": r36l[3]}
+        )
+        data.get("clear").get("cassandra").update(
+            {"cassandra-stress read test - 54 threads - Op rate(op/s)": r54o[3]}
+        )
+        data.get("clear").get("cassandra").update(
+            {"cassandra-stress read test - 54 threads - Latency mean(ms)": r54l[3]}
+        )
+
+        with open(self.json_path, "w")as f:
+            json.dump(data, f)
