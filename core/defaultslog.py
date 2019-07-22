@@ -1350,6 +1350,7 @@ class DefCassandra(DefTestLog):
         r24l = lines_a[int(line_nu12[4])].split()
         r36l = lines_a[int(line_nu12[5])].split()
         r54l = lines_a[int(line_nu12[6])].split()
+
         data.get("default").get("cassandra").update(
             {"cassandra-stress write test - Op rate(op/s)": wo[3]}
         )
