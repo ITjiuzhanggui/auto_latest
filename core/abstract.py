@@ -5,9 +5,9 @@ from abc import ABCMeta, abstractmethod, abstractproperty
 from conf import ConfManagement
 from logs import SetLog
 
+
 @add_metaclass(ABCMeta)
 class Global(object):
-
     def read_logs(self, file_name):
         with open(file_name, 'r') as f:
             return f.readlines()
@@ -23,6 +23,7 @@ class Global(object):
     def exception_to_response(self, match_result, message):
         if match_result == []:
             SetLog().error(" %s Not getting" % message)
+
 
 def exect_contest(fun):
     try:
