@@ -14,7 +14,9 @@
     "postgres": {},
     "mariadb": {},
     "rabbitmq":{},
-    "ruby": {}
+    "ruby": {},
+    "flink": {},
+    "cassandra": {}
   },
   "clear": {
     "httpd": {},
@@ -31,7 +33,9 @@
     "postgres": {},
     "mariadb": {},
     "rabbitmq":{},
-    "ruby": {}
+    "ruby": {},
+    "flink": {},
+    "cassandra": {}
   },
   "status_def": {
     "httpd": {},
@@ -48,7 +52,9 @@
     "postgres": {},
     "mariadb": {},
     "rabbitmq":{},
-    "ruby": {}
+    "ruby": {},
+    "flink": {},
+    "cassandra": {}
   },
   "status_Clr": {
     "clearlinux_version": {},
@@ -66,6 +72,8 @@
     "postgres": {},
     "mariadb": {},
     "rabbitmq":{},
-    "ruby": {}
+    "ruby": {},
+    "flink": {},
+    "cassandra": {}
   }
 }

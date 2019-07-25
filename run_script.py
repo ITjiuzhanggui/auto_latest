@@ -65,7 +65,7 @@ get_log_status(make_path, path)
 
 test_cmd = ["make httpd", "make nginx", "make memcached", "make redis", "make php", "make python", "make node",
             "make golang", "make postgres", "make tensorflow", "make mariadb", "make perl", "make openjdk",
-            "make rabbitmq", "make ruby"]
+            "make rabbitmq", "make flink", "make cassandra", "make ruby"]
 
 
 def get_log_test(cmd, logs_patg):
@@ -120,6 +120,10 @@ def status_anlies(num):
         exect_contest(StaClrMariadb().serialization)
         exect_contest(StaDefRabbitmq().serialization)
         exect_contest(StaClrRabbitmq().serialization)
+        exect_contest(StaDefFlink().serialization)
+        exect_contest(StaClrFlink().serialization)
+        exect_contest(StaDefCassandra().serialization)
+        exect_contest(StaClrCassandra().serialization)
         os.system("cp {} {}".format(status_json_path, JSON_STATUS_PATH + "/%d.json" % int(time.time() + num)))
     os.system("cp {} {}".format(status_json_ini, status_json_path))
 
@@ -238,12 +242,36 @@ def test_anlies(num):
                 exect_contest(ClrMariadb().serialization)
                 os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
 
+            if "rabbitmq" in log:
+                files = os.listdir(log)[num]
+                p = os.path.join(log, files)
+                ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
+                exect_contest(DefRabbitmq().serialization)
+                exect_contest(ClrRabbitmq().serialization)
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
+
             if "ruby" in log:
                 files = os.listdir(log)[num]
                 p = os.path.join(log, files)
                 ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
                 exect_contest(DefRuby().serialization)
                 exect_contest(ClrRuby().serialization)
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
+
+            if "flink" in log:
+                files = os.listdir(log)[num]
+                p = os.path.join(log, files)
+                ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
+                exect_contest(DefFlink().serialization)
+                exect_contest(ClrFlink().serialization)
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
+
+            if "cassandra" in log:
+                files = os.listdir(log)[num]
+                p = os.path.join(log, files)
+                ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
+                exect_contest(DefCassandra().serialization)
+                exect_contest(ClrCassandra().serialization)
                 os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
 
         os.system("cp {} {}".format(test_json_ini, test_json_path))

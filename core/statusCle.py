@@ -839,7 +839,7 @@ class StaClrRabbitmq(StaClrLog):
                     num = re.findall("\d+\.?\d*", i)
                     self.exception_to_response(num, "status_Clr_rabbitmq:Total")
                     data.get("status_Clr").get("rabbitmq").update(
-                        {"Total": num[-1] + "GB"}
+                        {"Total": num[-1] + "MB"}
                     )
 
             if i.startswith("clearlinux base layer Size:"):
@@ -862,6 +862,118 @@ class StaClrRabbitmq(StaClrLog):
                 num = re.findall("\d+\.?\d*", lines[start:][end])
                 self.exception_to_response(num, "status_Clr_rabbitmq:VERSION_ID")
                 data.get("status_Clr").get("rabbitmq").update(
+                    {"VERSION_ID": num[0]}
+                )
+
+        with open(self.json_path, 'w') as f:
+            json.dump(data, f)
+
+
+class StaClrFlink(StaClrLog):
+    """clearlinux test_status_flink long analysis"""
+
+    def serialization(self):
+        lines = self.status_log
+        data = self.data
+        if_n = True
+
+        for i in lines:
+            if i.startswith("flink"):
+                if "latest" in i:
+                    start = lines.index(i)
+
+        while if_n:
+            for i in lines[start:]:
+                if i == '\n':
+                    if_n = False
+                    end = lines[start:].index(i)
+
+        for i in lines[start:end + start]:
+
+            if i.startswith("clearlinux/flink"):
+                if "latest" in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    self.exception_to_response(num, "status_Clr_flink:Total")
+                    data.get("status_Clr").get("flink").update(
+                        {"Total": num[-1] + "MB"}
+                    )
+
+            if i.startswith("clearlinux base layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_Clr_flink:Base_Layer")
+                data.get("status_Clr").get("flink").update(
+                    {"Base_Layer": num[0]}
+                )
+
+            if i.startswith("clearlinux microservice added layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_Clr_flink:MicroService_layer")
+                data.get("status_Clr").get("flink").update(
+                    {"MicroService_layer": num[0]}
+                )
+
+        for i in lines[start:]:
+            if i.startswith("clearlinux/flink version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_flink:VERSION_ID")
+                data.get("status_Clr").get("flink").update(
+                    {"VERSION_ID": num[0]}
+                )
+
+        with open(self.json_path, 'w') as f:
+            json.dump(data, f)
+
+
+class StaClrCassandra(StaClrLog):
+    """clearlinux test_status_cassandra long analysis"""
+
+    def serialization(self):
+        lines = self.status_log
+        data = self.data
+
+        if_n = True
+        for i in lines:
+            if i.startswith("cassandra"):
+                if "latest" in i:
+                    start = lines.index(i)
+
+        while if_n:
+            for i in lines[start:]:
+                if i == '\n':
+                    if_n = False
+                    end = lines[start:].index(i)
+
+        for i in lines[start:end + start]:
+
+            if i.startswith("clearlinux/cassandra"):
+                if "latest" in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    self.exception_to_response(num, "status_Clr_cassandra:Total")
+                    data.get("status_Clr").get("cassandra").update(
+                        {"Total": num[-1] + "MB"}
+                    )
+
+            if i.startswith("clearlinux base layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_Clr_cassandra:Base_Layer")
+                data.get("status_Clr").get("cassandra").update(
+                    {"Base_Layer": num[0]}
+                )
+
+            if i.startswith("clearlinux microservice added layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_Clr_cassandra:MicroService_layer")
+                data.get("status_Clr").get("cassandra").update(
+                    {"MicroService_layer": num[0]}
+                )
+
+        for i in lines[start:]:
+            if i.startswith("clearlinux/cassandra version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_cassandra:VERSION_ID")
+                data.get("status_Clr").get("cassandra").update(
                     {"VERSION_ID": num[0]}
                 )
 
