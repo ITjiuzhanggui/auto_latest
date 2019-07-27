@@ -664,7 +664,7 @@ class DefRuby(DefTestLog):
         data_ruby = {}
         for i in lines[
                  lines.index("ruby/ruby.sh\n"):
-                 lines.index("Default-Ruby-Server\n")]:
+                 lines.index("[ruby] [INFO] Test clear docker image:\n")]:
 
             for startwith_item in influs_list:
                 if i.endswith("s/i)\n") and startwith_item in i:
@@ -685,7 +685,7 @@ class DefRuby(DefTestLog):
                 self.exception_to_response(num, "default_Ruby:so_k_nucleotidepreparing %d line" % (start + 2))
                 data_ruby.update({"so_k_nucleotidepreparing": num[-1][:-1]})
 
-        lines = lines[lines.index("ruby/ruby.sh\n"):lines.index("Default-Ruby-Server\n")]
+        lines = lines[lines.index("ruby/ruby.sh\n"):lines.index("[ruby] [INFO] Test clear docker image:\n")]
 
         for item in lines:
             if item.startswith("Warming up --------------------------------------\n"):
