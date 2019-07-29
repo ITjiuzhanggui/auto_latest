@@ -5,6 +5,7 @@ from core.abstract import Global
 from conf import ConfManagement
 from logs import SetLog
 
+
 class StaDefLog(Global):
 
     def __init__(self):
@@ -802,4 +803,3 @@ class StaDefCassandra(StaDefLog):
 
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
-
