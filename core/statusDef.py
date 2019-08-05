@@ -506,7 +506,7 @@ class StaDefPerl(StaDefLog):
                     num = re.findall("\d+\.?\d*", i)
                     self.exception_to_response(num, "status_def_Perl:Total")
                     data.get("status_def").get("perl").update(
-                        {"Toatl": num[-1] + "MB"}
+                        {"Total": num[-1] + "MB"}
                     )
 
             if i.startswith("default base layer Size:"):
