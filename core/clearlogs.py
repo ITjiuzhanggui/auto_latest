@@ -430,10 +430,12 @@ class ClrPython(ClrTestLog):
         lines = self.test_log
         data = self.data
 
-        for i in lines[
-                 lines.index("[python] [INFO] Test clear docker image:\n"):
-                 lines.index("Clr-Python-Server\n")]:
+        # for i in lines[
+        #          lines.index("[python] [INFO] Test clear docker image:\n"):
+        #          lines.index("Clr-Python-Server\n")]:
+        lines = lines[lines.index("[python] [INFO] Test clear docker image:\n"):].copy()
 
+        for i in lines:
             if i.startswith("Totals"):
                 num = re.findall("\d+\.?\d*", i)
                 self.exception_to_response(num, "clearlinux_python:Totals")

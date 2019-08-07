@@ -429,10 +429,13 @@ class DefPython(DefTestLog):
         lines = self.test_log
         data = self.data
 
-        for i in lines[
-                 lines.index("python/python.sh\n"):
-                 lines.index("Default-Python-Server\n")]:
+        # for i in lines[
+        #          lines.index("python/python.sh\n"):
+        #          lines.index("Default-Python-Server\n")]:
+        lines = lines[lines.index("python/python.sh\n"):
+                      lines.index("[python] [INFO] Test clear docker image:\n")].copy()
 
+        for i in lines:
             if i.startswith("Totals"):
                 num = re.findall("\d+\.?\d*", i)
                 self.exception_to_response(num, "default_python:Totals")
