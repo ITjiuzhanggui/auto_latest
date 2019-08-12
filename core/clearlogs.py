@@ -1178,7 +1178,9 @@ class ClrPostgres(ClrTestLog):
         lines = self.test_log
         data = self.data
 
-        lines_b = lines[lines.index("[postgres] [INFO] Test clear docker image:\n"):].copy()
+        lines_b = lines[
+                  lines.index("[postgres] [INFO] Test clear docker image:\n"):
+                  lines.index("Clr-Node-Server\n")].copy()
         line_nu2 = []
 
         for i in lines_b:
