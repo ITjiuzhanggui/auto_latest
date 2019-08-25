@@ -1129,7 +1129,10 @@ class DefPostgres(DefTestLog):
         lines = self.test_log
         data = self.data
 
-        lines_a = lines[1:lines.index("[postgres] [INFO] Test clear docker image:\n")].copy()
+        # lines_a = lines[1:lines.index("[postgres] [INFO] Test clear docker image:\n")].copy()
+        lines_a = lines[
+                  lines.index("[postgres] [INFO] Test extra official docker image, postgres9.6:\n"):
+                  lines.index("Extra Test on postgres9.6\n")].copy()
         line_nu = []
 
         for i in lines_a:
