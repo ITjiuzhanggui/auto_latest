@@ -1191,8 +1191,8 @@ class ClrPostgres(ClrTestLog):
         bsr2 = lines_b[int(line_nu2[1])].split()
         bnw2 = lines_b[int(line_nu2[2])].split()
         bnr2 = lines_b[int(line_nu2[3])].split()
-        bhw2 = lines_b[int(line_nu2[4])].split()
-        bhr2 = lines_b[int(line_nu2[5])].split()
+        # bhw2 = lines_b[int(line_nu2[4])].split()
+        # bhr2 = lines_b[int(line_nu2[5])].split()
         data.get("clear").get("postgres").update(
             {"BUFFER_TEST&SINGLE_THREAD&READ_WRITE": bsw2[2]}
         )
@@ -1205,12 +1205,12 @@ class ClrPostgres(ClrTestLog):
         data.get("clear").get("postgres").update(
             {"BUFFER_TEST&NORMAL_LOAD&READ_ONLY": bnr2[2]}
         )
-        data.get("clear").get("postgres").update(
-            {"BUFFER_TEST&HEAVY_CONNECTION&READ_WRITE": bhw2[2]}
-        )
-        data.get("clear").get("postgres").update(
-            {"BUFFER_TEST&HEAVY_CONNECTION&READ_ONLY": bhr2[2]}
-        )
+        # data.get("clear").get("postgres").update(
+        #     {"BUFFER_TEST&HEAVY_CONNECTION&READ_WRITE": bhw2[2]}
+        # )
+        # data.get("clear").get("postgres").update(
+        #     {"BUFFER_TEST&HEAVY_CONNECTION&READ_ONLY": bhr2[2]}
+        # )
 
         with open(self.json_path, "w")as f:
             json.dump(data, f)

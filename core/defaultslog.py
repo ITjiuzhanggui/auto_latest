@@ -1143,8 +1143,8 @@ class DefPostgres(DefTestLog):
         bsr = lines_a[int(line_nu[1])].split()
         bnw = lines_a[int(line_nu[2])].split()
         bnr = lines_a[int(line_nu[3])].split()
-        bhw = lines_a[int(line_nu[4])].split()
-        bhr = lines_a[int(line_nu[5])].split()
+        # bhw = lines_a[int(line_nu[4])].split()
+        # bhr = lines_a[int(line_nu[5])].split()
         data.get("default").get("postgres").update(
             {"BUFFER_TEST&SINGLE_THREAD&READ_WRITE": bsw[2]}
         )
@@ -1157,12 +1157,12 @@ class DefPostgres(DefTestLog):
         data.get("default").get("postgres").update(
             {"BUFFER_TEST&NORMAL_LOAD&READ_ONLY": bnr[2]}
         )
-        data.get("default").get("postgres").update(
-            {"BUFFER_TEST&HEAVY_CONNECTION&READ_WRITE": bhw[2]}
-        )
-        data.get("default").get("postgres").update(
-            {"BUFFER_TEST&HEAVY_CONNECTION&READ_ONLY": bhr[2]}
-        )
+        # data.get("default").get("postgres").update(
+        #     {"BUFFER_TEST&HEAVY_CONNECTION&READ_WRITE": bhw[2]}
+        # )
+        # data.get("default").get("postgres").update(
+        #     {"BUFFER_TEST&HEAVY_CONNECTION&READ_ONLY": bhr[2]}
+        # )
 
         with open(self.json_path, "w")as f:
             json.dump(data, f)
