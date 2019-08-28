@@ -1446,3 +1446,20 @@ class DefCassandra(DefTestLog):
 
         with open(self.json_path, "w")as f:
             json.dump(data, f)
+
+
+class DefWordpress(DefTestLog):
+    """default test_case Wordpress analysis"""
+
+    def serialization(self):
+        lines = self.test_log
+        data = self.data
+
+        lines = lines[lines.index("[wordpress] [INFO] Test official docker image:\n"):
+                      lines.index("Official-Wordpress\n")].copy()
+        for i in lines:
+            i = i.strip()
+            if i.startswith("Throughput:"):
+                throughput = i.split()
+                data.get("default").get("wordpress").update(
+                    {"Throughput": throughput[1]})

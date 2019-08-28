@@ -16,7 +16,9 @@
     "rabbitmq":{},
     "ruby": {},
     "flink": {},
-    "cassandra": {}
+    "cassandra": {},
+    "wordpress": {},
+    "glibc":{}
   },
   "clear": {
     "httpd": {},
@@ -35,7 +37,9 @@
     "rabbitmq":{},
     "ruby": {},
     "flink": {},
-    "cassandra": {}
+    "cassandra": {},
+    "wordpress": {},
+    "glibc":{}
   },
   "status_def": {
     "httpd": {},
@@ -54,7 +58,9 @@
     "rabbitmq":{},
     "ruby": {},
     "flink": {},
-    "cassandra": {}
+    "cassandra": {},
+    "wordpress": {},
+    "glibc":{}
   },
   "status_Clr": {
     "clearlinux_version": {},
@@ -74,6 +80,8 @@
     "rabbitmq":{},
     "ruby": {},
     "flink": {},
-    "cassandra": {}
+    "cassandra": {},
+    "wordpress": {},
+    "glibc":{}
   }
 }

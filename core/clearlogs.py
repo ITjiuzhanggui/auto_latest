@@ -1496,3 +1496,20 @@ class ClrCassandra(ClrTestLog):
 
         with open(self.json_path, "w")as f:
             json.dump(data, f)
+
+
+class ClrWordpress(ClrTestLog):
+    """clearlinux test_case Wordpress analysis"""
+
+    def serialization(self):
+        lines = self.test_log
+        data = self.data
+
+        lines = lines[lines.index("[wordpress] [INFO] Test clear docker image:\n"):
+                      lines.index("Clear-Wordpress\n")].copy()
+        for i in lines:
+            i = i.strip()
+            if i.startswith("Throughput:"):
+                throughput = i.split()
+                data.get("clear").get("wordpress").update(
+                    {"Throughput": throughput[1]})
