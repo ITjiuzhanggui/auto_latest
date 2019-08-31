@@ -65,7 +65,7 @@ get_log_status(make_path, path)
 
 test_cmd = ["make httpd", "make nginx", "make memcached", "make redis", "make php", "make python", "make node",
             "make golang", "make postgres", "make tensorflow", "make mariadb", "make perl", "make openjdk",
-            "make rabbitmq", "make flink", "make cassandra", "make ruby"]
+            "make rabbitmq", "make flink", "make cassandra", "make ruby", "make wordpress", "make glibc"]
 
 
 def get_log_test(cmd, logs_patg):
