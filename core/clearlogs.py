@@ -1304,12 +1304,12 @@ class ClrFlink(ClrTestLog):
         lines = self.test_log
         data = self.data
 
-        # for i in lines[
-        #          lines.index("[flink] [INFO] Test clear docker image:\n"):
-        #          lines.index("Clr-Flink-Server\n")]:
         for i in lines[
-                 lines.index("[flink] [INFO] use openjdk12:\n"):
-                 lines.index("Clr-Flink-Server-jdk12\n")]:
+                 lines.index("[flink] [INFO] Test clear docker image:\n"):
+                 lines.index("Clr-Flink-Server\n")]:
+        # for i in lines[
+        #          lines.index("[flink] [INFO] use openjdk12:\n"):
+        #          lines.index("Clr-Flink-Server-jdk12\n")]:
 
             if i.startswith("KeyByBenchmarks.arrayKeyBy"):
                 num = re.findall("\d+\.?\d*", i)
