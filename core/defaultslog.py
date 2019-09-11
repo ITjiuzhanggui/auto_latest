@@ -525,14 +525,14 @@ class DefOpenjdk(DefTestLog):
                  lines.index("[openjdk] [INFO] Test docker hub official image first:\n"):
                  lines.index("[openjdk] [INFO] Test clear docker image:\n")]:
 
-            if i.startswith("MyBenchmark.testMethod"):
+            if i.startswith("MyBenchmark.testMethod") and "thrpt " in i:
                 num = re.findall("\d+\.?\d+", i)
                 self.exception_to_response(num, "default_openjdk:MyBenchmark.testMethod.Score")
                 data.get("default").get("openjdk").update(
                     {"MyBenchmark.testMethod.Score": num[-2]}
                 )
 
-            if i.startswith("MyBenchmark.testMethod"):
+            if i.startswith("MyBenchmark.testMethod") and "thrpt " in i:
                 num = re.findall("\d+\.?\d+", i)
                 self.exception_to_response(num, "default_openjdk:MyBenchmark.testMethod.Error")
                 data.get("default").get("openjdk").update(
