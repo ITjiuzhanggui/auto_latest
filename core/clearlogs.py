@@ -1507,6 +1507,7 @@ class ClrWordpress(ClrTestLog):
 
         lines = lines[lines.index("[wordpress] [INFO] Test clear docker image:\n"):
                       lines.index("Clear-Wordpress\n")].copy()
+
         for i in lines:
             i = i.strip()
             if i.startswith("Throughput:"):

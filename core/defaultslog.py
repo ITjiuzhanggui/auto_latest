@@ -1457,6 +1457,7 @@ class DefWordpress(DefTestLog):
 
         lines = lines[lines.index("[wordpress] [INFO] Test official docker image:\n"):
                       lines.index("Official-Wordpress\n")].copy()
+
         for i in lines:
             i = i.strip()
             if i.startswith("Throughput:"):
