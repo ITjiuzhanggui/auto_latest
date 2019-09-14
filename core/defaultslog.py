@@ -1464,3 +1464,6 @@ class DefWordpress(DefTestLog):
                 throughput = i.split()
                 data.get("default").get("wordpress").update(
                     {"Throughput": throughput[1]})
+
+        with open(self.json_path, "w")as f:
+            json.dump(data, f)

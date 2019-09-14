@@ -1514,3 +1514,6 @@ class ClrWordpress(ClrTestLog):
                 throughput = i.split()
                 data.get("clear").get("wordpress").update(
                     {"Throughput": throughput[1]})
+
+        with open(self.json_path, "w")as f:
+            json.dump(data, f)
