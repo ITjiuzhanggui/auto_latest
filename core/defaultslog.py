@@ -1467,3 +1467,47 @@ class DefWordpress(DefTestLog):
 
         with open(self.json_path, "w")as f:
             json.dump(data, f)
+
+
+class DefTensorflow_serving(DefTestLog):
+    """default test_case Tensorflow_serving analysis"""
+    def serialization(self):
+        lines = self.test_log
+        data = self.date
+
+        lines = lines[lines.index("[tensorflow-serving] [INFO] Test docker hub official image first:\n"):
+                lines.index("Default-Tensorflow-Serving-Server\n")].copy()
+
+        for i in lines:
+            if i.startswith("Time taken for tests"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("default").get("tensorflow-serving").update(
+                    {"Time taken for tests": num[0]}
+                )
+
+            if i.endswith("[ms] (mean)\n"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("default").get("tensorflow-serving").update(
+                    {"Time per request": num[0]}
+                )
+
+            if i.endswith("(mean, across all concurrent requests)\n"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("default").get("tensorflow-serving").update(
+                    {"Time per request(all)": num[0]}
+                )
+
+            if i.startswith("Requests per second"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("default").get("tensorflow-serving").update(
+                    {"Requests per second": num[0]}
+                )
+
+            if i.startswith("Transfer rate"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("default").get("tensorflow-serving").update(
+                    {"Transfer rate": num[0]}
+                )
+
+        with open(self.json_path, "w")as f:
+            json.dump(data, f)

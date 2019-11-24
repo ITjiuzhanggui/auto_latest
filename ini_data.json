@@ -18,7 +18,8 @@
     "flink": {},
     "cassandra": {},
     "wordpress": {},
-    "glibc":{}
+    "glibc":{},
+    "tensorflow_serving": {}
   },
   "clear": {
     "httpd": {},
@@ -39,7 +40,8 @@
     "flink": {},
     "cassandra": {},
     "wordpress": {},
-    "glibc":{}
+    "glibc":{},
+    "tensorflow_serving": {}
   },
   "status_def": {
     "httpd": {},
@@ -60,7 +62,8 @@
     "flink": {},
     "cassandra": {},
     "wordpress": {},
-    "glibc":{}
+    "glibc":{},
+    "tensorflow_serving": {}
   },
   "status_Clr": {
     "clearlinux_version": {},
@@ -82,6 +85,7 @@
     "flink": {},
     "cassandra": {},
     "wordpress": {},
-    "glibc":{}
+    "glibc":{},
+    "tensorflow_serving": {}
   }
 }
