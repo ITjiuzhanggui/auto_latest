@@ -19,7 +19,7 @@
     "cassandra": {},
     "wordpress": {},
     "glibc":{},
-    "tensorflow_serving": {}
+    "tensorflow-serving": {}
   },
   "clear": {
     "httpd": {},
@@ -41,7 +41,7 @@
     "cassandra": {},
     "wordpress": {},
     "glibc":{},
-    "tensorflow_serving": {}
+    "tensorflow-serving": {}
   },
   "status_def": {
     "httpd": {},
@@ -63,7 +63,7 @@
     "cassandra": {},
     "wordpress": {},
     "glibc":{},
-    "tensorflow_serving": {}
+    "tensorflow-serving": {}
   },
   "status_Clr": {
     "clearlinux_version": {},
@@ -86,6 +86,6 @@
     "cassandra": {},
     "wordpress": {},
     "glibc":{},
-    "tensorflow_serving": {}
+    "tensorflow-serving": {}
   }
 }
