@@ -65,7 +65,7 @@ get_log_status(make_path, path)
 
 test_cmd = ["make httpd", "make nginx", "make memcached", "make redis", "make php", "make python", "make node",
             "make golang", "make postgres", "make tensorflow", "make mariadb", "make perl", "make openjdk",
-            "make rabbitmq", "make flink", "make cassandra", "make ruby"]
+            "make rabbitmq", "make flink", "make cassandra", "make ruby", "make wordpress", "make glibc"]
 
 
 def get_log_test(cmd, logs_patg):
@@ -272,6 +272,22 @@ def test_anlies(num):
                 ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
                 exect_contest(DefCassandra().serialization)
                 exect_contest(ClrCassandra().serialization)
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
+
+            if "wordpress" in log:
+                files = os.listdir(log)[num]
+                p = os.path.join(log, files)
+                ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
+                exect_contest(DefWordpress().serialization)
+                exect_contest(ClrWordpress().serialization)
+                os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
+
+            if "tensorflow-serving" in log:
+                files = os.listdir(log)[num]
+                p = os.path.join(log, files)
+                ConfManagement().set_ini(session="TEST_LOG_PATH", value=p)
+                exect_contest(DefTensorflow_serving().serialization)
+                exect_contest(ClrTensorflow_serving().serialization)
                 os.system("cp {} {}".format(test_json_path, JSON_TEST_PATH + "/test_json_%d.json" % int(num + 1)))
 
         os.system("cp {} {}".format(test_json_ini, test_json_path))

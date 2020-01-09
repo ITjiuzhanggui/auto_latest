@@ -430,10 +430,12 @@ class ClrPython(ClrTestLog):
         lines = self.test_log
         data = self.data
 
-        for i in lines[
-                 lines.index("[python] [INFO] Test clear docker image:\n"):
-                 lines.index("Clr-Python-Server\n")]:
+        # for i in lines[
+        #          lines.index("[python] [INFO] Test clear docker image:\n"):
+        #          lines.index("Clr-Python-Server\n")]:
+        lines = lines[lines.index("[python] [INFO] Test clear docker image:\n"):].copy()
 
+        for i in lines:
             if i.startswith("Totals"):
                 num = re.findall("\d+\.?\d*", i)
                 self.exception_to_response(num, "clearlinux_python:Totals")
@@ -541,39 +543,39 @@ class ClrOpenjdk(ClrTestLog):
         #         data.get("clear").get("openjdk").update(
         #             {"MyBenchmark.testMethod.Error": num[-1]}
         #         )
-        # for i in lines[
-        #          lines.index("[openjdk] [INFO] Test clear docker image:\n"):
-        #          lines.index("clr-openjdk\n")]:
-        #
-        #     if i.startswith("MyBenchmark.testMethod"):
-        #         num = re.findall("\d+\.?\d+", i)
-        #         self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod:Score")
-        #         data.get("clear").get("openjdk").update(
-        #             {"MyBenchmark.testMethod:Score": num[-2]}
-        #         )
-        #
-        #     if i.startswith("MyBenchmark.testMethod"):
-        #         num = re.findall("\d+\.?\d+", i)
-        #         self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod:Error")
-        #         data.get("clear").get("openjdk").update(
-        #             {"MyBenchmark.testMethod:Error": num[-1]}
-        #         )
+        for i in lines[
+                 lines.index("[openjdk] [INFO] Test clear docker image:\n"):
+                 lines.index("[openjdk] [INFO] Test extra official docker image, official latest image:\n")]:
 
-        for i in lines[lines.index("[openjdk] [INFO] Test clear docker image:\n"):]:
-
-            i.strip()
-
-            if i.startswith("MyBenchmark.testMethod"):
-                num = re.findall("\d+\.?\d*", i)
+            if i.startswith("MyBenchmark.testMethod") and "thrpt " in i:
+                num = re.findall("\d+\.?\d+", i)
+                self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod:Score")
                 data.get("clear").get("openjdk").update(
                     {"MyBenchmark.testMethod.Score": num[-2]}
                 )
 
-            if i.startswith("MyBenchmark.testMethod"):
-                num = re.findall("\d+\.?\d*", i)
+            if i.startswith("MyBenchmark.testMethod") and "thrpt " in i:
+                num = re.findall("\d+\.?\d+", i)
+                self.exception_to_response(num, "clearlinux_openjdk:MyBenchmark.testMethod:Error")
                 data.get("clear").get("openjdk").update(
                     {"MyBenchmark.testMethod.Error": num[-1]}
                 )
+
+        # for i in lines[lines.index("[openjdk] [INFO] Test clear docker image:\n"):]:
+        #
+        #     i.strip()
+        #
+        #     if i.startswith("MyBenchmark.testMethod"):
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data.get("clear").get("openjdk").update(
+        #             {"MyBenchmark.testMethod.Score": num[-2]}
+        #         )
+        #
+        #     if i.startswith("MyBenchmark.testMethod"):
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data.get("clear").get("openjdk").update(
+        #             {"MyBenchmark.testMethod.Error": num[-1]}
+        #         )
 
         with open(self.json_path, 'w')as f:
             json.dump(data, f)
@@ -586,356 +588,408 @@ class ClrRuby(ClrTestLog):
         lines = self.test_log
         data = self.data
 
-        influs_list = ["app_answer", "app_aobench", "app_erb", "app_factorial",
-                       "app_fib", "app_lc_fizzbuzz", "app_mandelbrot", "app_pentomino",
-                       "app_raise", "app_strconcat", "app_tak", "app_tarai", "app_uri",
-                       "array_sample_100k_10", "array_sample_100k_11", "array_sample_100k__100",
-                       "array_sample_100k__1k", "array_sample_100k__6k", "array_sample_100k___10k",
-                       "array_sample_100k___50k", "array_shift", "array_small_and", "array_small_diff",
-                       "array_small_or", "array_sort_block", "array_sort_float", "array_values_at_int",
-                       "array_values_at_range", "bighash", "complex_float_add", "complex_float_div",
-                       "complex_float_mul", "complex_float_new", "complex_float_power", "complex_float_sub",
-                       "dir_empty_p", "enum_lazy_grep_v_100", "enum_lazy_grep_v_20", "enum_lazy_grep_v_50",
-                       "enum_lazy_uniq_100", "enum_lazy_uniq_20", "enum_lazy_uniq_50", "erb_render",
-                       "fiber_chain", "file_chmod", "file_rename", "hash_aref_dsym", "hash_aref_dsym_long",
-                       "hash_aref_fix", "hash_aref_flo", "hash_aref_miss", "hash_aref_str", "hash_aref_sym",
-                       "hash_aref_sym_long", "hash_flatten", "hash_ident_flo", "hash_ident_num", "hash_ident_obj",
-                       "hash_ident_str", "hash_ident_sym", "hash_keys", "hash_literal_small2", "hash_literal_small4",
-                       "hash_literal_small8", "hash_long", "hash_shift", "hash_shift_u16", "hash_shift_u24",
-                       "hash_shift_u32", "hash_small2", "hash_small4", "hash_small8", "hash_to_proc",
-                       "hash_values", "int_quo", "io_copy_stream_write", "io_copy_stream_write_socket",
-                       "io_file_create", "io_file_read", "io_file_write", "io_nonblock_noex", "io_nonblock_noex2",
-                       "io_pipe_rw", "io_select", "io_select2", "io_select3", "loop_for", "loop_generator",
-                       "loop_times", "loop_whileloop", "loop_whileloop2", "marshal_dump_flo", "marshal_dump_load_geniv",
-                       "marshal_dump_load_time",
-                       "Calculating-(1..1_000_000).last(100)",
-                       "Calculating-(1..1_000_000).last(1000)",
-                       "Calculating-(1..1_000_000).last(10000)",
-                       "capitalize-1",
-                       "capitalize-10",
-                       "capitalize-100",
-                       "capitalize-1000",
-                       "downcase-1",
-                       "downcase-10",
-                       "downcase-100",
-                       "downcase-1000",
-                       "require", "require_thread", "securerandom", "so_ackermann",
-                       "so_array", "so_binary_trees", "so_concatenate", "so_count_words", "so_exception", "so_fannkuch",
-                       "so_fasta", "so_k_nucleotidepreparing", "so_lists", "so_mandelbrot", "so_matrix",
-                       "so_meteor_contest",
-                       "so_nbody", "so_nested_loop", "so_nsieve", "so_nsieve_bits", "so_object", "so_partial_sums",
-                       "so_pidigits", "so_random", "so_reverse_complementpreparing", "so_sieve", "so_spectralnorm",
-                       "string_index", "string_scan_re",
-                       "string_scan_str",
-                       "to_chars-1",
-                       "to_chars-10",
-                       "to_chars-100",
-                       "to_chars-1000",
-                       "swapcase-1",
-                       "swapcase-10",
-                       "swapcase-100",
-                       "swapcase-1000",
-                       "upcase-1",
-                       "upcase-10",
-                       "upcase-100",
-                       "upcase-1000",
-                       """Time.strptime("28/Aug/2005:06:54:20 +0000", "%d/%b/%Y:%T %z")""",
-                       """Time.strptime("1", "%s")""",
-                       """Time.strptime("0 +0100", "%s %z")""",
-                       """Time.strptime("0 UTC", "%s %z")""",
-                       """Time.strptime("1.5", "%s.%N")""",
-                       """Time.strptime("1.000000000001", "%s.%N")""",
-                       """Time.strptime("20010203 -0200", "%Y%m%d %z")""",
-                       """Time.strptime("20010203 UTC", "%Y%m%d %z")""",
-                       """Time.strptime("2018-365", "%Y-%j")""",
-                       """Time.strptime("2018-091", "%Y-%j")""",
-                       "time_subsec", "vm1_attr_ivar",
-                       "vm1_attr_ivar_set",
-                       "vm1_block", "vm1_blockparam", "vm1_blockparam_call", "vm1_blockparam_pass",
-                       "vm1_blockparam_yield",
-                       "vm1_const", "vm1_ensure", "vm1_float_simple", "vm1_gc_short_lived",
-                       "vm1_gc_short_with_complex_long",
-                       "vm1_gc_short_with_long", "vm1_gc_short_with_symbol", "vm1_gc_wb_ary", "vm1_gc_wb_ary_promoted",
-                       "vm1_gc_wb_obj", "vm1_gc_wb_obj_promoted", "vm1_ivar", "vm1_ivar_set", "vm1_length",
-                       "vm1_lvar_init",
-                       "vm1_lvar_set", "vm1_neq", "vm1_not", "vm1_rescue", "vm1_simplereturn", "vm1_swap", "vm1_yield",
-                       "vm2_array", "vm2_bigarray", "vm2_bighash", "vm2_case", "vm2_case_lit", "vm2_defined_method",
-                       "vm2_dstr", "vm2_eval", "vm2_fiber_switch", "vm2_freezestring", "vm2_method",
-                       "vm2_method_missing",
-                       "vm2_method_with_block", "vm2_module_ann_const_set", "vm2_module_const_set", "vm2_mutex",
-                       "vm2_newlambda",
-                       "vm2_poly_method", "vm2_poly_method_ov", "vm2_poly_singleton", "vm2_proc", "vm2_raise1",
-                       "vm2_raise2",
-                       "vm2_regexp", "vm2_send", "vm2_string_literal", "vm2_struct_big_aref_hi",
-                       "vm2_struct_big_aref_lo",
-                       "vm2_struct_big_aset", "vm2_struct_big_href_hi", "vm2_struct_big_href_lo", "vm2_struct_big_hset",
-                       "vm2_struct_small_aref", "vm2_struct_small_aset", "vm2_struct_small_href",
-                       "vm2_struct_small_hset",
-                       "vm2_super", "vm2_unif1", "vm2_zsuper", "vm3_backtrace", "vm3_clearmethodcache", "vm3_gc",
-                       "vm3_gc_old_full",
-                       "vm3_gc_old_immediate", "vm3_gc_old_lazy", "vm_symbol_block_pass", "vm_thread_alive_check1",
-                       "vm_thread_close",
-                       "vm_thread_condvar1", "vm_thread_condvar2", "vm_thread_create_join", "vm_thread_mutex1",
-                       "vm_thread_mutex2",
-                       "vm_thread_mutex3", "vm_thread_pass", "vm_thread_pass_flood", "vm_thread_pipe",
-                       "vm_thread_queue",
-                       "vm_thread_sized_queue", "vm_thread_sized_queue2", "vm_thread_sized_queue3",
-                       "vm_thread_sized_queue4"
-                       ]
-        data_ruby = {}
-        for i in lines[
-                 lines.index("[ruby] [INFO] Test clear docker image:\n"):
-                 lines.index("Clr-Ruby-Server\n")]:
-
-            for startwith_item in influs_list:
-                if i.endswith("s/i)\n") and startwith_item in i:
-                    num = re.findall("\d+\.?\d* s|ERROR", i)
-                    data_ruby.update({startwith_item: num[-1][:-1]})
-
-            if "so_reverse_complementpreparing" in i:
-                start = lines.index(i)
-                so_reverse_complementpreparing = lines[start + 1]
-                num = re.findall("\d+\.?\d* s", so_reverse_complementpreparing)
-                self.exception_to_response(num, "clearlinux_Ruby:so_reverse_complementpreparing %d line" % (start + 2))
-                data_ruby.update({"so_reverse_complementpreparing": num[-1][:-1]})
-
-            if "so_k_nucleotidepreparing" in i:
-                start = lines.index(i)
-                so_reverse_complementpreparing = lines[start + 1]
-                num = re.findall("\d+\.?\d* s", so_reverse_complementpreparing)
-                self.exception_to_response(num, "clearlinux_Ruby:so_k_nucleotidepreparing %d line" % (start + 2))
-                data_ruby.update({"so_k_nucleotidepreparing": num[-1][:-1]})
-
-        lines = lines[lines.index("[ruby] [INFO] Test clear docker image:\n"):lines.index("Clr-Ruby-Server\n")]
-
-        for item in lines:
-            if item.startswith("Warming up --------------------------------------\n"):
-                up = lines.index(item)
-
-        for item in lines[up:]:
-            if item.startswith("Comparison:\n"):
-                down = lines[up:].index(item) + up
-
-        for i in lines[up:down]:
-
-            if "(1..1_000_000).last(100)" in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"(1..1_000_000).last(100)": num[-4]})
-
-            if "(1..1_000_000).last(1000)" in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"(1..1_000_000).last(1000)": num[-4]})
-
-            if "(1..1_000_000).last(10000)" in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"(1..1_000_000).last(10000)": num[-4]})
-
-        for i in lines[down:]:
-
-            if i.startswith("Warming up --------------------------------------\n"):
-                capit_start = lines[down:].index(i) + down
-
-        for i in lines[capit_start:]:
-
-            if i.startswith("Calculating -------------------------------------\n"):
-                calc_start = lines[capit_start:].index(i) + capit_start
-
-        for i in lines[calc_start:]:
-
-            if i.startswith("Comparison:\n"):
-                calc_end = lines[calc_start:].index(i) + calc_start
-
-        for i in lines[calc_start:calc_end]:
-
-            if "capitalize-1  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"capitalize-1": num[1]})
-
-            if "capitalize-10  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"capitalize-10": num[1]})
-
-            if "capitalize-100  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"capitalize-100": num[1]})
-
-            if "capitalize-1000  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"capitalize-1000": num[1]})
-
-        for i in lines[calc_end:]:
-            if i.startswith("Calculating -------------------------------------\n"):
-                downcase_start = lines[calc_end:].index(i) + calc_end
-
-        for i in lines[downcase_start:]:
-
-            if i.startswith("Comparison:\n"):
-                downcase_end = lines[downcase_start:].index(i) + downcase_start
-
-        for i in lines[downcase_start:downcase_end]:
-
-            if "downcase-1  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"downcase-1": num[1]})
-
-            if "downcase-10  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"downcase-10": num[1]})
-
-            if "downcase-100  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"downcase-100": num[1]})
-
-            if "downcase-1000  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"downcase-1000": num[1]})
-
-        for i in lines[downcase_end:]:
-            if i.startswith("Warming up --------------------------------------\n"):
-                to_chars = lines[downcase_end:].index(i) + downcase_end
-
-        for i in lines[to_chars:]:
-
-            if i.startswith("Calculating -------------------------------------\n"):
-                to_chars_start = lines[to_chars:].index(i) + to_chars
-
-        for i in lines[to_chars_start:]:
-
-            if i.startswith("Comparison:\n"):
-                to_chars_end = lines[to_chars_start:].index(i) + to_chars_start
-
-        for i in lines[to_chars_start:to_chars_end]:
-
-            if "to_chars-1  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"to_chars-1": num[1]})
-
-            if "to_chars-10  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"to_chars-10": num[1]})
-
-            if "to_chars-100  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"to_chars-100": num[1]})
-
-            if "to_chars-1000  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"to_chars-1000": num[1]})
-
-        for i in lines[to_chars_end:]:
-
-            if i.startswith("Warming up --------------------------------------\n"):
-                swapcase = lines[to_chars_end:].index(i) + to_chars_end
-
-        for i in lines[swapcase:]:
-
-            if i.startswith("Calculating -------------------------------------\n"):
-                swapcase_start = lines[swapcase:].index(i) + swapcase
-
-        for i in lines[swapcase_start:]:
-
-            if i.startswith("Comparison:\n"):
-                swapcase_end = lines[swapcase_start:].index(i) + swapcase_start
-
-        for i in lines[swapcase_start:swapcase_end]:
-
-            if "swapcase-1  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"swapcase-1": num[1]})
-
-            if "swapcase-10  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"swapcase-10": num[1]})
-
-            if "swapcase-100  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"swapcase-100": num[1]})
-
-            if "swapcase-1000  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"swapcase-1000": num[1]})
-
-        for i in lines[swapcase_end:]:
-
-            if i.startswith("Calculating -------------------------------------\n"):
-                upcase_start = lines[swapcase_end:].index(i) + swapcase_end
-
-        for i in lines[upcase_start:]:
-
-            if i.startswith("Comparison:\n"):
-                upcase_end = lines[upcase_start:].index(i) + upcase_start
-
-        for i in lines[upcase_start:upcase_end]:
-
-            if "upcase-1  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"upcase-1": num[1]})
-
-            if "upcase-10  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"upcase-10": num[1]})
-
-            if "upcase-100  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"upcase-100": num[1]})
-
-            if "upcase-1000  " in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"upcase-1000": num[1]})
-
-        for i in lines[upcase_end:]:
-
-            if i.startswith("Calculating -------------------------------------\n"):
-                time_start = lines[upcase_end:].index(i) + upcase_end
-
-        for i in lines[time_start:]:
-
-            if i.startswith("Comparison:\n"):
-                time_end = lines[time_start:].index(i) + time_start
-
-        for i in lines[time_start:time_end]:
-
-            if """Time.strptime("28/Aug/2005:06:54:20 +0000", "%d/%b/%Y:%T %z")  """ in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"""Time.strptime("28/Aug/2005:06:54:20 +0000", "%d/%b/%Y:%T %z")""": num[-4]})
-
-            if """Time.strptime("1", "%s")  """ in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"""Time.strptime("1", "%s")""": num[-4]})
-
-            if """Time.strptime("0 +0100", "%s %z")  """ in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"""Time.strptime("0 +0100", "%s %z")""": num[-4]})
-
-            if """Time.strptime("0 UTC", "%s %z")  """ in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"""Time.strptime("0 UTC", "%s %z")""": num[-4]})
-
-            if """Time.strptime("1.5", "%s.%N")  """ in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"""Time.strptime("1.5", "%s.%N")""": num[-4]})
-
-            if """Time.strptime("1.000000000001", "%s.%N")  """ in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"""Time.strptime("1.000000000001", "%s.%N")""": num[-4]})
-
-            if """Time.strptime("20010203 -0200", "%Y%m%d %z")  """ in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"""Time.strptime("20010203 -0200", "%Y%m%d %z")""": num[-4]})
-
-            if """Time.strptime("20010203 UTC", "%Y%m%d %z")  """ in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"""Time.strptime("20010203 UTC", "%Y%m%d %z")""": num[-4]})
-
-            if """Time.strptime("2018-365", "%Y-%j")  """ in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"""Time.strptime("2018-365", "%Y-%j")""": num[-4]})
-
-            if """Time.strptime("2018-091", "%Y-%j")  """ in i:
-                num = re.findall("\d+\.?\d*", i)
-                data_ruby.update({"""Time.strptime("2018-091", "%Y-%j")""": num[-4]})
-
-        data.get("clear").get("ruby").update(data_ruby)
+        newlines = lines[
+                   lines.index("[ruby] [INFO] Test clear docker image:\n"):
+                   lines.index("Clr-Ruby-Server\n")].copy()
+
+        line_str_key = "Calculating"
+        line_dict = {}
+        ret_lines = []
+        for i in range(0, len(newlines)):
+            line_dict[i] = newlines[i].split("\n")[0]
+
+        for lineno, line_str in line_dict.items():
+            if line_str.startswith(line_str_key):
+
+                tmp_line_no = lineno + 1
+                while True:
+                    if newlines[tmp_line_no] != "\n":
+                        if "so_k_nucleotidepreparing" in newlines[tmp_line_no]:
+                            ret_lines.append("so_k_nucleotidepreparing " + newlines[tmp_line_no + 1])
+                        if "so_reverse_complementpreparing" in newlines[tmp_line_no]:
+                            ret_lines.append("so_reverse_complementpreparing " + newlines[tmp_line_no + 1])
+                        ret_lines.append(newlines[tmp_line_no])
+                    else:
+                        break
+                    tmp_line_no += 1
+
+        ret_line_list = []
+        for line in ret_lines:
+
+            line_split = line.split()
+            key_str = line_split[0]
+            value = line_split[1]
+            if "Time" in line:
+                time_line_split = line.split("s -")[0].split(")")
+                time_key = time_line_split[0].strip() + ")"
+                time_value = time_line_split[-1].strip()
+                ret_line_list.append({time_key: time_value})
+
+            elif not value.startswith("/"):
+
+                try:
+                    key_str = float(str(key_str))
+                except Exception:
+                    pass
+                if not isinstance(key_str, float):
+                    ret_line_list.append({key_str: value})
+
+        for tmp_dict in ret_line_list:
+            data.get("clear").get("ruby").update(tmp_dict)
+
+        with open(self.json_path, 'w') as f:
+            json.dump(data, f)
+
+        # influs_list = ["app_answer", "app_aobench", "app_erb", "app_factorial",
+        #                "app_fib", "app_lc_fizzbuzz", "app_mandelbrot", "app_pentomino",
+        #                "app_raise", "app_strconcat", "app_tak", "app_tarai", "app_uri",
+        #                "array_sample_100k_10", "array_sample_100k_11", "array_sample_100k__100",
+        #                "array_sample_100k__1k", "array_sample_100k__6k", "array_sample_100k___10k",
+        #                "array_sample_100k___50k", "array_shift", "array_small_and", "array_small_diff",
+        #                "array_small_or", "array_sort_block", "array_sort_float", "array_values_at_int",
+        #                "array_values_at_range", "bighash", "complex_float_add", "complex_float_div",
+        #                "complex_float_mul", "complex_float_new", "complex_float_power", "complex_float_sub",
+        #                "dir_empty_p", "enum_lazy_grep_v_100", "enum_lazy_grep_v_20", "enum_lazy_grep_v_50",
+        #                "enum_lazy_uniq_100", "enum_lazy_uniq_20", "enum_lazy_uniq_50", "erb_render",
+        #                "fiber_chain", "file_chmod", "file_rename", "hash_aref_dsym", "hash_aref_dsym_long",
+        #                "hash_aref_fix", "hash_aref_flo", "hash_aref_miss", "hash_aref_str", "hash_aref_sym",
+        #                "hash_aref_sym_long", "hash_flatten", "hash_ident_flo", "hash_ident_num", "hash_ident_obj",
+        #                "hash_ident_str", "hash_ident_sym", "hash_keys", "hash_literal_small2", "hash_literal_small4",
+        #                "hash_literal_small8", "hash_long", "hash_shift", "hash_shift_u16", "hash_shift_u24",
+        #                "hash_shift_u32", "hash_small2", "hash_small4", "hash_small8", "hash_to_proc",
+        #                "hash_values", "int_quo", "io_copy_stream_write", "io_copy_stream_write_socket",
+        #                "io_file_create", "io_file_read", "io_file_write", "io_nonblock_noex", "io_nonblock_noex2",
+        #                "io_pipe_rw", "io_select", "io_select2", "io_select3", "loop_for", "loop_generator",
+        #                "loop_times", "loop_whileloop", "loop_whileloop2", "marshal_dump_flo", "marshal_dump_load_geniv",
+        #                "marshal_dump_load_time",
+        #                "Calculating-(1..1_000_000).last(100)",
+        #                "Calculating-(1..1_000_000).last(1000)",
+        #                "Calculating-(1..1_000_000).last(10000)",
+        #                "capitalize-1",
+        #                "capitalize-10",
+        #                "capitalize-100",
+        #                "capitalize-1000",
+        #                "downcase-1",
+        #                "downcase-10",
+        #                "downcase-100",
+        #                "downcase-1000",
+        #                "require", "require_thread", "securerandom", "so_ackermann",
+        #                "so_array", "so_binary_trees", "so_concatenate", "so_count_words", "so_exception", "so_fannkuch",
+        #                "so_fasta", "so_k_nucleotidepreparing", "so_lists", "so_mandelbrot", "so_matrix",
+        #                "so_meteor_contest",
+        #                "so_nbody", "so_nested_loop", "so_nsieve", "so_nsieve_bits", "so_object", "so_partial_sums",
+        #                "so_pidigits", "so_random", "so_reverse_complementpreparing", "so_sieve", "so_spectralnorm",
+        #                "string_index", "string_scan_re",
+        #                "string_scan_str",
+        #                "to_chars-1",
+        #                "to_chars-10",
+        #                "to_chars-100",
+        #                "to_chars-1000",
+        #                "swapcase-1",
+        #                "swapcase-10",
+        #                "swapcase-100",
+        #                "swapcase-1000",
+        #                "upcase-1",
+        #                "upcase-10",
+        #                "upcase-100",
+        #                "upcase-1000",
+        #                """Time.strptime("28/Aug/2005:06:54:20 +0000", "%d/%b/%Y:%T %z")""",
+        #                """Time.strptime("1", "%s")""",
+        #                """Time.strptime("0 +0100", "%s %z")""",
+        #                """Time.strptime("0 UTC", "%s %z")""",
+        #                """Time.strptime("1.5", "%s.%N")""",
+        #                """Time.strptime("1.000000000001", "%s.%N")""",
+        #                """Time.strptime("20010203 -0200", "%Y%m%d %z")""",
+        #                """Time.strptime("20010203 UTC", "%Y%m%d %z")""",
+        #                """Time.strptime("2018-365", "%Y-%j")""",
+        #                """Time.strptime("2018-091", "%Y-%j")""",
+        #                "time_subsec", "vm1_attr_ivar",
+        #                "vm1_attr_ivar_set",
+        #                "vm1_block", "vm1_blockparam", "vm1_blockparam_call", "vm1_blockparam_pass",
+        #                "vm1_blockparam_yield",
+        #                "vm1_const", "vm1_ensure", "vm1_float_simple", "vm1_gc_short_lived",
+        #                "vm1_gc_short_with_complex_long",
+        #                "vm1_gc_short_with_long", "vm1_gc_short_with_symbol", "vm1_gc_wb_ary", "vm1_gc_wb_ary_promoted",
+        #                "vm1_gc_wb_obj", "vm1_gc_wb_obj_promoted", "vm1_ivar", "vm1_ivar_set", "vm1_length",
+        #                "vm1_lvar_init",
+        #                "vm1_lvar_set", "vm1_neq", "vm1_not", "vm1_rescue", "vm1_simplereturn", "vm1_swap", "vm1_yield",
+        #                "vm2_array", "vm2_bigarray", "vm2_bighash", "vm2_case", "vm2_case_lit", "vm2_defined_method",
+        #                "vm2_dstr", "vm2_eval", "vm2_fiber_switch", "vm2_freezestring", "vm2_method",
+        #                "vm2_method_missing",
+        #                "vm2_method_with_block", "vm2_module_ann_const_set", "vm2_module_const_set", "vm2_mutex",
+        #                "vm2_newlambda",
+        #                "vm2_poly_method", "vm2_poly_method_ov", "vm2_poly_singleton", "vm2_proc", "vm2_raise1",
+        #                "vm2_raise2",
+        #                "vm2_regexp", "vm2_send", "vm2_string_literal", "vm2_struct_big_aref_hi",
+        #                "vm2_struct_big_aref_lo",
+        #                "vm2_struct_big_aset", "vm2_struct_big_href_hi", "vm2_struct_big_href_lo", "vm2_struct_big_hset",
+        #                "vm2_struct_small_aref", "vm2_struct_small_aset", "vm2_struct_small_href",
+        #                "vm2_struct_small_hset",
+        #                "vm2_super", "vm2_unif1", "vm2_zsuper", "vm3_backtrace", "vm3_clearmethodcache", "vm3_gc",
+        #                "vm3_gc_old_full",
+        #                "vm3_gc_old_immediate", "vm3_gc_old_lazy", "vm_symbol_block_pass", "vm_thread_alive_check1",
+        #                "vm_thread_close",
+        #                "vm_thread_condvar1", "vm_thread_condvar2", "vm_thread_create_join", "vm_thread_mutex1",
+        #                "vm_thread_mutex2",
+        #                "vm_thread_mutex3", "vm_thread_pass", "vm_thread_pass_flood", "vm_thread_pipe",
+        #                "vm_thread_queue",
+        #                "vm_thread_sized_queue", "vm_thread_sized_queue2", "vm_thread_sized_queue3",
+        #                "vm_thread_sized_queue4"
+        #                ]
+        # data_ruby = {}
+        # for i in lines[
+        #          lines.index("[ruby] [INFO] Test clear docker image:\n"):
+        #          lines.index("Clr-Ruby-Server\n")]:
+        #
+        #     for startwith_item in influs_list:
+        #         if i.endswith("s/i)\n") and startwith_item in i:
+        #             num = re.findall("\d+\.?\d* s|ERROR", i)
+        #             data_ruby.update({startwith_item: num[-1][:-1]})
+        #
+        #     if "so_reverse_complementpreparing" in i:
+        #         start = lines.index(i)
+        #         so_reverse_complementpreparing = lines[start + 1]
+        #         num = re.findall("\d+\.?\d* s", so_reverse_complementpreparing)
+        #         self.exception_to_response(num, "clearlinux_Ruby:so_reverse_complementpreparing %d line" % (start + 2))
+        #         data_ruby.update({"so_reverse_complementpreparing": num[-1][:-1]})
+        #
+        #     if "so_k_nucleotidepreparing" in i:
+        #         start = lines.index(i)
+        #         so_reverse_complementpreparing = lines[start + 1]
+        #         num = re.findall("\d+\.?\d* s", so_reverse_complementpreparing)
+        #         self.exception_to_response(num, "clearlinux_Ruby:so_k_nucleotidepreparing %d line" % (start + 2))
+        #         data_ruby.update({"so_k_nucleotidepreparing": num[-1][:-1]})
+        #
+        # lines = lines[lines.index("[ruby] [INFO] Test clear docker image:\n"):lines.index("Clr-Ruby-Server\n")]
+        #
+        # for item in lines:
+        #     if item.startswith("Warming up --------------------------------------\n"):
+        #         up = lines.index(item)
+        #
+        # for item in lines[up:]:
+        #     if item.startswith("Comparison:\n"):
+        #         down = lines[up:].index(item) + up
+        #
+        # for i in lines[up:down]:
+        #
+        #     if "(1..1_000_000).last(100)" in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"(1..1_000_000).last(100)": num[-4]})
+        #
+        #     if "(1..1_000_000).last(1000)" in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"(1..1_000_000).last(1000)": num[-4]})
+        #
+        #     if "(1..1_000_000).last(10000)" in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"(1..1_000_000).last(10000)": num[-4]})
+        #
+        # for i in lines[down:]:
+        #
+        #     if i.startswith("Warming up --------------------------------------\n"):
+        #         capit_start = lines[down:].index(i) + down
+        #
+        # for i in lines[capit_start:]:
+        #
+        #     if i.startswith("Calculating -------------------------------------\n"):
+        #         calc_start = lines[capit_start:].index(i) + capit_start
+        #
+        # for i in lines[calc_start:]:
+        #
+        #     if i.startswith("Comparison:\n"):
+        #         calc_end = lines[calc_start:].index(i) + calc_start
+        #
+        # for i in lines[calc_start:calc_end]:
+        #
+        #     if "capitalize-1  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"capitalize-1": num[1]})
+        #
+        #     if "capitalize-10  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"capitalize-10": num[1]})
+        #
+        #     if "capitalize-100  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"capitalize-100": num[1]})
+        #
+        #     if "capitalize-1000  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"capitalize-1000": num[1]})
+        #
+        # for i in lines[calc_end:]:
+        #     if i.startswith("Calculating -------------------------------------\n"):
+        #         downcase_start = lines[calc_end:].index(i) + calc_end
+        #
+        # for i in lines[downcase_start:]:
+        #
+        #     if i.startswith("Comparison:\n"):
+        #         downcase_end = lines[downcase_start:].index(i) + downcase_start
+        #
+        # for i in lines[downcase_start:downcase_end]:
+        #
+        #     if "downcase-1  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"downcase-1": num[1]})
+        #
+        #     if "downcase-10  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"downcase-10": num[1]})
+        #
+        #     if "downcase-100  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"downcase-100": num[1]})
+        #
+        #     if "downcase-1000  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"downcase-1000": num[1]})
+        #
+        # for i in lines[downcase_end:]:
+        #     if i.startswith("Warming up --------------------------------------\n"):
+        #         to_chars = lines[downcase_end:].index(i) + downcase_end
+        #
+        # for i in lines[to_chars:]:
+        #
+        #     if i.startswith("Calculating -------------------------------------\n"):
+        #         to_chars_start = lines[to_chars:].index(i) + to_chars
+        #
+        # for i in lines[to_chars_start:]:
+        #
+        #     if i.startswith("Comparison:\n"):
+        #         to_chars_end = lines[to_chars_start:].index(i) + to_chars_start
+        #
+        # for i in lines[to_chars_start:to_chars_end]:
+        #
+        #     if "to_chars-1  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"to_chars-1": num[1]})
+        #
+        #     if "to_chars-10  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"to_chars-10": num[1]})
+        #
+        #     if "to_chars-100  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"to_chars-100": num[1]})
+        #
+        #     if "to_chars-1000  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"to_chars-1000": num[1]})
+        #
+        # for i in lines[to_chars_end:]:
+        #
+        #     if i.startswith("Warming up --------------------------------------\n"):
+        #         swapcase = lines[to_chars_end:].index(i) + to_chars_end
+        #
+        # for i in lines[swapcase:]:
+        #
+        #     if i.startswith("Calculating -------------------------------------\n"):
+        #         swapcase_start = lines[swapcase:].index(i) + swapcase
+        #
+        # for i in lines[swapcase_start:]:
+        #
+        #     if i.startswith("Comparison:\n"):
+        #         swapcase_end = lines[swapcase_start:].index(i) + swapcase_start
+        #
+        # for i in lines[swapcase_start:swapcase_end]:
+        #
+        #     if "swapcase-1  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"swapcase-1": num[1]})
+        #
+        #     if "swapcase-10  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"swapcase-10": num[1]})
+        #
+        #     if "swapcase-100  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"swapcase-100": num[1]})
+        #
+        #     if "swapcase-1000  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"swapcase-1000": num[1]})
+        #
+        # for i in lines[swapcase_end:]:
+        #
+        #     if i.startswith("Calculating -------------------------------------\n"):
+        #         upcase_start = lines[swapcase_end:].index(i) + swapcase_end
+        #
+        # for i in lines[upcase_start:]:
+        #
+        #     if i.startswith("Comparison:\n"):
+        #         upcase_end = lines[upcase_start:].index(i) + upcase_start
+        #
+        # for i in lines[upcase_start:upcase_end]:
+        #
+        #     if "upcase-1  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"upcase-1": num[1]})
+        #
+        #     if "upcase-10  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"upcase-10": num[1]})
+        #
+        #     if "upcase-100  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"upcase-100": num[1]})
+        #
+        #     if "upcase-1000  " in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"upcase-1000": num[1]})
+        #
+        # for i in lines[upcase_end:]:
+        #
+        #     if i.startswith("Calculating -------------------------------------\n"):
+        #         time_start = lines[upcase_end:].index(i) + upcase_end
+        #
+        # for i in lines[time_start:]:
+        #
+        #     if i.startswith("Comparison:\n"):
+        #         time_end = lines[time_start:].index(i) + time_start
+        #
+        # for i in lines[time_start:time_end]:
+        #
+        #     if """Time.strptime("28/Aug/2005:06:54:20 +0000", "%d/%b/%Y:%T %z")  """ in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"""Time.strptime("28/Aug/2005:06:54:20 +0000", "%d/%b/%Y:%T %z")""": num[-4]})
+        #
+        #     if """Time.strptime("1", "%s")  """ in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"""Time.strptime("1", "%s")""": num[-4]})
+        #
+        #     if """Time.strptime("0 +0100", "%s %z")  """ in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"""Time.strptime("0 +0100", "%s %z")""": num[-4]})
+        #
+        #     if """Time.strptime("0 UTC", "%s %z")  """ in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"""Time.strptime("0 UTC", "%s %z")""": num[-4]})
+        #
+        #     if """Time.strptime("1.5", "%s.%N")  """ in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"""Time.strptime("1.5", "%s.%N")""": num[-4]})
+        #
+        #     if """Time.strptime("1.000000000001", "%s.%N")  """ in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"""Time.strptime("1.000000000001", "%s.%N")""": num[-4]})
+        #
+        #     if """Time.strptime("20010203 -0200", "%Y%m%d %z")  """ in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"""Time.strptime("20010203 -0200", "%Y%m%d %z")""": num[-4]})
+        #
+        #     if """Time.strptime("20010203 UTC", "%Y%m%d %z")  """ in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"""Time.strptime("20010203 UTC", "%Y%m%d %z")""": num[-4]})
+        #
+        #     if """Time.strptime("2018-365", "%Y-%j")  """ in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"""Time.strptime("2018-365", "%Y-%j")""": num[-4]})
+        #
+        #     if """Time.strptime("2018-091", "%Y-%j")  """ in i:
+        #         num = re.findall("\d+\.?\d*", i)
+        #         data_ruby.update({"""Time.strptime("2018-091", "%Y-%j")""": num[-4]})
+        #
+        # data.get("clear").get("ruby").update(data_ruby)
         # for i in lines[
         #          lines.index("[ruby] [INFO] Test docker hub official image first:\n"):
         #          lines.index("Clr-Ruby-Server\n")]:
@@ -1036,8 +1090,8 @@ class ClrRuby(ClrTestLog):
         #                 {"app_tarai": num[-2]}
         #             )
 
-        with open(self.json_path, 'w') as f:
-            json.dump(data, f)
+        # with open(self.json_path, 'w') as f:
+        #     json.dump(data, f)
 
 
 class ClrPerl(ClrTestLog):
@@ -1124,7 +1178,9 @@ class ClrPostgres(ClrTestLog):
         lines = self.test_log
         data = self.data
 
-        lines_b = lines[lines.index("[postgres] [INFO] Test clear docker image:\n"):].copy()
+        lines_b = lines[
+                  lines.index("[postgres] [INFO] Test clear docker image:\n"):
+                  lines.index("Clr-Node-Server\n")].copy()
         line_nu2 = []
 
         for i in lines_b:
@@ -1135,8 +1191,8 @@ class ClrPostgres(ClrTestLog):
         bsr2 = lines_b[int(line_nu2[1])].split()
         bnw2 = lines_b[int(line_nu2[2])].split()
         bnr2 = lines_b[int(line_nu2[3])].split()
-        bhw2 = lines_b[int(line_nu2[4])].split()
-        bhr2 = lines_b[int(line_nu2[5])].split()
+        # bhw2 = lines_b[int(line_nu2[4])].split()
+        # bhr2 = lines_b[int(line_nu2[5])].split()
         data.get("clear").get("postgres").update(
             {"BUFFER_TEST&SINGLE_THREAD&READ_WRITE": bsw2[2]}
         )
@@ -1149,12 +1205,12 @@ class ClrPostgres(ClrTestLog):
         data.get("clear").get("postgres").update(
             {"BUFFER_TEST&NORMAL_LOAD&READ_ONLY": bnr2[2]}
         )
-        data.get("clear").get("postgres").update(
-            {"BUFFER_TEST&HEAVY_CONNECTION&READ_WRITE": bhw2[2]}
-        )
-        data.get("clear").get("postgres").update(
-            {"BUFFER_TEST&HEAVY_CONNECTION&READ_ONLY": bhr2[2]}
-        )
+        # data.get("clear").get("postgres").update(
+        #     {"BUFFER_TEST&HEAVY_CONNECTION&READ_WRITE": bhw2[2]}
+        # )
+        # data.get("clear").get("postgres").update(
+        #     {"BUFFER_TEST&HEAVY_CONNECTION&READ_ONLY": bhr2[2]}
+        # )
 
         with open(self.json_path, "w")as f:
             json.dump(data, f)
@@ -1251,6 +1307,9 @@ class ClrFlink(ClrTestLog):
         for i in lines[
                  lines.index("[flink] [INFO] Test clear docker image:\n"):
                  lines.index("Clr-Flink-Server\n")]:
+        # for i in lines[
+        #          lines.index("[flink] [INFO] use openjdk12:\n"):
+        #          lines.index("Clr-Flink-Server-jdk12\n")]:
 
             if i.startswith("KeyByBenchmarks.arrayKeyBy"):
                 num = re.findall("\d+\.?\d*", i)
@@ -1385,20 +1444,18 @@ class ClrCassandra(ClrTestLog):
                 line_nu22.append(lines_b.index(j))
 
         wo = lines_b[int(line_nu21[0])].split()
-        r4o = lines_b[int(line_nu21[1])].split()
-        r8o = lines_b[int(line_nu21[2])].split()
-        r16o = lines_b[int(line_nu21[3])].split()
-        r24o = lines_b[int(line_nu21[4])].split()
-        r36o = lines_b[int(line_nu21[5])].split()
-        r54o = lines_b[int(line_nu21[6])].split()
+        r4o = lines_b[int(line_nu21[-1])].split()
+        r8o = lines_b[int(line_nu21[-2])].split()
+        r16o = lines_b[int(line_nu21[-3])].split()
+        r24o = lines_b[int(line_nu21[-4])].split()
+        r36o = lines_b[int(line_nu21[-5])].split()
 
         wl = lines_b[int(line_nu22[0])].split()
-        r4l = lines_b[int(line_nu22[1])].split()
-        r8l = lines_b[int(line_nu22[2])].split()
-        r16l = lines_b[int(line_nu22[3])].split()
-        r24l = lines_b[int(line_nu22[4])].split()
-        r36l = lines_b[int(line_nu22[5])].split()
-        r54l = lines_b[int(line_nu22[6])].split()
+        r4l = lines_b[int(line_nu22[-1])].split()
+        r8l = lines_b[int(line_nu22[-2])].split()
+        r16l = lines_b[int(line_nu22[-3])].split()
+        r24l = lines_b[int(line_nu22[-4])].split()
+        r36l = lines_b[int(line_nu22[-5])].split()
 
         data.get("clear").get("cassandra").update(
             {"cassandra-stress write test - Op rate(op/s)": wo[3]}
@@ -1407,41 +1464,102 @@ class ClrCassandra(ClrTestLog):
             {"cassandra-stress write test - Latency mean(ms)": wl[3]}
         )
         data.get("clear").get("cassandra").update(
-            {"cassandra-stress read test - 4 threads - Op rate(op/s)": r4o[3]}
+            {"cassandra-stress read test - 5 threads - Op rate(op/s)": r4o[3]}
         )
         data.get("clear").get("cassandra").update(
-            {"cassandra-stress read test - 4 threads - Latency mean(ms)": r4l[3]}
+            {"cassandra-stress read test - 5 threads - Latency mean(ms)": r4l[3]}
         )
         data.get("clear").get("cassandra").update(
-            {"cassandra-stress read test - 8 threads - Op rate(op/s)": r8o[3]}
+            {"cassandra-stress read test - 4 threads - Op rate(op/s)": r8o[3]}
         )
         data.get("clear").get("cassandra").update(
-            {"cassandra-stress read test - 8 threads - Latency mean(ms)": r8l[3]}
+            {"cassandra-stress read test - 4 threads - Latency mean(ms)": r8l[3]}
         )
         data.get("clear").get("cassandra").update(
-            {"cassandra-stress read test - 16 threads - Op rate(op/s)": r16o[3]}
+            {"cassandra-stress read test - 3 threads - Op rate(op/s)": r16o[3]}
         )
         data.get("clear").get("cassandra").update(
-            {"cassandra-stress read test - 16 threads - Latency mean(ms)": r16l[3]}
+            {"cassandra-stress read test - 3 threads - Latency mean(ms)": r16l[3]}
         )
         data.get("clear").get("cassandra").update(
-            {"cassandra-stress read test - 24 threads - Op rate(op/s)": r24o[3]}
+            {"cassandra-stress read test - 2 threads - Op rate(op/s)": r24o[3]}
         )
         data.get("clear").get("cassandra").update(
-            {"cassandra-stress read test - 24 threads - Latency mean(ms)": r24l[3]}
+            {"cassandra-stress read test - 2 threads - Latency mean(ms)": r24l[3]}
         )
         data.get("clear").get("cassandra").update(
-            {"cassandra-stress read test - 36 threads - Op rate(op/s)": r36o[3]}
+            {"cassandra-stress read test - 1 threads - Op rate(op/s)": r36o[3]}
         )
         data.get("clear").get("cassandra").update(
-            {"cassandra-stress read test - 36 threads - Latency mean(ms)": r36l[3]}
+            {"cassandra-stress read test - 1 threads - Latency mean(ms)": r36l[3]}
         )
-        data.get("clear").get("cassandra").update(
-            {"cassandra-stress read test - 54 threads - Op rate(op/s)": r54o[3]}
-        )
-        data.get("clear").get("cassandra").update(
-            {"cassandra-stress read test - 54 threads - Latency mean(ms)": r54l[3]}
-        )
+
+        with open(self.json_path, "w")as f:
+            json.dump(data, f)
+
+
+class ClrWordpress(ClrTestLog):
+    """clearlinux test_case Wordpress analysis"""
+
+    def serialization(self):
+        lines = self.test_log
+        data = self.data
+
+        lines = lines[lines.index("[wordpress] [INFO] Test clear docker image:\n"):
+                      lines.index("Clear-Wordpress\n")].copy()
+
+        for i in lines:
+            i = i.strip()
+            if i.startswith("Throughput:"):
+                throughput = i.split()
+                data.get("clear").get("wordpress").update(
+                    {"Throughput": throughput[1]})
+
+        with open(self.json_path, "w")as f:
+            json.dump(data, f)
+
+
+class ClrTensorflow_serving(ClrTestLog):
+    """clearlinux test_case Tensorflow_serving analysis"""
+
+    def serialization(self):
+        lines = self.test_log
+        data = self.data
+
+        lines =  lines[
+                 lines.index("[tensorflow-serving] [INFO] Test clear docker image:\n"):
+                 lines.index("Clr-Tensorflow-serving-Server\n")].copy()
+
+        for i in lines:
+            if i.startswith("Time taken for tests"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("tensorflow-serving").update(
+                    {"Time taken for tests": num[0]}
+                )
+
+            if i.endswith("[ms] (mean)\n"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("tensorflow-serving").update(
+                    {"Time per request": num[0]}
+                )
+
+            if i.endswith("(mean, across all concurrent requests)\n"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("tensorflow-serving").update(
+                    {"Time per request(all)": num[0]}
+                )
+
+            if i.startswith("Requests per second"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("tensorflow-serving").update(
+                    {"Requests per second": num[0]}
+                )
+
+            if i.startswith("Transfer rate"):
+                num = re.findall("\d+\.?\d*", i)
+                data.get("clear").get("tensorflow-serving").update(
+                    {"Transfer rate": num[0]}
+                )
 
         with open(self.json_path, "w")as f:
             json.dump(data, f)

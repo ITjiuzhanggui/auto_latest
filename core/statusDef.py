@@ -5,6 +5,7 @@ from core.abstract import Global
 from conf import ConfManagement
 from logs import SetLog
 
+
 class StaDefLog(Global):
 
     def __init__(self):
@@ -505,7 +506,7 @@ class StaDefPerl(StaDefLog):
                     num = re.findall("\d+\.?\d*", i)
                     self.exception_to_response(num, "status_def_Perl:Total")
                     data.get("status_def").get("perl").update(
-                        {"Toatl": num[-1] + "MB"}
+                        {"Total": num[-1] + "MB"}
                     )
 
             if i.startswith("default base layer Size:"):
@@ -803,3 +804,48 @@ class StaDefCassandra(StaDefLog):
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
 
+
+class StaDefWordpress(StaDefLog):
+    """default test_status_wordpress long analysis"""
+
+    def serialization(self):
+        lines = self.status_log
+        data = self.data
+        if_n = True
+        for i in lines:
+            if i.startswith("wordpress"):
+                if "latest" in i:
+                    start = lines.index(i)
+
+        while if_n:
+            for i in lines[start:]:
+                if i == '\n':
+                    if_n = False
+                    end = lines[start:].index(i)
+
+        for i in lines[start:end + start]:
+
+            if i.startswith("wordpress"):
+                if "latest" in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    self.exception_to_response(num, "status_def_wordpress:Total")
+                    data.get("status_def").get("wordpress").update(
+                        {"Total": num[-1] + "MB"}
+                    )
+
+            if i.startswith("default base layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_def_wordpress:Base_Layer")
+                data.get("status_def").get("wordpress").update(
+                    {"Base_Layer": num[0]}
+                )
+
+            if i.startswith("default microservice added layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_def_wordpress:MicroService_layer")
+                data.get("status_def").get("wordpress").update(
+                    {"MicroService_layer": num[0]}
+                )
+
+        with open(self.json_path, 'w') as f:
+            json.dump(data, f)

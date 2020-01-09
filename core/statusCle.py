@@ -979,3 +979,59 @@ class StaClrCassandra(StaClrLog):
 
         with open(self.json_path, 'w') as f:
             json.dump(data, f)
+
+
+class StaClrWordpress(StaClrLog):
+    """clearlinux test_status_wordpress long analysis"""
+
+    def serialization(self):
+        lines = self.status_log
+        data = self.data
+
+        if_n = True
+        for i in lines:
+            if i.startswith("wordpress"):
+                if "latest" in i:
+                    start = lines.index(i)
+
+        while if_n:
+            for i in lines[start:]:
+                if i == '\n':
+                    if_n = False
+                    end = lines[start:].index(i)
+
+        for i in lines[start:end + start]:
+
+            if i.startswith("clearlinux/wordpress"):
+                if "latest" in i:
+                    num = re.findall("\d+\.?\d*", i)
+                    self.exception_to_response(num, "status_Clr_wordpress:Total")
+                    data.get("status_Clr").get("wordpress").update(
+                        {"Total": num[-1] + "MB"}
+                    )
+
+            if i.startswith("clearlinux base layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_Clr_wordpress:Base_Layer")
+                data.get("status_Clr").get("wordpress").update(
+                    {"Base_Layer": num[0]}
+                )
+
+            if i.startswith("clearlinux microservice added layer Size:"):
+                num = re.findall("\d+\.?\d*", i)
+                self.exception_to_response(num, "status_Clr_wordpress:MicroService_layer")
+                data.get("status_Clr").get("wordpress").update(
+                    {"MicroService_layer": num[0]}
+                )
+
+        for i in lines[start:]:
+            if i.startswith("clearlinux/wordpress version:\n"):
+                end = lines[start:].index(i) + 1
+                num = re.findall("\d+\.?\d*", lines[start:][end])
+                self.exception_to_response(num, "status_Clr_wordpress:VERSION_ID")
+                data.get("status_Clr").get("wordpress").update(
+                    {"VERSION_ID": num[0]}
+                )
+
+        with open(self.json_path, 'w') as f:
+            json.dump(data, f)

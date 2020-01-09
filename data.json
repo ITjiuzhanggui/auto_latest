@@ -16,7 +16,10 @@
     "rabbitmq":{},
     "ruby": {},
     "flink": {},
-    "cassandra": {}
+    "cassandra": {},
+    "wordpress": {},
+    "glibc":{},
+    "tensorflow-serving": {}
   },
   "clear": {
     "httpd": {},
@@ -35,7 +38,10 @@
     "rabbitmq":{},
     "ruby": {},
     "flink": {},
-    "cassandra": {}
+    "cassandra": {},
+    "wordpress": {},
+    "glibc":{},
+    "tensorflow-serving": {}
   },
   "status_def": {
     "httpd": {},
@@ -54,7 +60,10 @@
     "rabbitmq":{},
     "ruby": {},
     "flink": {},
-    "cassandra": {}
+    "cassandra": {},
+    "wordpress": {},
+    "glibc":{},
+    "tensorflow-serving": {}
   },
   "status_Clr": {
     "clearlinux_version": {},
@@ -74,6 +83,9 @@
     "rabbitmq":{},
     "ruby": {},
     "flink": {},
-    "cassandra": {}
+    "cassandra": {},
+    "wordpress": {},
+    "glibc":{},
+    "tensorflow-serving": {}
   }
 }
